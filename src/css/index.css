@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  text-align: center;
+}
+
+.date-form {
+  width: 25%;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: left
+}
+
+.date-form-label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.date-form-button {
+  display: inline-block;
+  width: 90px;
+  padding: 0.3em;
+  margin-right: 0.2em;
+}
+
+.date-form-error {
+  font-size: 0.7em;
+  color: red;
+  display: none;
+}
+
+.date-form-valid {
+  display: none;
+}
+
+.error {
+  border-bottom: 1px solid red;
+}
+
+
+
