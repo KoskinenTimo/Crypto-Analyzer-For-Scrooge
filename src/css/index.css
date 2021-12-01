@@ -5,12 +5,31 @@ body {
   text-align: center;
 }
 
-.date-form {
+#error-message-container,
+.date-form,
+header {
   width: 25%;
   min-width: 250px;
+  margin: 10px auto;
+}
+
+#error-message-container {
+  text-align: left;
+  display: none
+}
+
+#error-message-container h4 {
+  margin: 0 0 5px 0;
+  color: red;
+  border: 1px solid red;
+  padding: 8px;
+  
+}
+
+
+.date-form {
   display: flex;
-  flex-direction: column;
-  margin: auto;
+  flex-direction: column;  
   text-align: left
 }
 

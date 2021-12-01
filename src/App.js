@@ -1,36 +1,34 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 // Components
 import Header from "./Header"
 import DateInputForm from './DateInputForm'
-
-// Services
-import coinGeckoService from './services/coinGeckoApiService'
-
+import ErrorMessage from "./ErrorMessage"
+import DataView from "./DataView"
 
 
 function App() {
-  const [ fromDateInputValue, setFromDateInputValue ] = useState('')
-  const [ toDateInputValue, setToDateInputValue ] = useState('')
-  const [ path, setPath ] = useState()
+  const [ fromDateTimeStamp, setFromDateTimeStamp ] = useState('')
+  const [ toDateTimeStamp, setToDateTimeStamp ] = useState('')
   const [ error, setError ] = useState('')
-  useEffect(() => {
-    if(path) {
-      console.log(path)
-      coinGeckoService.getBitcoinChartRange("test","test")
-    }    
-  }, [path])
 
   return (
     <div className="App">
     
       <Header />
-      <DateInputForm 
-        fromDateInputValue={fromDateInputValue}
-        setFromDateInputValue={setFromDateInputValue}
-        toDateInputValue={toDateInputValue}
-        setToDateInputValue={setToDateInputValue}
-        setPath={setPath}
+      <ErrorMessage 
+        error={error}
+        setError={setError}
+      />
+      <DateInputForm
+        setFromDateTimeStamp={setFromDateTimeStamp}
+        setToDateTimeStamp={setToDateTimeStamp}
+        setError={setError}
+        error={error}
+      />
+      <DataView
+        fromDateTimeStamp={fromDateTimeStamp}
+        toDateTimeStamp={toDateTimeStamp}
       />
     </div>
   );

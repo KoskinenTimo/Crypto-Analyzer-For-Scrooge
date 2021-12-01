@@ -1,59 +1,65 @@
-import React, { useEffect } from "react";
-import { bitcoinChartRange } from "./constants/apiPaths";
+import React, { useRef, useState } from "react";
+
+// Components
 import DateInput from "./DateInput";
+
+// Hooks
+import useAutoInput from "./hooks/useAutoInput";
+
 
 /**
  * Form for inputting dates to make a range fetch from API
  */
-const DateInputForm = ({ 
-  fromDateInputValue,
-  setFromDateInputValue,
-  toDateInputValue,
-  setToDateInputValue,
-  setPath
+const DateInputForm = ({
+  setFromDateTimeStamp,
+  setToDateTimeStamp,
+  setError
 }) => {
-
+  const [ fromDateInputValue, setFromDateInputValue ] = useState('')
+  const [ toDateInputValue, setToDateInputValue ] = useState('')
+  useAutoInput(fromDateInputValue,setFromDateInputValue,"/",[2,5])
+  useAutoInput(toDateInputValue,setToDateInputValue,"/",[2,5])
+  const fromDateRef = useRef()
+  const toDateRef = useRef()
+  
   /**
-   * Handles form validation and fires the path building
+   * Handles form validation and coverts given dates to UNIX
+   * timestamps for API query
    * @param {event object} e 
    */
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (
-      isValidString(fromDateInputValue) &&
-      isValidString(toDateInputValue)
-    ) {
-      if (
-        isValidDate(fromDateInputValue) &&
-        isValidDate(toDateInputValue)
-      ) {
-        
-        const fromDateUnixStamp = parseToTimestamp(fromDateInputValue)
-        const toDateUnixStamp = parseToTimestamp(toDateInputValue)
-
-      }
+    const fromDateValid = handleDateInput(fromDateRef.current)
+    const toDateValid = handleDateInput(toDateRef.current)
+    if (fromDateValid || toDateValid) {
+      const fromDateUnixTimestamp = parseToTimestamp(fromDateInputValue)
+      const toDateUnixTimestamp = parseToTimestamp(toDateInputValue,1)
+      setFromDateTimeStamp(fromDateUnixTimestamp)
+      setToDateTimeStamp(toDateUnixTimestamp)
+      console.log(fromDateUnixTimestamp);
+      console.log(toDateUnixTimestamp);
+      return;
     }
+    setError("Please check the input, input provided is not valid!")
   }
-
-  /**
-   * Builds the path parameter for useCoinGeckoApi
-   * @param {string} fromDate 
-   * @param {string} toDate 
-   */
-  const createPath = (fromDate, toDate) => {
-    const path = `${bitcoinChartRange}`
-  }
+    
+  
 
   /**
    * Coverts a date string to UNIX timestamp
-   * Works for example with string form
-   * "MM/DD/YEAR hh:mm:ss"
+   * Builds first UTC time format and then converts 
+   * it to Unix timestamp
+   * Works with string format "DD/MM/YEAR"
    * @param {string} dateString 
    * @returns {number} Unix timestamp
    */
-  const parseToTimestamp = (dateString) =>{
-    const date = Date.parse(dateString);
-    return date/1000;
+  const parseToTimestamp = (dateString,hour=0) => {
+    const dateParts = dateString.split("/")
+    const [day,month,year] = [...dateParts];
+    const dateUTC = `${year}-${month}-${day}T0${hour}:00:00.000Z`
+    console.log(dateUTC);
+    const dateMilliseconds = Date.parse(dateUTC);
+    return dateMilliseconds/1000;
    }
 
   /**
@@ -116,8 +122,7 @@ const DateInputForm = ({
    * Controls date inputs storing and validations in real time
    * @param {event object} e
    */
-  const handleDateInput = (e) => {
-    const inputElement = e.target;    
+  const handleDateInput = (inputElement) => {  
     const validString = isValidString(inputElement.value)
     const validDate = isValidDate(inputElement.value)
     if (inputElement.name === "fromDate") {
@@ -125,14 +130,18 @@ const DateInputForm = ({
     }
     if (inputElement.name === "toDate") {
       setToDateInputValue(inputElement.value)
-    }
-    
+    }    
     toggleStringValidation(inputElement,validString,validDate)
+    if (!validString || !validDate) {
+      return false
+    }
+    return true;
   }
 
 
   /**
-   * 
+   * Toggles error messages and visuals on the form. Also adds 
+   * and removes valid marking.
    * @param {DOM element} inputElement 
    * @param {boolean} validString 
    */
@@ -160,6 +169,7 @@ const DateInputForm = ({
     }
   }
 
+  // Resets all form fields
   const handleResetButton = () => {
     setFromDateInputValue('')
     setToDateInputValue('')
@@ -173,12 +183,14 @@ const DateInputForm = ({
         handleDateInput={handleDateInput}
         name="fromDate"
         title="From Date"
+        elementRef={fromDateRef}        
       />
       <DateInput 
         dateInputValue={toDateInputValue}
         handleDateInput={handleDateInput}
         name="toDate"
         title="To Date"
+        elementRef={toDateRef}
       />
       <div>
         <button 
