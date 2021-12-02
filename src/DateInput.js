@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * Re-usable input field for dates
+ * @param {props}
+ */
 const DateInput = ({
   dateInputValue,
   handleDateInput,

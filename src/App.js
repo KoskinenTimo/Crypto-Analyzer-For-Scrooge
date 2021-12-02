@@ -12,6 +12,7 @@ function App() {
   const [ toDateTimeStamp, setToDateTimeStamp ] = useState('')
   const [ error, setError ] = useState('')
 
+  
   return (
     <div className="App">
     
@@ -27,8 +28,10 @@ function App() {
         error={error}
       />
       <DataView
-        fromDateTimeStamp={fromDateTimeStamp}
+        fromDateTimeStamp={fromDateTimeStamp}        
         toDateTimeStamp={toDateTimeStamp}
+        setFromDateTimeStamp={setFromDateTimeStamp}
+        setToDateTimeStamp={setToDateTimeStamp}
       />
     </div>
   );

@@ -25,25 +25,26 @@ const DateInputForm = ({
   /**
    * Handles form validation and coverts given dates to UNIX
    * timestamps for API query
-   * @param {event object} e 
+   * @param {event} e 
    */
   const handleSubmit = (e) => {
     e.preventDefault()
     const fromDateValid = handleDateInput(fromDateRef.current)
     const toDateValid = handleDateInput(toDateRef.current)
-    if (fromDateValid || toDateValid) {
+    const notSameDate = fromDateRef.current.value !== toDateRef.current.value
+    if (fromDateValid && toDateValid && notSameDate) {
       const fromDateUnixTimestamp = parseToTimestamp(fromDateInputValue)
       const toDateUnixTimestamp = parseToTimestamp(toDateInputValue,1)
       setFromDateTimeStamp(fromDateUnixTimestamp)
       setToDateTimeStamp(toDateUnixTimestamp)
-      console.log(fromDateUnixTimestamp);
-      console.log(toDateUnixTimestamp);
       return;
     }
-    setError("Please check the input, input provided is not valid!")
-  }
-    
-  
+    if (!fromDateValid || !toDateValid) {
+      setError("Please check the input, input provided is not valid")
+      return;
+    }
+    setError("'From Date' and 'To Date' cannot be the same")
+  }  
 
   /**
    * Coverts a date string to UNIX timestamp
@@ -120,7 +121,7 @@ const DateInputForm = ({
 
   /**
    * Controls date inputs storing and validations in real time
-   * @param {event object} e
+   * @param {DOM object} inputElement
    */
   const handleDateInput = (inputElement) => {  
     const validString = isValidString(inputElement.value)
@@ -142,7 +143,7 @@ const DateInputForm = ({
   /**
    * Toggles error messages and visuals on the form. Also adds 
    * and removes valid marking.
-   * @param {DOM element} inputElement 
+   * @param {DOM object} inputElement 
    * @param {boolean} validString 
    */
   const toggleStringValidation = (inputElement,validString,validDate) => {

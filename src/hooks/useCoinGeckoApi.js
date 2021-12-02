@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
-
+/**
+ * 
+ * !!DELETE THIS!!
+ * in the end if not needed
+ */
 
 /**
  * To fetch from Coin Gecko Api. It has base of the url and
