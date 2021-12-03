@@ -58,7 +58,6 @@ const DateInputForm = ({
     const dateParts = dateString.split("/")
     const [day,month,year] = [...dateParts];
     const dateUTC = `${year}-${month}-${day}T0${hour}:00:00.000Z`
-    console.log(dateUTC);
     const dateMilliseconds = Date.parse(dateUTC);
     return dateMilliseconds/1000;
    }
@@ -150,8 +149,7 @@ const DateInputForm = ({
     const stringErrorNode = inputElement.parentNode.getElementsByClassName("date-form-error")[0]
     const dateErrorNode = inputElement.parentNode.getElementsByClassName("date-form-error")[1]
     const inputValidNode = inputElement.parentNode.getElementsByClassName("date-form-valid")[0]
-    if (!validString || !validDate) {     
-      inputElement.parentNode.classList.add("error")
+    if (!validString || !validDate) {
       inputValidNode.style.display = "none"
       if (!validString) {
         stringErrorNode.style.display = "inline-block"
@@ -164,7 +162,6 @@ const DateInputForm = ({
         dateErrorNode.style.display = "none"
       }
     } else {
-      inputElement.parentNode.classList.remove("error")
       stringErrorNode.style.display = "none"
       inputValidNode.style.display = "inline-block"
     }
@@ -172,13 +169,19 @@ const DateInputForm = ({
 
   // Resets all form fields
   const handleResetButton = () => {
-    setFromDateInputValue('')
-    setToDateInputValue('')
+    setFromDateInputValue("")
+    setToDateInputValue("")
+    setFromDateTimeStamp("")
+    setToDateTimeStamp("")
+    const errorElements = document.getElementById("date-form").getElementsByClassName("date-form-error")
+    for (let i = 0; i < errorElements.length; i++) {
+      errorElements[i].style.display = "none"      
+    }
   }
 
 
   return(    
-    <form className="date-form" onSubmit={handleSubmit}>      
+    <form className="date-form" id="date-form" onSubmit={handleSubmit}>      
       <DateInput 
         dateInputValue={fromDateInputValue}
         handleDateInput={handleDateInput}
@@ -202,7 +205,7 @@ const DateInputForm = ({
           className="date-form-button"
           type="button"
           onClick={handleResetButton}
-        >Cancel</button>
+        >Reset</button>
       </div>
       
     </form>

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,12 +9,36 @@ body {
   text-align: center;
 }
 
+header {  
+  background-color: #01a1af;
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+
+header h1 {
+  color: aliceblue;
+  padding: 15px;  
+}
+
+footer {
+  background-color: #01a1af;
+  width: 100%;
+  padding: 7px;
+  margin-top: auto;
+  border-top: 10px solid white;
+}
+
+footer p {
+  margin: 0;
+  color: aliceblue;
+}
+
 #error-message-container,
 .date-form,
-header {
+.dataview-container {
   width: 25%;
   min-width: 250px;
-  margin: 10px auto;
+  margin: 0 auto 10px auto;
 }
 
 #error-message-container {
@@ -20,12 +48,11 @@ header {
 
 #error-message-container h4 {
   margin: 0 0 5px 0;
-  color: red;
-  border: 1px solid red;
+  background-color: #fe5e50;
+  color: aliceblue;
   padding: 8px;
   
 }
-
 
 .date-form {
   display: flex;
@@ -34,30 +61,77 @@ header {
 }
 
 .date-form-label {
+  color: #01a1af;
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
 }
 
+.date-form-input {
+  padding: 4px;
+  border: 1px solid #01a1af;
+  border-radius: 3px;  
+}
+
+.date-form-input:focus {
+  outline: 1px solid #01a1af;
+}
+
 .date-form-button {
   display: inline-block;
+  background-color: #01a1af;
+  border: none;
+  border-radius: 4px;
+  color: aliceblue;
   width: 90px;
   padding: 0.3em;
   margin-right: 0.2em;
 }
 
+.date-form-button:hover {
+  background-color: #01c9db;  
+}
+
 .date-form-error {
-  font-size: 0.7em;
-  color: red;
   display: none;
+  font-size: 0.7em;
+  color: #fe5e50;  
+  border-bottom: 1px solid #fe5e50;
 }
 
 .date-form-valid {
   display: none;
 }
 
-.error {
-  border-bottom: 1px solid red;
+.dataview-container {
+  text-align: left;  
+}
+
+.data-card {
+  background-color: #01a1af;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px; 
+}
+
+.data-card h4 {
+  display: inline-block;  
+  color: aliceblue;
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  padding: 4px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.data-card p {
+  color: aliceblue;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 

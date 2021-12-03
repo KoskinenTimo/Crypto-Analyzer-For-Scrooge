@@ -1,19 +1,40 @@
-import React, { useEffect } from "react"
-import { useState } from "react/cjs/react.development"
+import React, { useEffect,useState } from "react"
+
+// Utils
+import { parseNumber, parseToDate } from "./utils/parsers"
 
 /**
- * Used to render thebest day to buy and sell in data
+ * Used to render the best day to buy and to sell in data
  * @param {props}
  */
-const DataViewBestBuySell = ({ arrayOfDatesWithPrices }) => {
-  const [ bestDateBuySellProfit, setBestDateBuySellProfit ] = useState([])
+const DataViewBestBuySell = ({ arrayDatesPrices }) => {
+  // contains best buy and sell dates with profit
+  const [ profitData, setProfitData ] = useState([])
 
   useEffect(() => {
-    if(!arrayOfDatesWithPrices || !arrayOfDatesWithPrices.length) return
-    const newBestDateBuySellProfit = getPairBestDayToBuyAndToSell(arrayOfDatesWithPrices)
-    setBestDateBuySellProfit(newBestDateBuySellProfit)
-  },[arrayOfDatesWithPrices])
+    if (arrayDatesPrices && arrayDatesPrices.length) {
+      const datesAndProfit = getPairBestDayToBuyAndToSell(arrayDatesPrices)
+      const parsedBuyDate = parseToDate(datesAndProfit[0])
+      const parsedSellDate = parseToDate(datesAndProfit[1])
+      const parsedProfit = parseNumber(datesAndProfit[2],false)
+      const parsedArray = [ parsedBuyDate, parsedSellDate, parsedProfit ]
+      setProfitData(parsedArray)
+    }
+    if (arrayDatesPrices && !arrayDatesPrices.length) {
+      const reset = []
+      setProfitData(reset)
+    }
 
+  },[arrayDatesPrices])
+
+  /**
+   * Takes in data array of [Date, Price] pairs and outputs 
+   * the most profitable pair of Dates, in other words, when to 
+   * buy cheap and when to sell with most profit. Returns an
+   * array [ bestDateToBuy, bestDateToSell, profit ]
+   * @param {[number[]]} arrayOfDatesWithPrice 
+   * @returns {number[]}
+   */
   const getPairBestDayToBuyAndToSell = (arrayOfDatesWithPrice) => {
     return arrayOfDatesWithPrice
       .slice(0,-1)
@@ -41,14 +62,29 @@ const DataViewBestBuySell = ({ arrayOfDatesWithPrices }) => {
       })
   }
 
-  return (
-    <div>
-      <h3>
-        Best day to buy {bestDateBuySellProfit[0]} and best to sell {bestDateBuySellProfit[1]}, 
-        profit {bestDateBuySellProfit[2]}€.
-      </h3>
-    </div>
-  )
+  if (profitData && profitData.length) {
+    return (
+      <div className="data-card">
+        <h4>Best day to buy and sell</h4>
+        { 
+          
+          parseFloat(profitData[2]) > 0
+          ?
+          <p>
+          Best day to buy {profitData[0]} and best to sell {profitData[1]}, 
+          profit {profitData[2]}€ per coin.
+          </p>
+          :
+          <p>
+          Between {profitData[0]} and {profitData[1]}, there are no dates
+          to make profit.
+          </p>
+        }
+      </div>
+    )
+  }
+  return(<div></div>)
+
 }
 
 export default DataViewBestBuySell

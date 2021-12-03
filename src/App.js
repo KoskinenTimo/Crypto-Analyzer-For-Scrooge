@@ -5,6 +5,7 @@ import Header from "./Header"
 import DateInputForm from './DateInputForm'
 import ErrorMessage from "./ErrorMessage"
 import DataView from "./DataView"
+import Footer from "./Footer"
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
   
   return (
-    <div className="App">
+    <div className="wrapper">
     
       <Header />
       <ErrorMessage 
@@ -32,7 +33,9 @@ function App() {
         toDateTimeStamp={toDateTimeStamp}
         setFromDateTimeStamp={setFromDateTimeStamp}
         setToDateTimeStamp={setToDateTimeStamp}
+        setError={setError}
       />
+      <Footer />
     </div>
   );
 }

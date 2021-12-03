@@ -1,18 +1,28 @@
-import React from "react"
-import { useEffect, useState } from "react/cjs/react.development"
+import React, { useEffect, useState } from "react"
+
+// Utils
+import { parseToDate, parseNumber } from "./utils/parsers"
 
 /**
  * Used to render highest volume date data
  * @param {props}
  */
-const DataViewHighestVolume = ({ arrayOfDatesWithVolumes }) => {
-  const [ highestTradingVolumeDate, setHighestTradingVolumeDate ] = useState()
+const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
+  const [ highestTradingVolumeDate, setHighestTradingVolumeDate ] = useState([])
 
   useEffect(() => {
-    if(!arrayOfDatesWithVolumes || !arrayOfDatesWithVolumes.length) return
-    const newHighestTradingVolumeDate = getHighestTradingVolumeDateAndVolume(arrayOfDatesWithVolumes)
-    setHighestTradingVolumeDate(newHighestTradingVolumeDate)
-  },[arrayOfDatesWithVolumes])
+    if (arrayDatesVolumes && arrayDatesVolumes.length) {
+      const dateVolumePair = getHighestTradingVolumeDateAndVolume(arrayDatesVolumes)
+      const parsedDate = parseToDate(dateVolumePair[0])
+      const parsedVolume = parseNumber(dateVolumePair[1])
+      setHighestTradingVolumeDate([ parsedDate,parsedVolume ])
+    }
+    if (arrayDatesVolumes && !arrayDatesVolumes.length) {
+      const reset = []
+      setHighestTradingVolumeDate(reset)
+    }
+  },[arrayDatesVolumes])
+  
   /**
    * Gets the highest volume trading day and volume out of the 
    * given data array of date-volume pairs
@@ -26,14 +36,21 @@ const DataViewHighestVolume = ({ arrayOfDatesWithVolumes }) => {
     })
   }
 
-  return (
-    <div>
-      <h3>
-        Highest trading trade by volume was {highestTradingVolumeDate[0]} and 
-        the volume was {highestTradingVolumeDate[1]}
-      </h3>
-    </div>
-  )
+
+
+  if (highestTradingVolumeDate && highestTradingVolumeDate.length) {
+    return (
+      <div className="data-card">
+        <h4>Highest volume date</h4>
+        <p>
+          The highest trading trade by volume was {highestTradingVolumeDate[0]} and 
+          the volume was {highestTradingVolumeDate[1]}€.
+        </p>
+      </div>
+    )
+  }
+  return(<div></div>)
+
 }
 
 export default DataViewHighestVolume

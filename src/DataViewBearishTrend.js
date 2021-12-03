@@ -1,19 +1,42 @@
-import React from "react"
-import { useEffect, useState } from "react/cjs/react.development"
+import React,{ useEffect, useState } from "react"
+
+// Utils
+import { parseToDate } from "./utils/parsers"
 
 /**
  * Used to render bearish trend data
  * @param {props}
  */
-const DataViewBearishTrend = ({ arrayOfDatesWithPrices }) => {
-  const [ longestBearishTrend, setLongestBearishTrend ] = useState('')
+const DataViewBearishTrend = ({ 
+  arrayDatesPrices,
+  fromDateTimeStamp,
+  toDateTimeStamp
+}) => {
+  const [ longestTrend, setLongestTrend ] = useState('')
+  const [ dates, setDates ] = useState([])
 
   useEffect(() => {    
-    if(!arrayOfDatesWithPrices || !arrayOfDatesWithPrices.length) return
-    const longestTrend = getLongestBearishTrend(arrayOfDatesWithPrices)
-    setLongestBearishTrend(longestTrend)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arrayOfDatesWithPrices])
+    if (arrayDatesPrices && arrayDatesPrices.length) {
+      const longestTrend = getLongestBearishTrend(arrayDatesPrices)
+      setLongestTrend(longestTrend)
+      if (
+        fromDateTimeStamp &&
+        toDateTimeStamp &&
+        fromDateTimeStamp !== "" &&
+        toDateTimeStamp.length !== ""
+        ) {
+        const parsedFromDate = parseToDate(fromDateTimeStamp*1000)
+        const parsedToDate = parseToDate(toDateTimeStamp*1000)
+        setDates([ parsedFromDate,parsedToDate ])
+      }
+    }
+    // reset everything when dates are reset
+    if(arrayDatesPrices && !arrayDatesPrices.length) {
+      const reset = []
+      setLongestTrend('')
+      setDates(reset)
+    }
+  }, [arrayDatesPrices,fromDateTimeStamp,toDateTimeStamp])
 
   /**
    * 
@@ -39,14 +62,19 @@ const DataViewBearishTrend = ({ arrayOfDatesWithPrices }) => {
       })
     return Math.max(...trendArray)
   }
-  return (
-    <div>
-      <h3>
-        In bitcoin’s historical data from CoinGecko, the price decreased {longestBearishTrend} days in a row for the
-        inputs from DATE and DATE.
-      </h3>
-    </div>
-  )
+
+  if (longestTrend && longestTrend !== '') {
+    return (
+      <div className="data-card">
+        <h4>Longest bearish trend</h4>
+        <p>
+          In bitcoin’s historical data from CoinGecko, the price decreased {longestTrend} days in a row for the
+          inputs from {dates[0]} and {dates[1]}.
+        </p>
+      </div>
+    )
+  }
+  return(<div></div>)
 }
 
 export default DataViewBearishTrend;
