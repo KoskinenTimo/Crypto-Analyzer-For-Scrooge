@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from "react"
 
 // Utils
-import { parseNumber, parseToDate } from "./utils/parsers"
+import { parseNumber, parseToDate } from "../../utils/parsers"
 
 /**
  * Used to render the best day to buy and to sell in data

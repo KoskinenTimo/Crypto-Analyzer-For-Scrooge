@@ -1,7 +1,7 @@
 import React,{ useEffect, useState } from "react"
 
 // Utils
-import { parseToDate } from "./utils/parsers"
+import { parseToDate } from "../../utils/parsers"
 
 /**
  * Used to render bearish trend data

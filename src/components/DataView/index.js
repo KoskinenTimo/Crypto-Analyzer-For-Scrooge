@@ -5,17 +5,10 @@ import DataViewBearishTrend from "./DataViewBearishTrend"
 import DataViewBestBuySell from "./DataViewBestBuySell"
 import DataViewHighestVolume from "./DataViewHighestVolume"
 import DataViewNoData from "./DataViewNoData"
+import Loading from "../Loading"
 
 // Services
-import { getBitcoinChartRange } from "./services/geckoApiService"
-
-// // Sample data
-// // 1583020800 1627866000
-// import set1 from "./data/response_1638445445429.json"
-// // 1625184000 1627866000
-// import set2 from "./data/response_1638470696634.json"
-// // 1627776000 1627866000
-// import set3 from "./data/response_1638470886219.json"
+import { getBitcoinChartRange } from "../../services/geckoApiService"
 
 
 const DataView = ({
@@ -25,61 +18,56 @@ const DataView = ({
 }) => {
   const [ arrayDatesPrices, setarrayDatesPrices ] = useState([])
   const [ arrayDatesVolumes, setarrayDatesVolumes] = useState([])
-  const [ arrayOfDates, setArrayOfDates ] = useState([])
   const [ fetchedPrices, setFetchedPrices ] = useState([])
   const [ fetchedVolumes, setFetchedVolumes ] = useState([])
-
-  console.log(fetchedPrices,fetchedVolumes,"fetched");
-  console.log(arrayOfDates,"dates");
-  console.log(arrayDatesPrices,"prices");
-  console.log(arrayDatesVolumes,"volumes");
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
     if (
       fromDateTimeStamp &&
-      toDateTimeStamp &&
-      fromDateTimeStamp !== "" &&
-      toDateTimeStamp.length !== ""
+      toDateTimeStamp 
       ) {
-        const newArrayOfDates = createDateArray(fromDateTimeStamp,toDateTimeStamp)
-        setArrayOfDates(newArrayOfDates)
+        // Get data from API
         getBitcoinChartRange(fromDateTimeStamp,toDateTimeStamp)
           .then(res => {
-            console.log(res);
             setFetchedPrices(res.prices)
             setFetchedVolumes(res.total_volumes)
+            // if there is data from the range of dates, set it for viewing
+            if (
+              res.prices &&
+              res.total_volumes &&
+              res.prices.length &&
+              res.total_volumes.length
+              ) {                
+                const newArrayOfDates = createDateArray(fromDateTimeStamp,toDateTimeStamp)
+                const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,res.prices)
+                const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,res.total_volumes)
+                setarrayDatesPrices(newarrayDatesPrices)
+                setarrayDatesVolumes(newarrayDatesVolumes)
+            }
+            setLoading(false)      
           })
           .catch(err => {
             setError(err.message)
           })
-        return
+    }    
+    if (!fromDateTimeStamp || !toDateTimeStamp) {
+      resetData()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[fromDateTimeStamp,toDateTimeStamp])
+
+  /**
+   * Reset all data set states this component handles
+   */
+  const resetData = () => {
     const reset = []
     setarrayDatesPrices(reset)
     setarrayDatesVolumes(reset)
     setFetchedPrices(reset)
     setFetchedVolumes(reset)
-    setArrayOfDates(reset)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[fromDateTimeStamp,toDateTimeStamp])
-
-  useEffect(() => {
-    if(
-      arrayOfDates &&
-      fetchedPrices &&
-      fetchedVolumes &&
-      arrayOfDates.length &&
-      fetchedPrices.length &&
-      fetchedVolumes.length
-      ) {
-        console.log("TEST2");
-        const newarrayDatesPrices = getOneDataPointPerDate(arrayOfDates,fetchedPrices)
-        const newarrayDatesVolumes = getOneDataPointPerDate(arrayOfDates,fetchedVolumes)
-        setarrayDatesPrices(newarrayDatesPrices)
-        setarrayDatesVolumes(newarrayDatesVolumes)
-      }
-
-  }, [arrayOfDates,fetchedPrices,fetchedVolumes])
+    setLoading(true)
+  }
 
   /**
    * Takes in a date in milliseconds format, adds one day
@@ -123,7 +111,7 @@ const DataView = ({
    * ==> [...,[date,data],...]
    * @param {number[]} arrayOfDates 
    * @param {[number[]]} arrayOfDataPointsPerTimestamp 
-   * @returns 
+   * @returns {[number[]]} [...,[date,data],...]
    */
   const getOneDataPointPerDate = (arrayOfDates,arrayOfDataPointsPerTimestamp) => {
     const datesWithData = arrayOfDates.map(date => {
@@ -140,13 +128,30 @@ const DataView = ({
   }
    
   if (
+    loading &&
     fromDateTimeStamp &&
-    toDateTimeStamp && 
-    !fetchedPrices.length) {
-    return(
-    <div className="dataview-container">
-      <DataViewNoData />
-    </div>)
+    toDateTimeStamp    
+    ) {
+    return (
+      <div className="dataview-container">
+        <Loading />
+      </div>
+      )
+  }
+  if (
+    !loading &&
+    fromDateTimeStamp &&
+    toDateTimeStamp &&    
+    fetchedPrices &&
+    fetchedVolumes &&
+    !fetchedPrices.length &&
+    !fetchedVolumes.length
+    ) {
+      return (
+      <div className="dataview-container">
+        <DataViewNoData />
+      </div>
+      )
   }
   return(
   <div className="dataview-container">

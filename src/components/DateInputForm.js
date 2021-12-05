@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import DateInput from "./DateInput";
 
 // Hooks
-import useAutoInput from "./hooks/useAutoInput";
+import useAutoInput from "../hooks/useAutoInput";
 
 
 /**
@@ -83,27 +83,27 @@ const DateInputForm = ({
       const day = parseInt(dateParts[0],10)
       const month = parseInt(dateParts[1],10)
       const year = parseInt(dateParts[2],10)
-
+      console.log(day,month,year);
       if (
         year < 1970 || 
-        year >= new Date().getFullYear() || 
+        year > new Date().getFullYear() || 
         month === 0 || 
         month > 12
         ) {
-        return false
+          return false
       }
       if (
         year === new Date().getFullYear() &&
         month > new Date().getMonth()+1
         ) {
-        return false
+          return false
       }
       if (
         year === new Date().getFullYear() &&
         month === new Date().getMonth()+1 &&
         day > new Date().getDate()
         ) {
-        return false
+          return false
         }
 
       const daysInEachMonth = [ 31,28,31,30,31,30,31,31,30,31,30,31 ]
@@ -111,8 +111,8 @@ const DateInputForm = ({
       if (year % 4) {
         daysInEachMonth[1] = 29
       }
-      if (day > 0 && day <= daysInEachMonth[month - 1]) {
-        
+      if (day > 0 && day > daysInEachMonth[month - 1]) {
+        return false
       }
     }
     return true

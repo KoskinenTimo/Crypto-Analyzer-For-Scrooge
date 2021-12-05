@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 
 // Components
-import Header from "./Header"
-import DateInputForm from './DateInputForm'
-import ErrorMessage from "./ErrorMessage"
-import DataView from "./DataView"
-import Footer from "./Footer"
+import Header from "./components/Header"
+import DateInputForm from './components/DateInputForm'
+import ErrorMessage from "./components/ErrorMessage"
+import Footer from "./components/Footer"
+import DataView from "./components/DataView"
 
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
 
   
   return (
-    <div className="wrapper">
-    
+    <div className="wrapper">    
       <Header />
+
       <ErrorMessage 
         error={error}
         setError={setError}
@@ -35,6 +35,7 @@ function App() {
         setToDateTimeStamp={setToDateTimeStamp}
         setError={setError}
       />
+
       <Footer />
     </div>
   );
