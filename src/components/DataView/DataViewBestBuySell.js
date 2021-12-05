@@ -8,7 +8,7 @@ import { parseNumber, parseToDate } from "../../utils/parsers"
  * @param {props}
  */
 const DataViewBestBuySell = ({ arrayDatesPrices }) => {
-  // contains best buy and sell dates with profit
+  // contains best buy and sell dates with profit [ buyDate, sellDate, profit ]
   const [ profitData, setProfitData ] = useState([])
 
   useEffect(() => {
@@ -66,8 +66,8 @@ const DataViewBestBuySell = ({ arrayDatesPrices }) => {
     return (
       <div className="data-card">
         <h4>Best day to buy and sell</h4>
-        { 
-          
+        {      
+          // if profit
           parseFloat(profitData[2]) > 0
           ?
           <p>

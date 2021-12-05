@@ -12,7 +12,7 @@ const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
 
   useEffect(() => {
     if (arrayDatesVolumes && arrayDatesVolumes.length) {
-      const dateVolumePair = getHighestTradingVolumeDateAndVolume(arrayDatesVolumes)
+      const dateVolumePair = getHighestTradingVolumeAndDate(arrayDatesVolumes)
       const parsedDate = parseToDate(dateVolumePair[0])
       const parsedVolume = parseNumber(dateVolumePair[1])
       setHighestTradingVolumeDate([ parsedDate,parsedVolume ])
@@ -29,7 +29,7 @@ const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
    * @param {[number[]]} arrayOfDatesWithVolume 
    * @returns {number[]}
    */
-  const getHighestTradingVolumeDateAndVolume = (arrayOfDatesWithVolume) => {
+  const getHighestTradingVolumeAndDate = (arrayOfDatesWithVolume) => {
     return arrayOfDatesWithVolume.reduce((previousValue, currentValue) => {
       const currentValueVolumeHigher = previousValue[1] < currentValue[1]
       return currentValueVolumeHigher ? currentValue : previousValue

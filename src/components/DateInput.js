@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 
 /**
@@ -12,21 +12,10 @@ const DateInput = ({
   title,
   elementRef=null
 }) => {
-  const validSpanRef = useRef()
-
-  useEffect(() => {
-    if (
-      elementRef && 
-      elementRef.current &&
-      elementRef.current.value === ''
-      ) {
-      validSpanRef.current.style.display = "none"
-    }
-  })
 
   return(    
     <label className="date-form-label">
-      <label>{title}<span ref={validSpanRef} className="date-form-valid">&#10004;&#65039;</span></label>
+      <label>{title}<span className="date-form-valid">&#10004;&#65039;</span></label>
       <input
         className="date-form-input"
         name={name}

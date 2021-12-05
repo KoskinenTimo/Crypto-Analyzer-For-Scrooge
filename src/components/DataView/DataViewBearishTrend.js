@@ -19,12 +19,7 @@ const DataViewBearishTrend = ({
     if (arrayDatesPrices && arrayDatesPrices.length) {
       const longestTrend = getLongestBearishTrend(arrayDatesPrices)
       setLongestTrend(longestTrend)
-      if (
-        fromDateTimeStamp &&
-        toDateTimeStamp &&
-        fromDateTimeStamp !== "" &&
-        toDateTimeStamp.length !== ""
-        ) {
+      if (fromDateTimeStamp && toDateTimeStamp) {
         const parsedFromDate = parseToDate(fromDateTimeStamp*1000)
         const parsedToDate = parseToDate(toDateTimeStamp*1000)
         setDates([ parsedFromDate,parsedToDate ])
@@ -39,9 +34,11 @@ const DataViewBearishTrend = ({
   }, [arrayDatesPrices,fromDateTimeStamp,toDateTimeStamp])
 
   /**
-   * 
+   * Takes in an array of [...,[date,price],...]
+   * and loops over the array to check the longest
+   * downward trend of prices
    * @param {[number[]]} arrayOfDatesWithPrice 
-   * @returns 
+   * @returns {number} days
    */
   const getLongestBearishTrend = (arrayOfDatesWithPrice) => {
     let trendNumber = 0
@@ -63,7 +60,7 @@ const DataViewBearishTrend = ({
     return Math.max(...trendArray)
   }
 
-  if (longestTrend && longestTrend !== '') {
+  if (longestTrend) {
     return (
       <div className="data-card">
         <h4>Longest bearish trend</h4>

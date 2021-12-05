@@ -8,7 +8,7 @@ import useAutoInput from "../hooks/useAutoInput";
 
 
 /**
- * Form for inputting dates to make a range fetch from API
+ * Form for inputting dates to make a fetch to API
  */
 const DateInputForm = ({
   setFromDateTimeStamp,
@@ -17,8 +17,11 @@ const DateInputForm = ({
 }) => {
   const [ fromDateInputValue, setFromDateInputValue ] = useState('')
   const [ toDateInputValue, setToDateInputValue ] = useState('')
+
+  // Add / characters as the user gives date
   useAutoInput(fromDateInputValue,setFromDateInputValue,"/",[2,5])
   useAutoInput(toDateInputValue,setToDateInputValue,"/",[2,5])
+  // Refs to input fields to conrol them
   const fromDateRef = useRef()
   const toDateRef = useRef()
   
@@ -83,7 +86,6 @@ const DateInputForm = ({
       const day = parseInt(dateParts[0],10)
       const month = parseInt(dateParts[1],10)
       const year = parseInt(dateParts[2],10)
-      console.log(day,month,year);
       if (
         year < 1970 || 
         year > new Date().getFullYear() || 
@@ -138,7 +140,6 @@ const DateInputForm = ({
     return true;
   }
 
-
   /**
    * Toggles error messages and visuals on the form. Also adds 
    * and removes valid marking.
@@ -173,9 +174,13 @@ const DateInputForm = ({
     setToDateInputValue("")
     setFromDateTimeStamp("")
     setToDateTimeStamp("")
+    // remove all error messages visible in the form
+    
+    const validElements = document.getElementById("date-form").getElementsByClassName("date-form-valid")
     const errorElements = document.getElementById("date-form").getElementsByClassName("date-form-error")
-    for (let i = 0; i < errorElements.length; i++) {
-      errorElements[i].style.display = "none"      
+    const elements = [...validElements, ...errorElements]
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none"      
     }
   }
 

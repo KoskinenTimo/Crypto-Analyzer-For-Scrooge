@@ -9,7 +9,7 @@ const ErrorMessage = ({
   const containerRef = useRef();
 
   useEffect(() => {
-    if (!error.length) return
+    if (!error) return
     setErrorMessage(error)
     setError('')
     clearTimeout(timerRef.current)
@@ -17,7 +17,7 @@ const ErrorMessage = ({
     timerRef.current = setTimeout(() => {
       containerRef.current.style.display = "none"
       setErrorMessage('')
-    },2000)
+    },3000)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error])
 
