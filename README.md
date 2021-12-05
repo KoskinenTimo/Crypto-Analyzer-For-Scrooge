@@ -1,4 +1,4 @@
-If you have docker installed and want to run the app in a container you can simply run:
+If you have docker installed and want to run the app in a container at http://localhost:3000/ you can simply run:
 
 docker container run -p 3000:3000 koskinentht/gecko-front:1.2
 
