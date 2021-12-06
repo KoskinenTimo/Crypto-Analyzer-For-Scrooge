@@ -9,15 +9,8 @@ body {
   text-align: center;
 }
 
-header {  
-  background-color: #01a1af;
-  width: 100%;
-  margin: 0 0 20px 0;
-}
-
-header h1 {
-  color: aliceblue;
-  padding: 15px;  
+button {
+  border: none;
 }
 
 footer {
@@ -36,87 +29,49 @@ h4 {
   font-size: 1.1em;
 }
 
+header {  
+  background-color: #01a1af;
+  width: 100%;
+  margin: 0;
+}
+
 footer p {
   margin: 0;
   color: aliceblue;
 }
 
-#error-message-container,
-.date-form,
-.dataview-container {
-  width: 25%;
-  min-width: 250px;
-  margin: 0 auto 10px auto;
-}
-
-#error-message-container {
-  text-align: left;
-  display: none
-}
-
-#error-message-container h4 {
-  margin: 0 0 5px 0;
-  background-color: #fe5e50;
+header h1 {
   color: aliceblue;
-  padding: 8px;
-  
+  padding: 30px 30px 30px 6px;
+  margin-left: 15%
 }
 
-.date-form {
-  display: flex;
-  flex-direction: column;  
-  text-align: left
+header h3 {
+  color: white;
 }
 
-.date-form-label {
-  color: #01a1af;
-  display: flex;
+header button, 
+header h3 {
   font-size: 1.1em;
-  flex-direction: column;
-  margin: 10px 0;
+  font-weight: bold;
+  padding: 7px;
+  margin-right: 15px;
+} 
+
+header .login-bar {
+  overflow-y: hidden;
+  margin: auto 10% 0 0
 }
 
-.date-form-input {
-  padding: 8px;
-  border: 1px solid #01a1af;
-  border-radius: 3px;  
-  margin-top: 5px;
-}
-
-.date-form-input:focus {
-  outline: 1px solid #01a1af;
-}
-
-.date-form-button {
-  display: inline-block;
-  background-color: #01a1af;
-  font-size: 1.1em;
+header button {
   border: none;
-  border-radius: 4px;
-  color: aliceblue;
-  width: 90px;
-  padding: 0.7em;
-  margin-right: 0.2em;
+  color: #01a1af;
+  background-color: white;
 }
 
-.date-form-button:hover {
-  background-color: #01c9db;  
-}
-
-.date-form-error {
-  display: none;
-  font-size: 0.7em;
-  color: #fe5e50;  
-  border-bottom: 1px solid #fe5e50;
-  margin-top: 5px;
-}
-
-.date-form-valid {
-  display: none;
-}
-
-.dataview-container {
-  text-align: left;  
+header button:hover {
+  color:aliceblue;
+  background-color: #01c9db;
 }
 
 .data-card {
@@ -144,10 +99,114 @@ footer p {
   color: aliceblue;
 }
 
+.date-form {
+  display: flex;
+  flex-direction: column;  
+  text-align: left
+}
+
+.date-form-button {
+  display: inline-block;
+  background-color: #01a1af;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 4px;
+  color: aliceblue;
+  width: 90px;
+  padding: 0.7em;
+  margin-right: 0.2em;
+}
+
+.date-form-input {
+  padding: 8px;
+  border: 1px solid #01a1af;
+  border-radius: 3px;  
+  margin-top: 5px;
+}
+
+.date-form-input:focus {
+  outline: 1px solid #01a1af;
+}
+
+.date-form-label {
+  color: #01a1af;
+  display: flex;
+  font-size: 1.1em;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.date-form-error {
+  display: none;
+  font-size: 0.7em;
+  color: #fe5e50;  
+  border-bottom: 1px solid #fe5e50;
+  margin-top: 5px;
+}
+
+.date-form-valid {
+  display: none;
+}
+
+.date-form-button:hover,
+.header-navbar-button:hover {
+  background-color: #01c9db;  
+}
+
+.date-form,
+.dataview-container,
+#error-message-container {
+  width: 25%;
+  min-width: 250px;
+  margin: 0 auto 10px auto;
+}
+
+.dataview-container {
+  text-align: left;  
+}
+
+.flex-row-space-btw {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-navbar {
+  margin: 0 0 2% 15%;
+  justify-content: start;
+}
+
+.header-navbar-button {
+  background-color: #01a1af;
+  color: aliceblue;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 6px;
+  margin: 0 10px 0 0;
+}
+
 .wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+#error-message-container {
+  text-align: left;
+  display: none
+}
+
+#error-message-container h4 {
+  margin: 0 0 5px 0;
+  background-color: #fe5e50;
+  color: aliceblue;
+  padding: 8px;
+  
 }
 
 #loading {
