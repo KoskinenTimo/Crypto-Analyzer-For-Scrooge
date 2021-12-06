@@ -43,7 +43,7 @@ const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
       <div className="data-card">
         <h4>Highest volume date</h4>
         <p>
-          The highest trading trade by volume was {highestTradingVolumeDate[0]} and 
+          The highest trading day by volume was {highestTradingVolumeDate[0]} and 
           the volume was {highestTradingVolumeDate[1]}€.
         </p>
       </div>
