@@ -90,17 +90,16 @@ const DataView = ({
    * @param {number} toDate Unix timestamp ms
    * @returns {number[]} dateArray
    */
-  const createDateArray = (fromDate,toDate) => {
+   const createDateArray = (fromDate,toDate) => {
     const firstDay = fromDate*1000
     const lastDay = toDate*1000
     let currentDay = firstDay
     const dateArray = []
-    while (currentDay < lastDay) {
+    while (currentDay <= lastDay) {
       dateArray.push(currentDay)
       const newDay = addOneDayToDate(currentDay)
       currentDay = newDay
     }
-    dateArray.pop()
     return dateArray
   }
   
@@ -113,16 +112,19 @@ const DataView = ({
    * @param {[number[]]} arrayOfDataPointsPerTimestamp 
    * @returns {[number[]]} [...,[date,data],...]
    */
-  const getOneDataPointPerDate = (arrayOfDates,arrayOfDataPointsPerTimestamp) => {
+   const getOneDataPointPerDate = (arrayOfDates,arrayOfDataPointsPerTimestamp) => {
     let index = 0
     const datesWithData = arrayOfDates.map(dateInMS => {
-      let closestDataPoint = ''
-      // 2 options, for loop is 40 times more performant in tests but less readable
+      // for loop is 40 times more performant in tests than reduce but less readable
       // get the matching date from the other array and start the loop where
       // previous for loop left of(both arrayz in chronological order), break the
       // for loop when the gap is getting wider, in other works the date is 
       // getting further from the already found 'best match'
-      for (index; index < arrayOfDataPointsPerTimestamp.length; index++) {
+      let closestDataPoint = ''
+      if (index >= arrayOfDataPointsPerTimestamp.length) {
+        index = arrayOfDataPointsPerTimestamp.length - 1
+      }
+      for (index; index < arrayOfDataPointsPerTimestamp.length;index++) {
         if (!closestDataPoint) {
           closestDataPoint = arrayOfDataPointsPerTimestamp[index]
           continue
@@ -133,16 +135,12 @@ const DataView = ({
           index--
           break;
         }
+        if (storedDifference === currentDifference) {
+          closestDataPoint = arrayOfDataPointsPerTimestamp[index]
+          continue
+        }
         closestDataPoint = arrayOfDataPointsPerTimestamp[index]
       }
-      // const closestDataPoint = arrayOfDataPointsPerTimestamp.reduce((bestValue, currentValue) => {
-      //   const storedDifference = Math.abs(bestValue[0] - dateInMS)
-      //   const currentDifference = Math.abs(currentValue[0] - dateInMS)
-      //   if (storedDifference < currentDifference) {
-      //     return bestValue
-      //   }
-      //   return currentValue
-      // })
       return [ dateInMS, closestDataPoint[1] ]
     })
     return datesWithData

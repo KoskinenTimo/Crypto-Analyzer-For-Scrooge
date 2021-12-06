@@ -6,6 +6,7 @@ import DateInputForm from './components/DateInputForm'
 import ErrorMessage from "./components/ErrorMessage"
 import Footer from "./components/Footer"
 import DataView from "./components/DataView"
+import NavBar from "./components/NavBar"
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   return (
     <div className="wrapper">    
       <Header />
-
+      <NavBar />
       <ErrorMessage 
         error={error}
         setError={setError}
