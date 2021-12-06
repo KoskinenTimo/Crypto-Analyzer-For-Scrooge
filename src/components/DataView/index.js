@@ -114,15 +114,36 @@ const DataView = ({
    * @returns {[number[]]} [...,[date,data],...]
    */
   const getOneDataPointPerDate = (arrayOfDates,arrayOfDataPointsPerTimestamp) => {
-    const datesWithData = arrayOfDates.map(date => {
-      const dateUnix = date
-      const closestDataPoint = arrayOfDataPointsPerTimestamp.reduce((previousValue, currentValue) => {
-        const storedDifference = Math.abs(previousValue[0] - dateUnix)
-        const currentDifference = Math.abs(currentValue[0] - dateUnix)
-        const previousValueDifferenceLower = storedDifference < currentDifference
-        return previousValueDifferenceLower ? previousValue : currentValue
-      })
-      return [ date, closestDataPoint[1] ]
+    let index = 0
+    const datesWithData = arrayOfDates.map(dateInMS => {
+      let closestDataPoint = ''
+      // 2 options, for loop is 40 times more performant in tests but less readable
+      // get the matching date from the other array and start the loop where
+      // previous for loop left of(both arrayz in chronological order), break the
+      // for loop when the gap is getting wider, in other works the date is 
+      // getting further from the already found 'best match'
+      for (index; index < arrayOfDataPointsPerTimestamp.length; index++) {
+        if (!closestDataPoint) {
+          closestDataPoint = arrayOfDataPointsPerTimestamp[index]
+          continue
+        }
+        const storedDifference = Math.abs(arrayOfDataPointsPerTimestamp[index-1][0] - dateInMS)
+        const currentDifference = Math.abs(arrayOfDataPointsPerTimestamp[index][0] - dateInMS)
+        if (storedDifference < currentDifference) {
+          index--
+          break;
+        }
+        closestDataPoint = arrayOfDataPointsPerTimestamp[index]
+      }
+      // const closestDataPoint = arrayOfDataPointsPerTimestamp.reduce((bestValue, currentValue) => {
+      //   const storedDifference = Math.abs(bestValue[0] - dateInMS)
+      //   const currentDifference = Math.abs(currentValue[0] - dateInMS)
+      //   if (storedDifference < currentDifference) {
+      //     return bestValue
+      //   }
+      //   return currentValue
+      // })
+      return [ dateInMS, closestDataPoint[1] ]
     })
     return datesWithData
   }

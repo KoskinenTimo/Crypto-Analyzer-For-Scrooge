@@ -37,6 +37,7 @@ const DataViewBestBuySell = ({ arrayDatesPrices }) => {
    */
   const getPairBestDayToBuyAndToSell = (arrayOfDatesWithPrice) => {
     return arrayOfDatesWithPrice
+      // last day of the array doesn't have a sell date
       .slice(0,-1)
       // create new array that matches all dates of the initial array with the best  
       // dates ahead to sell, profit included [..., [buyDate,bestSellDate,profit], ...]
