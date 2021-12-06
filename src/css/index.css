@@ -12,12 +12,7 @@ body {
 header {  
   background-color: #01a1af;
   width: 100%;
-  margin: 0 0 20px 0;
-}
-
-header h1 {
-  color: aliceblue;
-  padding: 15px;  
+  margin: 0;
 }
 
 footer {
@@ -36,9 +31,58 @@ h4 {
   font-size: 1.1em;
 }
 
+button {
+  border: none;
+}
+
 footer p {
   margin: 0;
   color: aliceblue;
+}
+
+header h1 {
+  color: aliceblue;
+  padding: 30px 30px 30px 6px;
+  margin-left: 15%
+}
+
+header .login-bar {
+  overflow-y: hidden;
+  margin: auto 10% 0 0
+}
+
+header button, 
+header h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 7px;
+  margin-right: 15px;
+} 
+
+header button {
+  border: none;
+  color: #01a1af;
+  background-color: white;
+}
+
+header h3 {
+  color: white;
+}
+
+header button:hover {
+  color:aliceblue;
+  background-color: #01c9db;
+}
+
+.flex-row-space-btw {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }
 
 #error-message-container,
@@ -60,6 +104,20 @@ footer p {
   color: aliceblue;
   padding: 8px;
   
+}
+
+.header-navbar {
+  margin: 0 0 2% 15%;
+  justify-content: start;
+}
+
+.navbar-button {
+  background-color: #01a1af;
+  color: aliceblue;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 6px;
+  margin: 0 10px 0 0;
 }
 
 .date-form {
@@ -99,7 +157,8 @@ footer p {
   margin-right: 0.2em;
 }
 
-.date-form-button:hover {
+.date-form-button:hover,
+.navbar-button:hover {
   background-color: #01c9db;  
 }
 
