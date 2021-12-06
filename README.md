@@ -1,7 +1,7 @@
-If you have docker installed and want to run the app in a container at http://localhost:3000/ you can:
+If you have docker installed and want to run the app in a container at http://localhost:3000/ you can: <br>
 'docker container run -p 3000:3000 koskinentht/gecko-front:1.2'
 
-If you want to run without build version
+If you want to run without build version  <br>
 'npm start'
 
 You can ask for a link to live version if needed.
