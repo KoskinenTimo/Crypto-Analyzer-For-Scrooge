@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 
 const NavButton = ({ text }) => {
@@ -6,7 +6,7 @@ const NavButton = ({ text }) => {
     <button className="header-navbar-button">
       {text}
     </button>
-    )
+  )
 }
 
 export default NavButton

@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 
 // Components
-import Header from "./components/Header"
+import Header from './components/Header'
 import DateInputForm from './components/DateInputForm'
-import ErrorMessage from "./components/ErrorMessage"
-import Footer from "./components/Footer"
-import DataView from "./components/DataView"
-import NavBar from "./components/NavBar"
+import ErrorMessage from './components/ErrorMessage'
+import Footer from './components/Footer'
+import DataView from './components/DataView'
+import NavBar from './components/NavBar'
 
 
 function App() {
@@ -14,12 +14,12 @@ function App() {
   const [ toDateTimeStamp, setToDateTimeStamp ] = useState('')
   const [ error, setError ] = useState('')
 
-  
+
   return (
-    <div className="wrapper">    
+    <div className="wrapper">
       <Header />
       <NavBar />
-      <ErrorMessage 
+      <ErrorMessage
         error={error}
         setError={setError}
       />
@@ -30,7 +30,7 @@ function App() {
         error={error}
       />
       <DataView
-        fromDateTimeStamp={fromDateTimeStamp}        
+        fromDateTimeStamp={fromDateTimeStamp}
         toDateTimeStamp={toDateTimeStamp}
         setFromDateTimeStamp={setFromDateTimeStamp}
         setToDateTimeStamp={setToDateTimeStamp}
@@ -39,7 +39,7 @@ function App() {
 
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
