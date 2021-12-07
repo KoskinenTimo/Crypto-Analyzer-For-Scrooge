@@ -116,7 +116,7 @@ const DataView = ({
     const datesWithData = arrayOfDates.map(dateInMS => {
       // for loop is 40 times more performant in tests than reduce but less readable
       // get the matching date from the other array and start the loop where
-      // previous for loop left of(both arrayz in chronological order), break the
+      // previous for loop left of(both arrays in chronological order), break the
       // for loop when the gap is getting wider, in other works the date is
       // getting further from the already found 'best match'
       let closestDataPoint = ''

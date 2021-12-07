@@ -1,5 +1,5 @@
 import {
-  coinGeckoBaseUrl,
+  coinGeckoBaseUrl
 } from '../utils/constants/apiPaths'
 
 //

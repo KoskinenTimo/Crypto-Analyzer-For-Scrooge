@@ -25,3 +25,4 @@ Dockerfile
 .gitignore
 docker-compose.yml
 /.github
+.env
