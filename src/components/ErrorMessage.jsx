@@ -1,17 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetError } from '../reducers/errorReducer'
 
-const ErrorMessage = ({
-  error,
-  setError
-}) => {
+const ErrorMessage = () => {
+  const error = useSelector(state => state.error)
+  const dispatch = useDispatch()
   const [ errorMessage, setErrorMessage ] = useState('')
+  // ref to make sure timer resets correctly
   const timerRef = useRef()
   const containerRef = useRef()
 
   useEffect(() => {
     if (!error) return
     setErrorMessage(error)
-    setError('')
+    dispatch(resetError())
     clearTimeout(timerRef.current)
     containerRef.current.style.display = 'block'
     timerRef.current = setTimeout(() => {
@@ -19,7 +21,6 @@ const ErrorMessage = ({
       setErrorMessage('')
     },3000)
   }, [error])
-
 
   return(
     <div id="error-message-container" ref={containerRef}>

@@ -1,4 +1,5 @@
 import React,{ useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 // Utils
 import { parseToDate } from '../../utils/parsers'
@@ -7,11 +8,8 @@ import { parseToDate } from '../../utils/parsers'
  * Used to render bearish trend data
  * @param {props}
  */
-const DataViewBearishTrend = ({
-  arrayDatesPrices,
-  fromDateTimeStamp,
-  toDateTimeStamp
-}) => {
+const DataViewBearishTrend = ({ arrayDatesPrices }) => {
+  const analyzer = useSelector(state => state.analyzer)
   const [ longestTrend, setLongestTrend ] = useState('')
   const [ dates, setDates ] = useState([])
 
@@ -19,9 +17,13 @@ const DataViewBearishTrend = ({
     if (arrayDatesPrices && arrayDatesPrices.length) {
       const longestTrend = getLongestBearishTrend(arrayDatesPrices)
       setLongestTrend(longestTrend)
-      if (fromDateTimeStamp && toDateTimeStamp) {
-        const parsedFromDate = parseToDate(fromDateTimeStamp*1000)
-        const parsedToDate = parseToDate(toDateTimeStamp*1000)
+      if (
+        analyzer &&
+        analyzer.fromDate &&
+        analyzer.toDate
+      ) {
+        const parsedFromDate = parseToDate(analyzer.fromDate*1000)
+        const parsedToDate = parseToDate(analyzer.toDate*1000)
         setDates([ parsedFromDate,parsedToDate ])
       }
     }
@@ -31,7 +33,7 @@ const DataViewBearishTrend = ({
       setLongestTrend('')
       setDates(reset)
     }
-  }, [arrayDatesPrices,fromDateTimeStamp,toDateTimeStamp])
+  }, [arrayDatesPrices,analyzer])
 
   /**
    * Takes in an array of [...,[date,price],...]

@@ -1,44 +1,35 @@
-import React, { useState } from 'react'
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from 'react-router-dom'
 
 // Components
 import Header from './components/Header'
-import DateInputForm from './components/DateInputForm'
 import ErrorMessage from './components/ErrorMessage'
 import Footer from './components/Footer'
-import DataView from './components/DataView'
 import NavBar from './components/NavBar'
+import AnalyzerContainer from './components/AnalyzerContainer'
+import LoginForm from './components/LoginForm'
 
 
 function App() {
-  const [ fromDateTimeStamp, setFromDateTimeStamp ] = useState('')
-  const [ toDateTimeStamp, setToDateTimeStamp ] = useState('')
-  const [ error, setError ] = useState('')
-
 
   return (
-    <div className="wrapper">
-      <Header />
-      <NavBar />
-      <ErrorMessage
-        error={error}
-        setError={setError}
-      />
-      <DateInputForm
-        setFromDateTimeStamp={setFromDateTimeStamp}
-        setToDateTimeStamp={setToDateTimeStamp}
-        setError={setError}
-        error={error}
-      />
-      <DataView
-        fromDateTimeStamp={fromDateTimeStamp}
-        toDateTimeStamp={toDateTimeStamp}
-        setFromDateTimeStamp={setFromDateTimeStamp}
-        setToDateTimeStamp={setToDateTimeStamp}
-        setError={setError}
-      />
+    <Router>
+      <div className="wrapper">
+        <Header />
+        <NavBar />
+        <ErrorMessage />
+        <Routes>
+          <Route path="/analyzer" element={<AnalyzerContainer />}/>
+          <Route path="/login" element={<LoginForm />} />
+        </Routes>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 

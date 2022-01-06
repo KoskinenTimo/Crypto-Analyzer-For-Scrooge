@@ -14,10 +14,10 @@ const DateInput = ({
 }) => {
 
   return(
-    <label className="date-form-label">
+    <label className="input-label">
       <label>{title}<span className="date-form-valid">&#10004;&#65039;</span></label>
       <input
-        className="date-form-input"
+        className="form-input"
         name={name}
         type="text"
         maxLength="10"

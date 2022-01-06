@@ -1,20 +1,22 @@
 import React, { useRef, useState } from 'react'
+import { createError } from '../reducers/errorReducer'
+import { createSearch, resetSearch } from '../reducers/analyzerReducer'
 
 // Components
 import DateInput from './DateInput'
+import SubmitResetButtons from './SubmitResetButtons'
 
 // Hooks
 import useAutoInput from '../hooks/useAutoInput'
+import { useDispatch } from 'react-redux'
+
 
 
 /**
  * Form for inputting dates to make a fetch to API
  */
-const DateInputForm = ({
-  setFromDateTimeStamp,
-  setToDateTimeStamp,
-  setError
-}) => {
+const DateInputForm = () => {
+  const dispatch = useDispatch()
   const [ fromDateInputValue, setFromDateInputValue ] = useState('')
   const [ toDateInputValue, setToDateInputValue ] = useState('')
 
@@ -38,15 +40,17 @@ const DateInputForm = ({
     if (fromDateValid && toDateValid && notSameDate) {
       const fromDateUnixTimestamp = parseToTimestamp(fromDateInputValue)
       const toDateUnixTimestamp = parseToTimestamp(toDateInputValue,1)
-      setFromDateTimeStamp(fromDateUnixTimestamp)
-      setToDateTimeStamp(toDateUnixTimestamp)
+      dispatch(createSearch({
+        fromDate: fromDateUnixTimestamp,
+        toDate: toDateUnixTimestamp
+      }))
       return
     }
     if (!fromDateValid || !toDateValid) {
-      setError('Please check the input, input provided is not valid')
+      dispatch(createError('Please check the input, input provided is not valid'))
       return
     }
-    setError('\'From Date\' and \'To Date\' cannot be the same')
+    dispatch(createError('\'From Date\' and \'To Date\' cannot be the same'))
   }
 
   /**
@@ -172,10 +176,9 @@ const DateInputForm = ({
   const handleResetButton = () => {
     setFromDateInputValue('')
     setToDateInputValue('')
-    setFromDateTimeStamp('')
-    setToDateTimeStamp('')
-    // remove all error messages visible in the form
+    dispatch(resetSearch())
 
+    // remove all error messages visible in the form
     const validElements = document.getElementById('date-form').getElementsByClassName('date-form-valid')
     const errorElements = document.getElementById('date-form').getElementsByClassName('date-form-error')
     const elements = [...validElements, ...errorElements]
@@ -201,18 +204,11 @@ const DateInputForm = ({
         title="To Date"
         elementRef={toDateRef}
       />
-      <div>
-        <button
-          className="date-form-button"
-          type="submit"
-        >Search</button>
-        <button
-          className="date-form-button"
-          type="button"
-          onClick={handleResetButton}
-        >Reset</button>
-      </div>
-
+      <SubmitResetButtons
+        submit='Search'
+        cancel='Reset'
+        handleReset={handleResetButton}
+      />
     </form>
   )
 }

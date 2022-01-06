@@ -105,7 +105,7 @@ header button:hover {
   text-align: left
 }
 
-.date-form-button {
+.form-button {
   display: inline-block;
   background-color: #01a1af;
   font-size: 1.1em;
@@ -117,18 +117,18 @@ header button:hover {
   margin-right: 0.2em;
 }
 
-.date-form-input {
+.form-input {
   padding: 8px;
   border: 1px solid #01a1af;
   border-radius: 3px;  
   margin-top: 5px;
 }
 
-.date-form-input:focus {
+.form-input:focus {
   outline: 1px solid #01a1af;
 }
 
-.date-form-label {
+.input-label {
   color: #01a1af;
   display: flex;
   font-size: 1.1em;
@@ -148,7 +148,7 @@ header button:hover {
   display: none;
 }
 
-.date-form-button:hover,
+.form-button:hover,
 .header-navbar-button:hover {
   background-color: #01c9db;  
 }

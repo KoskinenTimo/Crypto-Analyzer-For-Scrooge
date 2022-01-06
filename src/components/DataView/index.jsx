@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Components
 import DataViewBearishTrend from './DataViewBearishTrend'
@@ -9,13 +10,12 @@ import Loading from '../Loading'
 
 // Services
 import { getBitcoinChartRange } from '../../services/geckoApiService'
+import { createError } from '../../reducers/errorReducer'
 
 
-const DataView = ({
-  fromDateTimeStamp,
-  toDateTimeStamp,
-  setError
-}) => {
+const DataView = () => {
+  const dispatch = useDispatch()
+  const analyzer = useSelector(state => state.analyzer)
   const [ arrayDatesPrices, setarrayDatesPrices ] = useState([])
   const [ arrayDatesVolumes, setarrayDatesVolumes] = useState([])
   const [ fetchedPrices, setFetchedPrices ] = useState([])
@@ -24,11 +24,12 @@ const DataView = ({
 
   useEffect(() => {
     if (
-      fromDateTimeStamp &&
-      toDateTimeStamp
+      analyzer &&
+      analyzer.fromDate &&
+      analyzer.toDate
     ) {
       // Get data from API
-      getBitcoinChartRange(fromDateTimeStamp,toDateTimeStamp)
+      getBitcoinChartRange(analyzer.fromDate,analyzer.toDate)
         .then(res => {
           setFetchedPrices(res.prices)
           setFetchedVolumes(res.total_volumes)
@@ -39,7 +40,7 @@ const DataView = ({
               res.prices.length &&
               res.total_volumes.length
           ) {
-            const newArrayOfDates = createDateArray(fromDateTimeStamp,toDateTimeStamp)
+            const newArrayOfDates = createDateArray(analyzer.fromDate,analyzer.toDate)
             const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,res.prices)
             const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,res.total_volumes)
             setarrayDatesPrices(newarrayDatesPrices)
@@ -48,13 +49,13 @@ const DataView = ({
           setLoading(false)
         })
         .catch(err => {
-          setError(err.message)
+          dispatch(createError(err.message))
         })
     }
-    if (!fromDateTimeStamp || !toDateTimeStamp) {
+    if (!analyzer.fromDate || !analyzer.toDate) {
       resetData()
     }
-  },[fromDateTimeStamp,toDateTimeStamp])
+  },[analyzer])
 
   /**
    * Reset all data set states this component handles
@@ -147,8 +148,9 @@ const DataView = ({
 
   if (
     loading &&
-    fromDateTimeStamp &&
-    toDateTimeStamp
+    analyzer &&
+    analyzer.fromDate &&
+    analyzer.toDate
   ) {
     return (
       <div className="dataview-container">
@@ -158,8 +160,9 @@ const DataView = ({
   }
   if (
     !loading &&
-    fromDateTimeStamp &&
-    toDateTimeStamp &&
+    analyzer &&
+    analyzer.fromDate &&
+    analyzer.toDate &&
     fetchedPrices &&
     fetchedVolumes &&
     !fetchedPrices.length &&
@@ -173,11 +176,7 @@ const DataView = ({
   }
   return(
     <div className="dataview-container">
-      <DataViewBearishTrend
-        arrayDatesPrices={arrayDatesPrices}
-        fromDateTimeStamp={fromDateTimeStamp}
-        toDateTimeStamp={toDateTimeStamp}
-      />
+      <DataViewBearishTrend arrayDatesPrices={arrayDatesPrices} />
       <DataViewHighestVolume arrayDatesVolumes={arrayDatesVolumes} />
       <DataViewBestBuySell arrayDatesPrices={arrayDatesPrices} />
     </div>)
