@@ -62,6 +62,7 @@ const LoginForm = () => {
         name='password'
         value={password}
         handler={handleInput}
+        type='password'
       />
       <SubmitResetButtons
         submit='Login'

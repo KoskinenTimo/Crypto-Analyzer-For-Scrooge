@@ -9,7 +9,8 @@ const TextInput = ({
   handler,
   placeholder='',
   ref=null,
-  error='Make sure the input is in correct form'
+  error='Make sure the input is in correct form',
+  type='text'
 }) => {
   return (
     <label className="input-label">
@@ -17,7 +18,7 @@ const TextInput = ({
       <input
         className='form-input'
         name={name}
-        type="text"
+        type={type}
         maxLength={maxLength}
         value={value}
         onChange={({ target }) => handler(target)}
