@@ -19,7 +19,7 @@ const ErrorMessage = () => {
     timerRef.current = setTimeout(() => {
       containerRef.current.style.display = 'none'
       setErrorMessage('')
-    },3000)
+    },4000)
   }, [error])
 
   return(

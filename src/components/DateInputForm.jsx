@@ -3,7 +3,7 @@ import { createError } from '../reducers/errorReducer'
 import { createSearch, resetSearch } from '../reducers/analyzerReducer'
 
 // Components
-import DateInput from './DateInput'
+import DateInput from './Inputs/DateInput'
 import SubmitResetButtons from './SubmitResetButtons'
 
 // Hooks
@@ -151,9 +151,9 @@ const DateInputForm = () => {
    * @param {boolean} validString
    */
   const toggleStringValidation = (inputElement,validString,validDate) => {
-    const stringErrorNode = inputElement.parentNode.getElementsByClassName('date-form-error')[0]
-    const dateErrorNode = inputElement.parentNode.getElementsByClassName('date-form-error')[1]
-    const inputValidNode = inputElement.parentNode.getElementsByClassName('date-form-valid')[0]
+    const stringErrorNode = inputElement.parentNode.getElementsByClassName('form-input-error')[0]
+    const dateErrorNode = inputElement.parentNode.getElementsByClassName('form-input-error')[1]
+    const inputValidNode = inputElement.parentNode.getElementsByClassName('form-input-valid')[0]
     if (!validString || !validDate) {
       inputValidNode.style.display = 'none'
       if (!validString) {
@@ -179,8 +179,8 @@ const DateInputForm = () => {
     dispatch(resetSearch())
 
     // remove all error messages visible in the form
-    const validElements = document.getElementById('date-form').getElementsByClassName('date-form-valid')
-    const errorElements = document.getElementById('date-form').getElementsByClassName('date-form-error')
+    const validElements = document.getElementById('date-form').getElementsByClassName('form-input-valid')
+    const errorElements = document.getElementById('date-form').getElementsByClassName('form-input-error')
     const elements = [...validElements, ...errorElements]
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.display = 'none'

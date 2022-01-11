@@ -16,7 +16,7 @@ import AnalyzerContainer from './components/AnalyzerContainer'
 import LoginForm from './components/LoginForm'
 import { loginUser } from './reducers/userReducer'
 import Logout from './components/Logout'
-
+import SignUpForm from './components/SignUpForm'
 
 
 function App() {
@@ -36,6 +36,7 @@ function App() {
         <NavBar />
         <ErrorMessage />
         <Routes>
+          <Route path="/signup" element={<SignUpForm />}/>
           <Route path="/analyzer" element={<AnalyzerContainer />}/>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/logout" element={<Logout />}/>

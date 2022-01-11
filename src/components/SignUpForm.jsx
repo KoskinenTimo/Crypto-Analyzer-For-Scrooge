@@ -1,27 +1,36 @@
-import Cookies from 'js-cookie'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { createError } from '../reducers/errorReducer'
-import { loginUser } from '../reducers/userReducer'
-import { login } from '../services/loginService'
+import { signup } from '../services/userService'
+
+// Components
 import TextInput from './Inputs/TextInput'
 import SubmitResetButtons from './SubmitResetButtons'
 
 
-const LoginForm = () => {
+/**
+ * This component hold the logic for sign up, new user will be also logged in
+ * after a succesfull sign up
+ */
+const SignUpForm = () => {
+  const authUser = useSelector(state => state.authUser)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [ name, setName ] = useState('')
 
+  /**
+   * MISSING VALIDATION AND LOGIN AFTER SIGNUP
+   * @param {event} e
+   */
   const onSubmit = (e) => {
     e.preventDefault()
-    login({ username, password })
+    signup({ username, password, name })
       .then(res => {
-        const authDetails = res.data
-        Cookies.set('authUser', JSON.stringify(authDetails),{ expires: 1 })
-        dispatch(loginUser(authDetails))
+        console.log(res.data)
         onReset()
         navigate('/home')
       })
@@ -33,10 +42,14 @@ const LoginForm = () => {
   const onReset = () => {
     setUsername('')
     setPassword('')
+    setName('')
   }
 
   const handleInput = (target) => {
     switch (target.name) {
+    case 'name':
+      setName(target.value)
+      break
     case 'username':
       setUsername(target.value)
       break
@@ -48,8 +61,19 @@ const LoginForm = () => {
     }
   }
 
+  if (authUser) {
+    return (
+      <Navigate to="/" />
+    )
+  }
   return (
     <form className='date-form' onSubmit={onSubmit}>
+      <TextInput
+        title='Name'
+        name='name'
+        value={name}
+        handler={handleInput}
+      />
       <TextInput
         title='Username'
         name='username'
@@ -72,4 +96,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default SignUpForm

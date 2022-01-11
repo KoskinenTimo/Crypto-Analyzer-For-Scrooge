@@ -15,7 +15,7 @@ const DateInput = ({
 
   return(
     <label className="input-label">
-      <label>{title}<span className="date-form-valid">&#10004;&#65039;</span></label>
+      <label>{title}<span className="form-input-valid">&#10004;&#65039;</span></label>
       <input
         className="form-input"
         name={name}
@@ -26,8 +26,8 @@ const DateInput = ({
         onChange={({ target }) => handleDateInput(target)}
         ref={elementRef}
       />
-      <span className="date-form-error">Make sure the date is in correct form DD/MM/YYYY</span>
-      <span className="date-form-error">Date is incorrect, check day/month/year, year must be greater than 1970, also cannot be set in the future</span>
+      <span className="form-input-error">Make sure the date is in correct form DD/MM/YYYY</span>
+      <span className="form-input-error">Date is incorrect, check day/month/year, year must be greater than 1970, also cannot be set in the future</span>
     </label>
   )
 }
