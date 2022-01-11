@@ -2,6 +2,9 @@ FROM node:16-alpine AS build-stage
 
 WORKDIR /usr/src/app
 
+ARG REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+
 COPY . .
 
 RUN npm ci && \

@@ -1,4 +1,8 @@
+import Cookies from 'js-cookie'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { loginUser } from '../reducers/userReducer'
 import { login } from '../services/loginService'
 import SubmitResetButtons from './SubmitResetButtons'
 
@@ -6,11 +10,19 @@ import SubmitResetButtons from './SubmitResetButtons'
 const LoginForm = () => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const onSubmit = (e) => {
     e.preventDefault()
     login({ username, password })
-      .then(res => console.log(res))
+      .then(res => {
+        const authDetails = res.data
+        Cookies.set('authUser', JSON.stringify(authDetails),{ expires: 1 })
+        dispatch(loginUser(authDetails))
+        onReset()
+        navigate('/home')
+      })
       .catch(err => console.log(err))
   }
 
