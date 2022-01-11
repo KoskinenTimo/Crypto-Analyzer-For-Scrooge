@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { login } from '../services/userService'
+import { login } from '../services/loginService'
 import SubmitResetButtons from './SubmitResetButtons'
 
 
@@ -7,7 +7,8 @@ const LoginForm = () => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     login({ username, password })
       .then(res => console.log(res))
       .catch(err => console.log(err))
