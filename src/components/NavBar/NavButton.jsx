@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const NavButton = ({ text }) => {
+  const navigate = useNavigate()
   return (
-    <Link className="header-navbar-button" to={text.toLowerCase()}>
+    <button className="header-navbar-button" onClick={() => navigate(text.toLowerCase())}>
       {text}
-    </Link>
+    </button>
   )
 }
 

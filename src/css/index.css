@@ -99,7 +99,7 @@ header button:hover {
   color: aliceblue;
 }
 
-.date-form {
+.form {
   display: flex;
   flex-direction: column;  
   text-align: left
@@ -128,7 +128,7 @@ header button:hover {
   outline: 1px solid #01a1af;
 }
 
-.input-label {
+.form-input-label {
   color: #01a1af;
   display: flex;
   font-size: 1.1em;
@@ -148,12 +148,22 @@ header button:hover {
   display: none;
 }
 
+.form-title {
+  color: #01a1af;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 5px 5px 5px 0;
+  border-bottom: 1px solid #01a1af;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
 .form-button:hover,
 .header-navbar-button:hover {
   background-color: #01c9db;  
 }
 
-.date-form,
+.form,
 .dataview-container,
 #error-message-container {
   width: 25%;
@@ -186,9 +196,9 @@ header button:hover {
   color: aliceblue;
   font-size: 1.1em;
   font-weight: bold;
-  padding: 6px;
+  padding: 8px;
   margin: 0 10px 0 0;
-  width: 90px;
+  width: 100px;
 }
 
 .wrapper {

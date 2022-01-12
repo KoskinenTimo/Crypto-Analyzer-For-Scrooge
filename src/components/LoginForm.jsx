@@ -15,6 +15,10 @@ const LoginForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  /**
+   * Submit for the login form, sets a cookie for 1 hour persistent log in
+   * @param {event} e
+   */
   const onSubmit = (e) => {
     e.preventDefault()
     login({ username, password })
@@ -30,11 +34,18 @@ const LoginForm = () => {
       })
   }
 
+  /**
+   * Reset form fields
+   */
   const onReset = () => {
     setUsername('')
     setPassword('')
   }
 
+  /**
+   * Handles the log in form input states
+   * @param {event object property} target
+   */
   const handleInput = (target) => {
     switch (target.name) {
     case 'username':
@@ -49,7 +60,8 @@ const LoginForm = () => {
   }
 
   return (
-    <form className='date-form' onSubmit={onSubmit}>
+    <form className='form' onSubmit={onSubmit}>
+      <h3 className='form-title'>Login</h3>
       <TextInput
         title='Username'
         name='username'

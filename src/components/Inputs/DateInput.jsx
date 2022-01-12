@@ -14,7 +14,7 @@ const DateInput = ({
 }) => {
 
   return(
-    <label className="input-label">
+    <label className="form-input-label">
       <label>{title}<span className="form-input-valid">&#10004;&#65039;</span></label>
       <input
         className="form-input"

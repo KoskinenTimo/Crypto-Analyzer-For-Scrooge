@@ -179,8 +179,8 @@ const DateInputForm = () => {
     dispatch(resetSearch())
 
     // remove all error messages visible in the form
-    const validElements = document.getElementById('date-form').getElementsByClassName('form-input-valid')
-    const errorElements = document.getElementById('date-form').getElementsByClassName('form-input-error')
+    const validElements = document.getElementById('analyzer-form').getElementsByClassName('form-input-valid')
+    const errorElements = document.getElementById('analyzer-form').getElementsByClassName('form-input-error')
     const elements = [...validElements, ...errorElements]
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.display = 'none'
@@ -189,7 +189,8 @@ const DateInputForm = () => {
 
 
   return(
-    <form className="date-form" id="date-form" onSubmit={handleSubmit}>
+    <form className="form" id="analyzer-form" onSubmit={handleSubmit}>
+      <h3 className='form-title'>Analyzer</h3>
       <DateInput
         dateInputValue={fromDateInputValue}
         handleDateInput={handleDateInput}

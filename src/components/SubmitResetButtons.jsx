@@ -14,7 +14,7 @@ const SubmitResetButtons = ({
       <button
         className="form-button"
         type="button"
-        onClick={handleReset}
+        onClick={() => handleReset()}
       >{cancel}</button>
     </div>
   )

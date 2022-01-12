@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { useDispatch } from 'react-redux'
+import { checkToken } from './services/loginService'
 
 // Components
 import Header from './components/Header'
@@ -25,7 +26,13 @@ function App() {
   useEffect(() => {
     if (Cookies.get('authUser')) {
       const authUser = JSON.parse(Cookies.get('authUser'))
-      dispatch(loginUser(authUser))
+      checkToken(authUser.token)
+        .then(() => {
+          dispatch(loginUser(authUser))
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }, [])
 

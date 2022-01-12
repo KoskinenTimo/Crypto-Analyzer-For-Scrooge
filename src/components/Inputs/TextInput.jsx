@@ -8,12 +8,13 @@ const TextInput = ({
   value,
   handler,
   placeholder='',
-  ref=null,
+  inputRef=null,
   error='Make sure the input is in correct form',
   type='text'
 }) => {
+
   return (
-    <label className="input-label">
+    <label className="form-input-label">
       <label>{title}<span className="form-input-valid">&#10004;&#65039;</span></label>
       <input
         className='form-input'
@@ -23,7 +24,7 @@ const TextInput = ({
         value={value}
         onChange={({ target }) => handler(target)}
         placeholder={placeholder}
-        ref={ref}
+        ref={inputRef}
       />
       <span className="form-input-error">{error}</span>
     </label>
