@@ -44,7 +44,8 @@ function App() {
         <NavBar />
         <ErrorMessage />
         <Routes>
-          <Route path={['/home', '/']} element={<Home />}/>
+          <Route exact path='/' element={<Home />}/>
+          <Route path='/home' element={<Home />}/>
           <Route path='/signup' element={<SignUpForm />}/>
           <Route path='/analyzer' element={<AnalyzerContainer />}/>
           <Route path='/login' element={<LoginForm />} />
