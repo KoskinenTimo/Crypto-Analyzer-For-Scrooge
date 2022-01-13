@@ -11,7 +11,6 @@ import useAutoInput from '../hooks/useAutoInput'
 import { useDispatch } from 'react-redux'
 
 
-
 /**
  * Form for inputting dates to make a fetch to API
  */

@@ -2,6 +2,9 @@ import React from 'react'
 import NavButton from './NavButton'
 
 
+/**
+ * Header navigation bar for main site navigation
+ */
 const NavBar = () => {
   return (
     <div className="header-navbar flex-row">

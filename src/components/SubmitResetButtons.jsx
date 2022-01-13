@@ -1,5 +1,9 @@
 import React from 'react'
 
+
+/**
+ * Form buttons for submit and reset input fields
+ */
 const SubmitResetButtons = ({
   submit='submit',
   cancel='cancel',

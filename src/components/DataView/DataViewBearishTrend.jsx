@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 // Utils
 import { parseToDate } from '../../utils/parsers'
 
+
 /**
  * Used to render bearish trend data
  * @param {props}

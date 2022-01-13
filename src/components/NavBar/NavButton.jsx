@@ -2,6 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
+/**
+ * Header navigation bar button
+ */
 const NavButton = ({ text }) => {
   const navigate = useNavigate()
   return (

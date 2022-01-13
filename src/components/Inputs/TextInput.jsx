@@ -1,6 +1,9 @@
 import React from 'react'
 
 
+/**
+ * Re-usable input field for text
+ */
 const TextInput = ({
   title='',
   name='',

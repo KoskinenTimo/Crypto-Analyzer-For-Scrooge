@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetError } from '../reducers/errorReducer'
 
+
+/**
+ * Used as an error message display below header for any caught errors
+ */
 const ErrorMessage = () => {
   const error = useSelector(state => state.error)
   const dispatch = useDispatch()

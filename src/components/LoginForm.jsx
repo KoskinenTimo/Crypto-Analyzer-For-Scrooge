@@ -9,6 +9,9 @@ import TextInput from './Inputs/TextInput'
 import SubmitResetButtons from './SubmitResetButtons'
 
 
+/**
+ * User log in form, succesful log in set 1 hour persistent token cookie
+ */
 const LoginForm = () => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')

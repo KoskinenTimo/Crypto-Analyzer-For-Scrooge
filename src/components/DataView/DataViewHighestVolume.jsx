@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 // Utils
 import { parseToDate, parseNumber } from '../../utils/parsers'
 
+
 /**
  * Used to render highest volume date data
  * @param {props}

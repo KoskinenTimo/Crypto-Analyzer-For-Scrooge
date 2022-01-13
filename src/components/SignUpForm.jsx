@@ -32,7 +32,9 @@ const SignUpForm = () => {
   const [ rePassword, setRePassword ] = useState('')
 
   /**
-   * MISSING VALIDATION AND LOGIN AFTER SIGNUP
+   * Handles form submit. Uses input client-side validations before submitting
+   * to API. After succesful sign up, logs in the users and redirects to home
+   * page.
    * @param {event} e
    */
   const onSubmit = (e) => {
@@ -65,6 +67,9 @@ const SignUpForm = () => {
     }
   }
 
+  /**
+   * Resets all input tracking states and error/valid visuals on the form
+   */
   const onReset = () => {
     setUsername('')
     setPassword('')
@@ -182,7 +187,7 @@ const SignUpForm = () => {
     return true
   }
 
-
+  // No sign up if the user is already logged in
   if (authUser) {
     return (
       <Navigate to="/" />

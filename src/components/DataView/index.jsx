@@ -13,6 +13,10 @@ import { getBitcoinChartRange } from '../../services/geckoApiService'
 import { createError } from '../../reducers/errorReducer'
 
 
+/**
+ * Main container component for all data display, formats dates data to be
+ * used by children, like list of days and days with data points
+ */
 const DataView = () => {
   const dispatch = useDispatch()
   const analyzer = useSelector(state => state.analyzer)
