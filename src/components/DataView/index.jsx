@@ -11,6 +11,7 @@ import Loading from '../Loading'
 // Services
 import { getBitcoinChartRange } from '../../services/geckoApiService'
 import { createError } from '../../reducers/errorReducer'
+import { resetSearch } from '../../reducers/analyzerReducer'
 
 
 /**
@@ -60,6 +61,13 @@ const DataView = () => {
       resetData()
     }
   },[analyzer])
+
+  // Reset data when componentWillUnmount
+  useEffect(() => {
+    return () => {
+      dispatch(resetSearch())
+    }
+  })
 
   /**
    * Reset all data set states this component handles
