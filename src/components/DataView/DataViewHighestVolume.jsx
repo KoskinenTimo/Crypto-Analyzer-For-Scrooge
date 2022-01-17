@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 // Utils
 import { parseToDate, parseNumber } from '../../utils/parsers'
@@ -9,6 +10,8 @@ import { parseToDate, parseNumber } from '../../utils/parsers'
  * @param {props}
  */
 const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
+  // Currency symbol, on purpose only 1 character long
+  const s = useSelector(state => state.analyzer.symbol)
   const [ highestTradingVolumeDate, setHighestTradingVolumeDate ] = useState([])
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
         <h4>Highest volume date</h4>
         <p>
           The highest trading day by volume was {highestTradingVolumeDate[0]} and
-          the volume was {highestTradingVolumeDate[1]}€.
+          the volume was {highestTradingVolumeDate[1]}{s}.
         </p>
       </div>
     )

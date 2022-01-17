@@ -2,7 +2,7 @@ import React from 'react'
 
 // Components
 import DataView from './DataView'
-import DateInputForm from './DateInputForm'
+import AnalyzeForm from './AnalyzeForm'
 
 
 /**
@@ -12,7 +12,7 @@ import DateInputForm from './DateInputForm'
 const AnalyzerContainer = () => {
   return (
     <>
-      <DateInputForm />
+      <AnalyzeForm />
       <DataView />
     </>
   )

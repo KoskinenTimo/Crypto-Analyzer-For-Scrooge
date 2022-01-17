@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 // Utils
 import { parseToDate } from '../../utils/parsers'
+import { coins } from '../../utils/constants'
 
 
 /**
@@ -13,6 +14,7 @@ const DataViewBearishTrend = ({ arrayDatesPrices }) => {
   const analyzer = useSelector(state => state.analyzer)
   const [ longestTrend, setLongestTrend ] = useState('')
   const [ dates, setDates ] = useState([])
+  const [ coinName, setCoinName ] = useState('')
 
   useEffect(() => {
     if (arrayDatesPrices && arrayDatesPrices.length) {
@@ -33,9 +35,17 @@ const DataViewBearishTrend = ({ arrayDatesPrices }) => {
       const reset = []
       setLongestTrend('')
       setDates(reset)
+      setCoinName('')
     }
   }, [arrayDatesPrices,analyzer])
 
+  // Handles setting correct coin name
+  useEffect(() => {
+    if (analyzer && analyzer.coin) {
+      const foundCoin = coins.find(coin => coin.id === analyzer.coin)
+      setCoinName(foundCoin.name)
+    }
+  }, [analyzer])
   /**
    * Takes in an array of [...,[date,price],...]
    * and loops over the array to check the longest
@@ -68,7 +78,7 @@ const DataViewBearishTrend = ({ arrayDatesPrices }) => {
       <div className="data-card">
         <h4>Longest bearish trend</h4>
         <p>
-          In bitcoin’s historical data from CoinGecko, the price decreased {longestTrend} days in a row for the
+          In {coinName}’s historical data from CoinGecko, the price decreased {longestTrend} days in a row for the
           inputs from {dates[0]} and {dates[1]}.
         </p>
       </div>

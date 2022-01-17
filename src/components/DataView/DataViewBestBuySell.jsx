@@ -1,4 +1,5 @@
 import React, { useEffect,useState } from 'react'
+import { useSelector } from 'react-redux'
 
 // Utils
 import { parseNumber, parseToDate } from '../../utils/parsers'
@@ -11,6 +12,8 @@ import { parseNumber, parseToDate } from '../../utils/parsers'
 const DataViewBestBuySell = ({ arrayDatesPrices }) => {
   // contains best buy and sell dates with profit [ buyDate, sellDate, profit ]
   const [ profitData, setProfitData ] = useState([])
+  // Currency symbol, on purpose only 1 character long
+  const s = useSelector(state => state.analyzer.symbol)
 
   useEffect(() => {
     if (arrayDatesPrices && arrayDatesPrices.length) {
@@ -74,7 +77,7 @@ const DataViewBestBuySell = ({ arrayDatesPrices }) => {
             ?
             <p>
           Best day to buy {profitData[0]} and best to sell {profitData[1]},
-          profit {profitData[2]}€ per coin.
+          profit {profitData[2]}{s} per coin.
             </p>
             :
             <p>

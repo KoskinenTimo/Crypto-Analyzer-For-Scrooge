@@ -147,6 +147,25 @@ header button:hover {
   display: none;
 }
 
+.form-menu-label {
+  color: #01a1af;
+  display: flex;
+  font-size: 1.1em;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 10px 10px 10px 0;
+}
+
+.form-menu-label label {
+  padding: 5px;
+}
+
+.form-menu-label select {
+  padding: 5px;
+  margin-left: 4px;
+  width: 120px;
+}
+
 .form-title {
   color: #01a1af;
   font-size: 1.6em;

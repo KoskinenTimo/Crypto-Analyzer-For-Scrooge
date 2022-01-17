@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { createErrorNotification } from '../reducers/notificationReducer'
 import { createSearch, resetSearch } from '../reducers/analyzerReducer'
+import { coins, currencies } from '../utils/constants'
 
 // Components
 import DateInput from './Inputs/DateInput'
@@ -9,15 +10,18 @@ import SubmitResetButtons from './SubmitResetButtons'
 // Hooks
 import useAutoInput from '../hooks/useAutoInput'
 import { useDispatch } from 'react-redux'
+import DropDownMenu from './Inputs/DropDownMenu'
 
 
 /**
  * Form for inputting dates to make a fetch to API
  */
-const DateInputForm = () => {
+const AnalyzeForm = () => {
   const dispatch = useDispatch()
   const [ fromDateInputValue, setFromDateInputValue ] = useState('')
   const [ toDateInputValue, setToDateInputValue ] = useState('')
+  const [ coin, setCoin ] = useState('')
+  const [ currency, setCurrency ] = useState('')
 
   // Add / characters as the user gives date
   useAutoInput(fromDateInputValue,setFromDateInputValue,'/',[2,5])
@@ -41,7 +45,9 @@ const DateInputForm = () => {
       const toDateUnixTimestamp = parseToTimestamp(toDateInputValue,1)
       dispatch(createSearch({
         fromDate: fromDateUnixTimestamp,
-        toDate: toDateUnixTimestamp
+        toDate: toDateUnixTimestamp,
+        coin,
+        currency
       }))
       return
     }
@@ -204,6 +210,18 @@ const DateInputForm = () => {
         title="To Date"
         elementRef={toDateRef}
       />
+      <div className='flex-row'>
+        <DropDownMenu
+          setter={setCoin}
+          title={'Coin'}
+          array={coins}
+        />
+        <DropDownMenu
+          setter={setCurrency}
+          title={'Currency'}
+          array={currencies}
+        />
+      </div>
       <SubmitResetButtons
         submit='Search'
         cancel='Reset'
@@ -213,4 +231,4 @@ const DateInputForm = () => {
   )
 }
 
-export default DateInputForm
+export default AnalyzeForm

@@ -18,6 +18,13 @@ const analyzerReducer = (state = initialState, action) => {
 
 
 export const createSearch = (content) => {
+  if (content.currency === 'eur') {
+    content.symbol = '€'
+  } else if (content.currency === 'usd') {
+    content.symbol = '$'
+  } else {
+    content.symbol = content.currency
+  }
   return {
     type: 'NEW_SEARCH',
     data: content

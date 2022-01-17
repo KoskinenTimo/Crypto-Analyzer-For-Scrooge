@@ -1,6 +1,6 @@
 import {
   coinGeckoBaseUrl
-} from '../utils/constants/apiPaths'
+} from '../utils/apiPaths'
 
 import axios from 'axios'
 
@@ -28,13 +28,13 @@ import axios from 'axios'
 // }
 
 /**
- * Currently only handles bitcoin vs eur, can be modified easily to fetch other values
+ * Gets coin data vs 'real' currency
  * @param {number} fromDate
  * @param {number} toDate
  * @returns {response object}
  */
-export const getBitcoinChartRange = async (fromDate,toDate) => {
-  return await axios(`${coinGeckoBaseUrl}/coins/bitcoin/market_chart/range?vs_currency=eur&from=${fromDate}&to=${toDate}`)
+export const getCoinChartRange = async (fromDate,toDate,coin,currency) => {
+  return await axios(`${coinGeckoBaseUrl}/coins/${coin}/market_chart/range?vs_currency=${currency}&from=${fromDate}&to=${toDate}`)
 }
 
 /**

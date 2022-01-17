@@ -9,7 +9,7 @@ import DataViewNoData from './DataViewNoData'
 import Loading from '../Loading'
 
 // Services
-import { getBitcoinChartRange } from '../../services/geckoApiService'
+import { getCoinChartRange } from '../../services/geckoApiService'
 import { createErrorNotification } from '../../reducers/notificationReducer'
 import { resetSearch } from '../../reducers/analyzerReducer'
 
@@ -34,7 +34,12 @@ const DataView = () => {
       analyzer.toDate
     ) {
       // Get data from API
-      getBitcoinChartRange(analyzer.fromDate,analyzer.toDate)
+      getCoinChartRange(
+        analyzer.fromDate,
+        analyzer.toDate,
+        analyzer.coin,
+        analyzer.currency
+      )
         .then(res => {
           const { prices, total_volumes } = res.data
           setFetchedPrices(res.prices)
