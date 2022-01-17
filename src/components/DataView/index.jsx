@@ -67,10 +67,8 @@ const DataView = () => {
         })
     }
     if (!analyzer.fromDate || !analyzer.fromDate) {
-      console.log('right')
       resetData()
     }
-    console.log(analyzer)
   },[analyzer])
 
   /**
