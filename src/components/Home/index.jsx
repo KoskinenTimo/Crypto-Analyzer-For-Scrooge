@@ -1,6 +1,6 @@
 import React from 'react'
 import Info from './Info'
-import TopCoins from './TopCoins'
+import Project from './Project'
 
 
 /**
@@ -11,7 +11,7 @@ const Home = () => {
     <div className="dataview-container">
       <h1 className='form-title'>Home</h1>
       <Info />
-      <TopCoins />
+      <Project />
     </div>
   )
 }

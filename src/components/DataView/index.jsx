@@ -36,25 +36,34 @@ const DataView = () => {
       // Get data from API
       getBitcoinChartRange(analyzer.fromDate,analyzer.toDate)
         .then(res => {
+          const { prices, total_volumes } = res.data
           setFetchedPrices(res.prices)
           setFetchedVolumes(res.total_volumes)
           // if there is data from the range of dates, set it for viewing
           if (
-            res.prices &&
-              res.total_volumes &&
-              res.prices.length &&
-              res.total_volumes.length
+            prices &&
+            total_volumes &&
+            prices.length &&
+            total_volumes.length
           ) {
             const newArrayOfDates = createDateArray(analyzer.fromDate,analyzer.toDate)
-            const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,res.prices)
-            const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,res.total_volumes)
+            const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,prices)
+            const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,total_volumes)
             setarrayDatesPrices(newarrayDatesPrices)
             setarrayDatesVolumes(newarrayDatesVolumes)
           }
           setLoading(false)
         })
         .catch(err => {
-          dispatch(createError(err.message))
+          if (
+            err.response &&
+            err.response.data &&
+            err.response.data.error
+          ) {
+            dispatch(createError(err.response.data.error))
+          } else {
+            dispatch(createError(err.message))
+          }
         })
     }
     if (!analyzer.fromDate || !analyzer.toDate) {
@@ -62,7 +71,9 @@ const DataView = () => {
     }
   },[analyzer])
 
-  // Reset data when componentWillUnmount
+  /**
+   * Reset data when componentWillUnmount
+   */
   useEffect(() => {
     return () => {
       dispatch(resetSearch())

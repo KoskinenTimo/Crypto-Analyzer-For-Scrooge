@@ -7,6 +7,7 @@ import {
 import Cookies from 'js-cookie'
 import { useDispatch } from 'react-redux'
 import { checkToken } from './services/loginService'
+import { loginUser } from './reducers/userReducer'
 
 // Components
 import Header from './components/Header'
@@ -15,10 +16,11 @@ import Footer from './components/Footer'
 import NavBar from './components/NavBar'
 import AnalyzerContainer from './components/AnalyzerContainer'
 import LoginForm from './components/LoginForm'
-import { loginUser } from './reducers/userReducer'
 import Logout from './components/Logout'
 import SignUpForm from './components/SignUpForm'
 import Home from './components/Home'
+import Profile from './components/Profile'
+import MarketContainer from './components/Market/MarketContainer'
 
 
 function App() {
@@ -50,6 +52,8 @@ function App() {
           <Route path='/analyzer' element={<AnalyzerContainer />}/>
           <Route path='/login' element={<LoginForm />} />
           <Route path='/logout' element={<Logout />}/>
+          <Route path='/profile' element={<Profile />}/>
+          <Route path='/market' element={<MarketContainer />}/>
         </Routes>
 
         <Footer />
