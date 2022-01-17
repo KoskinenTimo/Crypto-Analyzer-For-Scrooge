@@ -11,7 +11,7 @@ import { loginUser } from './reducers/userReducer'
 
 // Components
 import Header from './components/Header'
-import ErrorMessage from './components/ErrorMessage'
+import Notification from './components/Notification'
 import Footer from './components/Footer'
 import NavBar from './components/NavBar'
 import AnalyzerContainer from './components/AnalyzerContainer'
@@ -21,6 +21,7 @@ import SignUpForm from './components/SignUpForm'
 import Home from './components/Home'
 import Profile from './components/Profile'
 import MarketContainer from './components/Market/MarketContainer'
+import { createErrorNotification } from './reducers/notificationReducer'
 
 
 function App() {
@@ -34,7 +35,23 @@ function App() {
           dispatch(loginUser(authUser))
         })
         .catch(err => {
-          console.log(err)
+          if (
+            err.response &&
+            err.response.status &&
+            err.response.status === 401
+          ) {
+            Cookies.remove('authUser')
+            dispatch(createErrorNotification('Login token expired or invalid'))
+          }
+          if (
+            err.response &&
+            err.response.data &&
+            err.response.message
+          ) {
+            dispatch(createErrorNotification(err.response.message))
+          } else {
+            dispatch(createErrorNotification(err.message))
+          }
         })
     }
   }, [])
@@ -44,7 +61,7 @@ function App() {
       <div className="wrapper">
         <Header />
         <NavBar />
-        <ErrorMessage />
+        <Notification />
         <Routes>
           <Route exact path='/' element={<Home />}/>
           <Route path='/home' element={<Home />}/>

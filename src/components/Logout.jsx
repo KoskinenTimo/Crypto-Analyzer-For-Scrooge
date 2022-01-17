@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { resetUser } from '../reducers/userReducer'
 import { Navigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { createSuccessNotification } from '../reducers/notificationReducer'
 
 
 /**
@@ -13,6 +14,7 @@ const Logout = () => {
   useEffect(() => {
     dispatch(resetUser())
     Cookies.remove('authUser')
+    dispatch(createSuccessNotification('Logged out'))
   })
   return (
     <Navigate to="/" />

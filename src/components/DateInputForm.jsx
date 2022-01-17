@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { createError } from '../reducers/errorReducer'
+import { createErrorNotification } from '../reducers/notificationReducer'
 import { createSearch, resetSearch } from '../reducers/analyzerReducer'
 
 // Components
@@ -46,10 +46,10 @@ const DateInputForm = () => {
       return
     }
     if (!fromDateValid || !toDateValid) {
-      dispatch(createError('Please check the input, input provided is not valid'))
+      dispatch(createErrorNotification('Please check the input, input provided is not valid'))
       return
     }
-    dispatch(createError('\'From Date\' and \'To Date\' cannot be the same'))
+    dispatch(createErrorNotification('\'From Date\' and \'To Date\' cannot be the same'))
   }
 
   /**

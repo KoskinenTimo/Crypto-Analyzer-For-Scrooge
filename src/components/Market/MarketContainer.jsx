@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createError } from '../../reducers/errorReducer'
+import { createErrorNotification } from '../../reducers/notificationReducer'
 import { getTopMarketData } from '../../services/geckoApiService'
 
 // Components
@@ -30,9 +30,9 @@ const MarketContainer = () => {
           err.response.data &&
           err.response.data.error
         ) {
-          dispatch(createError(err.response.data.error))
+          dispatch(createErrorNotification(err.response.data.error))
         } else {
-          dispatch(createError(err.message))
+          dispatch(createErrorNotification(err.message))
         }
       })
   }, [])

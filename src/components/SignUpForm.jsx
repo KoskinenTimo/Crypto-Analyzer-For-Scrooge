@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { createError } from '../reducers/errorReducer'
+import { createErrorNotification, createProcessNotification, createSuccessNotification, resetNotification } from '../reducers/notificationReducer'
 import { loginUser } from '../reducers/userReducer'
 import { login } from '../services/loginService'
 import { signup } from '../services/userService'
@@ -45,6 +45,8 @@ const SignUpForm = () => {
       validatePassword() &&
       validateRePassword()
     ) {
+      dispatch(resetNotification())
+      dispatch(createProcessNotification('Signing up...'))
       signup({ username, password, name })
         .then(() => {
           login({ username, password })
@@ -53,17 +55,18 @@ const SignUpForm = () => {
               const authDetails = res.data
               Cookies.set('authUser', JSON.stringify(authDetails),{ expires: 1 })
               dispatch(loginUser(authDetails))
+              dispatch(createSuccessNotification('Sign Up succesful'))
               navigate('/home')
             })
             .catch(err => {
-              dispatch(createError(err.response.data.error))
+              dispatch(createErrorNotification(err.response.data.error))
             })
         })
         .catch(err => {
-          dispatch(createError(err.response.data.error))
+          dispatch(createErrorNotification(err.response.data.error))
         })
     } else {
-      dispatch(createError('Please check that the input is in correct form'))
+      dispatch(createErrorNotification('Please check that the input is in correct form'))
     }
   }
 

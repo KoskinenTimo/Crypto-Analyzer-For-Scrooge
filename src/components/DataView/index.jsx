@@ -10,7 +10,7 @@ import Loading from '../Loading'
 
 // Services
 import { getBitcoinChartRange } from '../../services/geckoApiService'
-import { createError } from '../../reducers/errorReducer'
+import { createErrorNotification } from '../../reducers/notificationReducer'
 import { resetSearch } from '../../reducers/analyzerReducer'
 
 
@@ -60,9 +60,9 @@ const DataView = () => {
             err.response.data &&
             err.response.data.error
           ) {
-            dispatch(createError(err.response.data.error))
+            dispatch(createErrorNotification(err.response.data.error))
           } else {
-            dispatch(createError(err.message))
+            dispatch(createErrorNotification(err.message))
           }
         })
     }

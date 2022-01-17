@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createError } from '../reducers/errorReducer'
+import { createErrorNotification, createProcessNotification, createSuccessNotification, resetNotification } from '../reducers/notificationReducer'
 import { loginUser } from '../reducers/userReducer'
 import { login } from '../services/loginService'
 import TextInput from './Inputs/TextInput'
@@ -24,16 +24,21 @@ const LoginForm = () => {
    */
   const onSubmit = (e) => {
     e.preventDefault()
+    dispatch(resetNotification())
+    dispatch(createProcessNotification('Logging in...'))
     login({ username, password })
       .then(res => {
         const authDetails = res.data
         Cookies.set('authUser', JSON.stringify(authDetails),{ expires: 1 })
         dispatch(loginUser(authDetails))
         onReset()
+        dispatch(resetNotification())
+        dispatch(createSuccessNotification('Logged in'))
         navigate('/home')
       })
       .catch(err => {
-        dispatch(createError(err.response.data.error))
+        dispatch(resetNotification())
+        dispatch(createErrorNotification(err.response.data.error))
       })
   }
 

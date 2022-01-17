@@ -164,7 +164,9 @@ header button:hover {
 
 .form,
 .dataview-container,
-#error-message-container {
+#error-message-container,
+#success-message-container,
+#process-message-container {
   width: 30%;
   min-width: 250px;
   margin: 0 auto 10px auto;
@@ -206,17 +208,29 @@ header button:hover {
   flex-direction: column;
 }
 
-#error-message-container {
+#error-message-container,
+#success-message-container,
+#process-message-container {
   text-align: left;
   display: none
 }
 
-#error-message-container h4 {
+#error-message-container h4,
+#success-message-container h4,
+#process-message-container h4 {
   margin: 0 0 5px 0;
-  background-color: #fe5e50;
   color: aliceblue;
   padding: 8px;
-  
+}
+
+#error-message-container h4 {
+  background-color: #fe5e50;
+}
+#success-message-container h4 {
+  background-color: #00b10f;
+}
+#process-message-container h4 {
+  background-color: #01c9db;
 }
 
 #loading {

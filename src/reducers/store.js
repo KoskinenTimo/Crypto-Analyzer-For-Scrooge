@@ -1,12 +1,12 @@
 import { combineReducers, createStore } from 'redux'
 import analyzerReducer from './analyzerReducer'
-import errorReducer from './errorReducer'
+import notificationReducer from './notificationReducer'
 import userReducer from './userReducer'
 
 
 const reducer = combineReducers({
   analyzer: analyzerReducer,
-  error: errorReducer,
+  notification: notificationReducer,
   authUser: userReducer
 })
 
