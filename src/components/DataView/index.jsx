@@ -33,6 +33,7 @@ const DataView = () => {
       analyzer.fromDate &&
       analyzer.toDate
     ) {
+      console.log('wrong')
       // Get data from API
       getBitcoinChartRange(analyzer.fromDate,analyzer.toDate)
         .then(res => {
@@ -66,9 +67,11 @@ const DataView = () => {
           }
         })
     }
-    if (!analyzer.fromDate || !analyzer.toDate) {
+    if (!analyzer.fromDate || !analyzer.fromDate) {
+      console.log('right')
       resetData()
     }
+    console.log(analyzer)
   },[analyzer])
 
   /**
@@ -78,7 +81,7 @@ const DataView = () => {
     return () => {
       dispatch(resetSearch())
     }
-  })
+  }, [])
 
   /**
    * Reset all data set states this component handles
@@ -180,6 +183,9 @@ const DataView = () => {
         <Loading />
       </div>
     )
+  }
+  if (!analyzer.fromDate || !analyzer.toDate) {
+    return ''
   }
   if (
     !loading &&
