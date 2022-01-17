@@ -33,7 +33,6 @@ const DataView = () => {
       analyzer.fromDate &&
       analyzer.toDate
     ) {
-      console.log('wrong')
       // Get data from API
       getBitcoinChartRange(analyzer.fromDate,analyzer.toDate)
         .then(res => {
