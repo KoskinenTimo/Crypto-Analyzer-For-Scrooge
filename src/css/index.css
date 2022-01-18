@@ -155,7 +155,7 @@ header button:hover {
   justify-content: flex-start;
   border: 1px solid #01a1af;
   border-radius: 3px;
-  margin: 10px 10px 10px 0;
+  margin: 10px 10px 20px 0;
 }
 
 .form-menu-label label {
