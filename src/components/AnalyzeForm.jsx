@@ -1,16 +1,18 @@
 import React, { useRef, useState } from 'react'
 import { createErrorNotification } from '../reducers/notificationReducer'
 import { createSearch, resetSearch } from '../reducers/analyzerReducer'
+
+// Utils
 import { coins, currencies } from '../utils/constants'
 
 // Components
 import DateInput from './Inputs/DateInput'
 import SubmitResetButtons from './SubmitResetButtons'
+import DropDownMenu from './Inputs/DropDownMenu'
 
 // Hooks
 import useAutoInput from '../hooks/useAutoInput'
 import { useDispatch } from 'react-redux'
-import DropDownMenu from './Inputs/DropDownMenu'
 
 
 /**
@@ -37,6 +39,7 @@ const AnalyzeForm = () => {
    */
   const handleSubmit = (e) => {
     e.preventDefault()
+    dispatch(resetSearch())
     const fromDateValid = handleDateInput(fromDateRef.current)
     const toDateValid = handleDateInput(toDateRef.current)
     const notSameDate = fromDateRef.current.value !== toDateRef.current.value
@@ -192,10 +195,19 @@ const AnalyzeForm = () => {
     }
   }
 
+  const getImageLink = () =>  {
+    const foundCoin = coins.find(part => part.id === coin)
+    if (foundCoin) {
+      return foundCoin.image
+    }
+  }
 
   return(
     <form className="form" id="analyzer-form" onSubmit={handleSubmit}>
-      <h3 className='form-title'>Analyzer</h3>
+      <h3 className='form-title flex-row'>
+        <div>Analyzer</div>
+        <img src={getImageLink()}/>
+      </h3>
       <DateInput
         dateInputValue={fromDateInputValue}
         handleDateInput={handleDateInput}

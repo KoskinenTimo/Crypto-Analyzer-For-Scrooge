@@ -17,7 +17,8 @@ const DropDownMenu = ({
   },[])
 
   /**
-   * Handles setting the id value to the state tracking current value
+   * Handles setting the id value to the state tracking current value,
+   * find the id value from the provided array
    * @param {event object} e
    */
   const handleChange = (e) => {

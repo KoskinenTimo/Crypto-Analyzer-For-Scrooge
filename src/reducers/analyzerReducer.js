@@ -22,6 +22,8 @@ export const createSearch = (content) => {
     content.symbol = '€'
   } else if (content.currency === 'usd') {
     content.symbol = '$'
+  } else if (content.currency === 'gbp') {
+    content.symbol = '£'
   } else {
     content.symbol = content.currency
   }

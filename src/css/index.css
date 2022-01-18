@@ -153,17 +153,29 @@ header button:hover {
   font-size: 1.1em;
   flex-direction: row;
   justify-content: flex-start;
+  border: 1px solid #01a1af;
+  border-radius: 3px;
   margin: 10px 10px 10px 0;
 }
 
 .form-menu-label label {
-  padding: 5px;
+  padding: 8px;
 }
 
 .form-menu-label select {
-  padding: 5px;
-  margin-left: 4px;
+  padding: 8px;
+  color: aliceblue;
+  font-size: 0.9em;
   width: 120px;
+  text-align: center;
+  background-color: #01a1af;
+  border: none;
+  margin-left: 4px;
+}
+
+.form-menu-label select:focus,
+.form-menu-label select:hover {
+  background-color: #01c9db;
 }
 
 .form-title {
@@ -174,6 +186,12 @@ header button:hover {
   border-bottom: 1px solid #01a1af;
   width: 50%;
   margin-bottom: 10px;
+}
+
+.form-title img {
+  margin: 0 0 0 10px;
+  padding: 0;
+  height: 1.2em;
 }
 
 .form-button:hover,
