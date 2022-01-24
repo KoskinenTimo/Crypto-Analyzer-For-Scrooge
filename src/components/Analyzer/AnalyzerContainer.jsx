@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import DataView from './DataView'
+import DataView from '../DataView'
 import AnalyzerForm from './AnalyzerForm'
 import AnalyzerInfo from './AnalyzerInfo'
 import { useSelector } from 'react-redux'

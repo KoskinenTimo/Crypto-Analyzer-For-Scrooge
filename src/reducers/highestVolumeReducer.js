@@ -2,9 +2,9 @@ const initialState = []
 
 const highestVolumeReducer = (state = initialState, action) => {
   switch (action.type) {
-  case 'NEW_BEST_BUY_SELL':
+  case 'NEW_HIGHEST_VOLUME':
     return state = action.data
-  case 'RESET_BEST_BUY_SELL':
+  case 'RESET_HIGHEST_VOLUME':
     return state = initialState
   default:
     return state

@@ -4,3 +4,9 @@ import { appBackendUrl } from '../utils/apiPaths'
 export const signup = async (userDetails) => {
   return await axios.post(`${appBackendUrl}/api/users`, userDetails)
 }
+
+export const getOneUser = async (id,token) => {
+  return await axios.get(
+    `${appBackendUrl}/api/users/${id}`,
+    { headers: { Authorization: `Bearer ${token}` } })
+}

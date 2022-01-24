@@ -1,17 +1,17 @@
 import React, { useRef, useState } from 'react'
-import { createErrorNotification } from '../reducers/notificationReducer'
-import { createSearch, resetSearch } from '../reducers/analyzerReducer'
+import { createErrorNotification } from '../../reducers/notificationReducer'
+import { createSearch, resetSearch } from '../../reducers/analyzerReducer'
 
 // Utils
-import { coins, currencies } from '../utils/constants'
+import { coins, currencies } from '../../utils/constants'
 
 // Components
-import DateInput from './Inputs/DateInput'
-import SubmitResetButtons from './SubmitResetButtons'
-import DropDownMenu from './Inputs/DropDownMenu'
+import DateInput from '../Inputs/DateInput'
+import SubmitResetButtons from '../SubmitResetButtons'
+import DropDownMenu from '../Inputs/DropDownMenu'
 
 // Hooks
-import useAutoInput from '../hooks/useAutoInput'
+import useAutoInput from '../../hooks/useAutoInput'
 import { useDispatch } from 'react-redux'
 
 

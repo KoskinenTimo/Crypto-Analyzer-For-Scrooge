@@ -74,12 +74,38 @@ header button:hover {
   background-color: #01c9db;
 }
 
+header button:active {
+  background-color: rgba(1, 201, 219, 0.4);
+}
+
 .data-card {
   background-color: #01a1af;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 15px; 
   width: 100%;
+}
+
+.data-save-bar {
+  background-color: #01c9db;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px; 
+  width: 100%;
+}
+
+.data-save-bar:hover {
+  background-color: #01a1af;
+}
+
+.data-save-bar:active {
+  background-color: rgba(1, 163, 178, 0.4);
+}
+
+.data-save-bar h4 {
+  display: inline-block;  
+  color: aliceblue;
 }
 
 .data-card h4 {
@@ -208,13 +234,18 @@ header button:hover {
   background-color: #01c9db;  
 }
 
+.form-button:active,
+.header-navbar-button:active {
+  background-color: rgba(1, 201, 219, 0.4);  
+}
 
 #error-message-container,
 #success-message-container,
 #process-message-container {
-  width: 30%;
+  width: 45%;
   min-width: 250px;
   margin: 0 auto 10px auto;
+  max-width: 600px;
 }
 
 .form,
@@ -226,7 +257,8 @@ header button:hover {
 }
 
 .dataview-container {
-  text-align: left;  
+  text-align: left;
+  margin-top: 10px;  
 }
 
 .flex-row-space-btw {
@@ -286,6 +318,10 @@ header button:hover {
   line-height: 1.25em;
 }
 
+.market-data-card img {
+  width: 40%;
+  margin-right: 5%;
+}
 
 .market-title {
   color: #01a1af;

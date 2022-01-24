@@ -14,6 +14,8 @@ import { createErrorNotification } from '../../reducers/notificationReducer'
 import { resetSearch } from '../../reducers/analyzerReducer'
 import { createBearishTrend } from '../../reducers/bearishTrendReducer'
 import { createBestBuySell } from '../../reducers/bestBuySellReducer'
+import SaveBar from './SaveBar'
+import { createHighestVolume } from '../../reducers/highestVolumeReducer'
 
 
 /**
@@ -22,7 +24,8 @@ import { createBestBuySell } from '../../reducers/bestBuySellReducer'
  */
 const DataView = () => {
   const dispatch = useDispatch()
-  const analyzer = useSelector(state => state.analyzer)
+  const analyzer = useSelector(s => s.analyzer)
+  const authUser = useSelector(s => s.authUser)
   const [ loading, setLoading ] = useState(false)
   const [ arrayDatesPrices, setArrayDatesPrices ] = useState([])
   const [ arrayDatesVolumes, setArrayDatesVolumes ] = useState([])
@@ -52,6 +55,7 @@ const DataView = () => {
           setArrayDatesVolumes(newarrayDatesVolumes)
           dispatch(createBearishTrend(newarrayDatesPrices))
           dispatch(createBestBuySell(newarrayDatesPrices))
+          dispatch(createHighestVolume(newarrayDatesVolumes))
         }
         setLoading(false)
       })
@@ -172,8 +176,9 @@ const DataView = () => {
       </div>
     )
   }
-  return(
+  return (
     <div className="dataview-container">
+      {authUser && <SaveBar />}
       <DataViewBearishTrend />
       <DataViewHighestVolume />
       <DataViewBestBuySell />
