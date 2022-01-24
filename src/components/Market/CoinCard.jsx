@@ -27,7 +27,7 @@ const CoinCard = ({
   }
 
   return(
-    <div className="data-card">
+    <div className="market-data-card">
       <h4>{index + 1}. {data.name}</h4>
       <p></p>
       <p>Market Cap: {parseNumber(data.market_cap)}€</p>
@@ -37,6 +37,7 @@ const CoinCard = ({
       <p>Total Supply: {data.total_supply}</p>
       <p>Last Updated: {new Date(data.last_updated).toUTCString()}</p>
     </div>
+
   )
 }
 export default CoinCard

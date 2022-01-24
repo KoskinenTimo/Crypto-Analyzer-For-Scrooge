@@ -2,7 +2,9 @@ import React from 'react'
 
 // Components
 import DataView from './DataView'
-import AnalyzeForm from './AnalyzeForm'
+import AnalyzerForm from './AnalyzerForm'
+import AnalyzerInfo from './AnalyzerInfo'
+import { useSelector } from 'react-redux'
 
 
 /**
@@ -10,12 +12,16 @@ import AnalyzeForm from './AnalyzeForm'
  * routing clean in App
  */
 const AnalyzerContainer = () => {
+  const search = useSelector(state => state.analyzer.fromDate)
+
   return (
-    <>
-      <AnalyzeForm />
-      <DataView />
-    </>
+    <div className='data-card-table'>
+      <AnalyzerForm />
+      {!search ? <AnalyzerInfo /> : null}
+      {search ? <DataView /> : null}
+    </div>
   )
+
 }
 
 export default AnalyzerContainer

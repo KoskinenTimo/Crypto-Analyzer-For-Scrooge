@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux'
 /**
  * Form for inputting dates to make a fetch to API
  */
-const AnalyzeForm = () => {
+const AnalyzerForm = () => {
   const dispatch = useDispatch()
   const [ fromDateInputValue, setFromDateInputValue ] = useState('')
   const [ toDateInputValue, setToDateInputValue ] = useState('')
@@ -243,4 +243,4 @@ const AnalyzeForm = () => {
   )
 }
 
-export default AnalyzeForm
+export default AnalyzerForm

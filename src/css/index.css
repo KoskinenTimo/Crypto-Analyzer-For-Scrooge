@@ -78,7 +78,8 @@ header button:hover {
   background-color: #01a1af;
   border-radius: 10px;
   padding: 20px;
-  margin-top: 15px; 
+  margin-bottom: 15px; 
+  width: 100%;
 }
 
 .data-card h4 {
@@ -98,10 +99,18 @@ header button:hover {
   line-height: 1.25em;
 }
 
+.data-card-table {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  width: 60%;
+  margin: 2% auto;
+}
+
 .form {
   display: flex;
   flex-direction: column;  
-  text-align: left
+  text-align: left;
 }
 
 .form-button {
@@ -199,13 +208,20 @@ header button:hover {
   background-color: #01c9db;  
 }
 
-.form,
-.dataview-container,
+
 #error-message-container,
 #success-message-container,
 #process-message-container {
   width: 30%;
   min-width: 250px;
+  margin: 0 auto 10px auto;
+}
+
+.form,
+.dataview-container {
+  width: 45%;
+  min-width: 250px;
+  max-width: 600px;
   margin: 0 auto 10px auto;
 }
 
@@ -239,6 +255,48 @@ header button:hover {
   width: 120px;
 }
 
+.loading {
+  margin: 20px 0;
+  color: #01a1af;
+}
+
+.market-data-card {
+  background-color: #01a1af;
+  border-radius: 10px;
+  padding: 20px;
+  width: 45%;
+  text-align: left;
+  margin: 1%;
+}
+
+.market-data-card h4 {
+  display: inline-block;  
+  color: aliceblue;
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  padding: 6px;
+  margin-bottom: 8px;
+  margin-top: 5px;
+}
+
+.market-data-card p {
+  margin-bottom: 5px;
+  color: aliceblue;
+  font-size: 1.1em;
+  line-height: 1.25em;
+}
+
+
+.market-title {
+  color: #01a1af;
+  font-size: 1.6em;
+  font-weight: bold;
+  padding: 5px 5px 5px 0;
+  border-bottom: 1px solid #01a1af;
+  width: 20%;
+  margin: 0 auto 10px auto;
+}
+
 .wrapper {
   min-height: 100vh;
   display: flex;
@@ -270,9 +328,6 @@ header button:hover {
   background-color: #01c9db;
 }
 
-#loading {
-  margin: 20px 0;
-  color: #01a1af;
-}
+
 
 

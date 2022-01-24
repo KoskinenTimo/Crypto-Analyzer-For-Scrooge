@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetHighestVolume } from '../../reducers/highestVolumeReducer'
 
 // Utils
 import { parseToDate, parseNumber } from '../../utils/parsers'
@@ -9,38 +10,27 @@ import { parseToDate, parseNumber } from '../../utils/parsers'
  * Used to render highest volume date data
  * @param {props}
  */
-const DataViewHighestVolume = ({ arrayDatesVolumes }) => {
-  // Currency symbol, on purpose only 1 character long
-  const s = useSelector(state => state.analyzer.symbol)
+const DataViewHighestVolume = () => {
+  const s = useSelector(state => state.analyzer.symbol) // Currency symbol
+  const highestVolumeAndDate = useSelector(state => state.highestVolume)
   const [ highestTradingVolumeDate, setHighestTradingVolumeDate ] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (arrayDatesVolumes && arrayDatesVolumes.length) {
-      const dateVolumePair = getHighestTradingVolumeAndDate(arrayDatesVolumes)
-      const parsedDate = parseToDate(dateVolumePair[0])
-      const parsedVolume = parseNumber(dateVolumePair[1])
+    if (highestVolumeAndDate.length) {
+      const parsedDate = parseToDate(highestVolumeAndDate[0])
+      const parsedVolume = parseNumber(highestVolumeAndDate[1])
       setHighestTradingVolumeDate([ parsedDate,parsedVolume ])
     }
-    if (arrayDatesVolumes && !arrayDatesVolumes.length) {
+    // Reset on unmount
+    return () => {
       const reset = []
       setHighestTradingVolumeDate(reset)
+      dispatch(resetHighestVolume())
     }
-  },[arrayDatesVolumes])
+  },[highestVolumeAndDate])
 
-  /**
-   * Gets the highest volume trading day and volume out of the
-   * given data array of date-volume pairs
-   * @param {[number[]]} arrayOfDatesWithVolume
-   * @returns {number[]}
-   */
-  const getHighestTradingVolumeAndDate = (arrayOfDatesWithVolume) => {
-    return arrayOfDatesWithVolume.reduce((previousValue, currentValue) => {
-      const currentValueVolumeHigher = currentValue[1] > previousValue[1]
-      return currentValueVolumeHigher ? currentValue : previousValue
-    })
-  }
-
-  if (highestTradingVolumeDate && highestTradingVolumeDate.length) {
+  if (highestTradingVolumeDate.length) {
     return (
       <div className="data-card">
         <h4>Highest volume date</h4>

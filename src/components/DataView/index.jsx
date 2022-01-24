@@ -12,6 +12,8 @@ import Loading from '../Loading'
 import { getCoinChartRange } from '../../services/geckoApiService'
 import { createErrorNotification } from '../../reducers/notificationReducer'
 import { resetSearch } from '../../reducers/analyzerReducer'
+import { createBearishTrend } from '../../reducers/bearishTrendReducer'
+import { createBestBuySell } from '../../reducers/bestBuySellReducer'
 
 
 /**
@@ -21,81 +23,64 @@ import { resetSearch } from '../../reducers/analyzerReducer'
 const DataView = () => {
   const dispatch = useDispatch()
   const analyzer = useSelector(state => state.analyzer)
-  const [ arrayDatesPrices, setarrayDatesPrices ] = useState([])
-  const [ arrayDatesVolumes, setarrayDatesVolumes] = useState([])
-  const [ fetchedPrices, setFetchedPrices ] = useState([])
-  const [ fetchedVolumes, setFetchedVolumes ] = useState([])
-  const [ loading, setLoading ] = useState(true)
+  const [ loading, setLoading ] = useState(false)
+  const [ arrayDatesPrices, setArrayDatesPrices ] = useState([])
+  const [ arrayDatesVolumes, setArrayDatesVolumes ] = useState([])
 
   useEffect(() => {
-    if (
-      analyzer &&
-      analyzer.fromDate &&
-      analyzer.toDate
-    ) {
-      // Get data from API
-      getCoinChartRange(
-        analyzer.fromDate,
-        analyzer.toDate,
-        analyzer.coin,
-        analyzer.currency
-      )
-        .then(res => {
-          const { prices, total_volumes } = res.data
-          setFetchedPrices(res.prices)
-          setFetchedVolumes(res.total_volumes)
-          // if there is data from the range of dates, set it for viewing
-          if (
-            prices &&
-            total_volumes &&
-            prices.length &&
-            total_volumes.length
-          ) {
-            const newArrayOfDates = createDateArray(analyzer.fromDate,analyzer.toDate)
-            const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,prices)
-            const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,total_volumes)
-            setarrayDatesPrices(newarrayDatesPrices)
-            setarrayDatesVolumes(newarrayDatesVolumes)
-          }
-          setLoading(false)
-        })
-        .catch(err => {
-          if (
-            err.response &&
+    if (loading) return
+    setLoading(true)
+    // Get data from API
+    getCoinChartRange(
+      analyzer.fromDate,
+      analyzer.toDate,
+      analyzer.coin,
+      analyzer.currency
+    )
+      .then(res => {
+        const { prices, total_volumes } = res.data
+        if (
+          prices &&
+          total_volumes &&
+          prices.length &&
+          total_volumes.length
+        ) {
+          const newArrayOfDates = createDateArray(analyzer.fromDate,analyzer.toDate)
+          const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,prices)
+          const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,total_volumes)
+          setArrayDatesPrices(newarrayDatesPrices)
+          setArrayDatesVolumes(newarrayDatesVolumes)
+          dispatch(createBearishTrend(newarrayDatesPrices))
+          dispatch(createBestBuySell(newarrayDatesPrices))
+        }
+        setLoading(false)
+      })
+      .catch(err => {
+        if (
+          err.response &&
             err.response.data &&
             err.response.data.error
-          ) {
-            dispatch(createErrorNotification(err.response.data.error))
-          } else {
-            dispatch(createErrorNotification(err.message))
-          }
-        })
-    }
-    if (!analyzer.fromDate || !analyzer.fromDate) {
-      resetData()
-    }
+        ) {
+          dispatch(createErrorNotification(err.response.data.error))
+        } else {
+          dispatch(createErrorNotification(err.message))
+        }
+        setLoading(false)
+      })
   },[analyzer])
 
   /**
-   * Reset data when componentWillUnmount
+   * Reset data when unmount
    */
   useEffect(() => {
     return () => {
+      const reset = []
+      setLoading(false)
       dispatch(resetSearch())
+      setArrayDatesPrices(reset)
+      setArrayDatesVolumes(reset)
     }
   }, [])
-
-  /**
-   * Reset all data set states this component handles
-   */
-  const resetData = () => {
-    const reset = []
-    setarrayDatesPrices(reset)
-    setarrayDatesVolumes(reset)
-    setFetchedPrices(reset)
-    setFetchedVolumes(reset)
-    setLoading(true)
-  }
 
   /**
    * Takes in a date in milliseconds format, adds one day
@@ -143,11 +128,6 @@ const DataView = () => {
   const getOneDataPointPerDate = (arrayOfDates,arrayOfDataPointsPerTimestamp) => {
     let index = 0
     const datesWithData = arrayOfDates.map(dateInMS => {
-      // for loop is 40 times more performant in tests than reduce but less readable
-      // get the matching date from the other array and start the loop where
-      // previous for loop left of(both arrays in chronological order), break the
-      // for loop when the gap is getting wider, in other works the date is
-      // getting further from the already found 'best match'
       let closestDataPoint = ''
       if (index >= arrayOfDataPointsPerTimestamp.length) {
         index = arrayOfDataPointsPerTimestamp.length - 1
@@ -174,30 +154,17 @@ const DataView = () => {
     return datesWithData
   }
 
-  if (
-    loading &&
-    analyzer &&
-    analyzer.fromDate &&
-    analyzer.toDate
-  ) {
+  if (loading) {
     return (
       <div className="dataview-container">
         <Loading />
       </div>
     )
   }
-  if (!analyzer.fromDate || !analyzer.toDate) {
-    return ''
-  }
   if (
     !loading &&
-    analyzer &&
-    analyzer.fromDate &&
-    analyzer.toDate &&
-    fetchedPrices &&
-    fetchedVolumes &&
-    !fetchedPrices.length &&
-    !fetchedVolumes.length
+    !arrayDatesPrices.length &&
+    !arrayDatesVolumes.length
   ) {
     return (
       <div className="dataview-container">
@@ -207,9 +174,9 @@ const DataView = () => {
   }
   return(
     <div className="dataview-container">
-      <DataViewBearishTrend arrayDatesPrices={arrayDatesPrices} />
-      <DataViewHighestVolume arrayDatesVolumes={arrayDatesVolumes} />
-      <DataViewBestBuySell arrayDatesPrices={arrayDatesPrices} />
+      <DataViewBearishTrend />
+      <DataViewHighestVolume />
+      <DataViewBestBuySell />
     </div>)
 }
 

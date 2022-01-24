@@ -9,7 +9,7 @@ const Info = () => {
     <div className="data-card">
       <h4>General Info</h4>
       <p>
-        This project is a combination of learning coding and having fun while doing it. There are multiple things I will try on this app and most likely revert back to old settings. Also the purpose of tracking hours used etc is to finish required tasks from studies. If you are using the live link I provided, you can signup with a username you like and then try the analyze tool to view data. Front end code can be found in GitHub: <br /><strong>KoskinenTimo/Crypto-Analyzer-For-Scrooge</strong><br /> And back end code is also found in GitHub: <br /><strong>KoskinenTimo/Crypto-Analyzer-For-Scrooge-API</strong>
+        This Project/App is the final project of MOOC Full Stack 2021 Open course. There is a file tracking hours used, in the front repository. App is live on Heroku and link can be provided for that. Front end code can be found in GitHub: <br /><strong>KoskinenTimo/Crypto-Analyzer-For-Scrooge</strong><br /> And back end code is also found in GitHub: <br /><strong>KoskinenTimo/Crypto-Analyzer-For-Scrooge-API</strong>
       </p>
     </div>
   )

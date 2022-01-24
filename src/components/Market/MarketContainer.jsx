@@ -10,7 +10,7 @@ import NoData from './NoData'
 
 
 /**
- * Market data page for top 5 coins by market cap
+ * Market data page for top 6 coins by market cap
  */
 const MarketContainer = () => {
   const dispatch = useDispatch()
@@ -51,8 +51,8 @@ const MarketContainer = () => {
   }
   if (marketData && !loading) {
     return (
-      <div className="dataview-container">
-        <h1 className='form-title'>Market</h1>
+      <div>
+        <h1 className='market-title'>Market</h1>
         <CoinCardList data={marketData} />
       </div>
     )
