@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
 import {
-  BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
+  useNavigate
 } from 'react-router-dom'
 import Cookies from 'js-cookie'
-import { useDispatch } from 'react-redux'
-import { checkToken } from './services/loginService'
-import { loginUser } from './reducers/userReducer'
 
 // Components
 import Header from './components/Header'
@@ -21,61 +18,39 @@ import SignUpForm from './components/SignUpForm'
 import Home from './components/Home'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import MarketContainer from './components/Market/MarketContainer'
-import { createErrorNotification } from './reducers/notificationReducer'
-
+import Forbidden from './components/Forbidden'
+import Authenticate from './components/Authenticate'
+import PR from './components/PrivateRoute'
 
 function App() {
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (Cookies.get('authUser')) {
-      const authUser = JSON.parse(Cookies.get('authUser'))
-      checkToken(authUser.token)
-        .then(() => {
-          dispatch(loginUser(authUser))
-        })
-        .catch(err => {
-          if (
-            err.response &&
-            err.response.status &&
-            err.response.status === 401
-          ) {
-            Cookies.remove('authUser')
-            dispatch(createErrorNotification('Login token expired or invalid'))
-          }
-          if (
-            err.response &&
-            err.response.data &&
-            err.response.message
-          ) {
-            dispatch(createErrorNotification(err.response.message))
-          } else {
-            dispatch(createErrorNotification(err.message))
-          }
-        })
+      navigate('/authenticate')
     }
   }, [])
 
   return (
-    <Router>
-      <div className="wrapper">
-        <Header />
-        <NavBar />
-        <Notification />
-        <Routes>
-          <Route exact path='/' element={<Home />}/>
-          <Route path='/home' element={<Home />}/>
-          <Route path='/signup' element={<SignUpForm />}/>
-          <Route path='/analyzer' element={<AnalyzerContainer />}/>
-          <Route path='/login' element={<LoginForm />} />
-          <Route path='/logout' element={<Logout />}/>
-          <Route path='/profile' element={<ProfileContainer />}/>
-          <Route path='/market' element={<MarketContainer />}/>
-        </Routes>
+    <div className="wrapper">
+      <Header />
+      <NavBar />
+      <Notification />
+      <Routes>
+        <Route exact path='/' element={<Home />}/>
+        <Route path='/authenticate' element={<Authenticate />}/>
+        <Route path='/home' element={<Home />}/>
+        <Route path='/signup' element={<SignUpForm />}/>
+        <Route path='/analyzer' element={<AnalyzerContainer />}/>
+        <Route path='/login' element={<LoginForm />} />
+        <Route path='/logout' element={<Logout />}/>
+        <Route path='/profile' element={<PR><ProfileContainer /></PR>}/>
+        <Route path='/market' element={<MarketContainer />}/>
+        <Route path='/forbidden' element={<Forbidden />}/>
+      </Routes>
 
-        <Footer />
-      </div>
-    </Router>
+      <Footer />
+    </div>
   )
 }
 

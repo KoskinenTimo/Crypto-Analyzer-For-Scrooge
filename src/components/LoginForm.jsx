@@ -32,10 +32,19 @@ const LoginForm = () => {
         dispatch(loginUser(authDetails))
         onReset()
         dispatch(createSuccessNotification('Logged in'))
-        navigate('/home')
+        navigate(-1)
       })
       .catch(err => {
-        dispatch(createErrorNotification(err.response.data.error))
+        if (
+          err.response &&
+          err.response.data &&
+          err.response.error
+        ) {
+          dispatch(createErrorNotification(err.response.data.error))
+        } else {
+          dispatch(createErrorNotification(err.message))
+        }
+
       })
   }
 
