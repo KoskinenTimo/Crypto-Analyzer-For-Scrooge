@@ -6,7 +6,6 @@ export const signup = async (userDetails) => {
 }
 
 export const getOneUser = async (id,token) => {
-  console.log(id)
   return await axios.get(
     `${appBackendUrl}/api/users/${id}`,
     { headers: { Authorization: `Bearer ${token}` } })

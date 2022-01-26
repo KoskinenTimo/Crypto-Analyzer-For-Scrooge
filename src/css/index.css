@@ -125,10 +125,46 @@ header button:active {
   line-height: 1.25em;
 }
 
+.data-card button {
+  color: #01a1af;
+  font-size: 1.1em;
+  background-color: white;
+  padding: 5px;
+  width: 120px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.data-card button:hover {
+  background-color: #01c9db;
+}
+
+.data-card button:active {
+  background-color: rgba(1, 201, 219, 0.2);
+}
+
+.data-card textarea {
+  font-size: 1em;
+  width: 60%;
+  height: 4em;
+  padding: .5em;
+  margin-right: .5em;
+}
+
 .data-card-table {
   display: flex;
   justify-content: space-around;
   flex-flow: row wrap;
+  width: 60%;
+  margin: 2% auto;
+}
+
+.data-card-table-list {
+  display: flex;
+  flex-direction: row;
+  flex-basis: inherit;
   width: 60%;
   margin: 2% auto;
 }
@@ -261,6 +297,11 @@ header button:active {
   margin-top: 10px;  
 }
 
+.dataview-container-favorites {
+  height:65vh;
+  overflow-y: scroll;
+}
+
 .flex-row-space-btw {
   display: flex;
   flex-direction: row;
@@ -270,6 +311,11 @@ header button:active {
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .header-navbar {
@@ -362,6 +408,10 @@ header button:active {
 }
 #process-message-container h4 {
   background-color: #01c9db;
+}
+
+#profile-details {
+  height: 210px;
 }
 
 

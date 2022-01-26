@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {  } from 'react-router-dom'
 import { createErrorNotification } from '../../reducers/notificationReducer'
+import { updateUser } from '../../reducers/userReducer'
 import { getOneUser } from '../../services/userService'
 import Loading from '../Loading'
 import DetailsCard from './DetailsCard'
@@ -14,13 +15,11 @@ const ProfileContainer = () => {
   const [ loading, setLoading ] = useState(false)
 
   useEffect(() => {
-    if (loading) return
     setLoading(true)
     if (user) {
       getOneUser(user.id,user.token)
         .then(res => {
-          console.log(res.data)
-          console.log(user)
+          dispatch(updateUser(res.data))
           setLoading(false)
         })
         .catch(err => {
@@ -38,13 +37,13 @@ const ProfileContainer = () => {
     } else {
       setLoading(false)
     }
-  }, [user])
+  }, [])
 
   if (loading) {
     return(<Loading />)
   }
   return (
-    <div className='data-card-table'>
+    <div className='data-card-table-list'>
       <DetailsCard />
       <FavoritesList />
     </div>

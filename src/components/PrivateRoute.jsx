@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 
 /**
- * Is used to wrap routes that require login
+ * Is used to wrap routes that require login/auth user
  */
 const PrivateRoute = ({ children }) => {
   const user = useSelector(s => s.authUser)

@@ -44,7 +44,6 @@ const LoginForm = () => {
         } else {
           dispatch(createErrorNotification(err.message))
         }
-
       })
   }
 

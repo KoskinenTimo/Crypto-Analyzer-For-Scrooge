@@ -20,7 +20,7 @@ import ProfileContainer from './components/Profile/ProfileContainer'
 import MarketContainer from './components/Market/MarketContainer'
 import Forbidden from './components/Forbidden'
 import Authenticate from './components/Authenticate'
-import PR from './components/PrivateRoute'
+import PR from './components/PrivateRoute' // Private Route wrapper
 
 function App() {
   const navigate = useNavigate()

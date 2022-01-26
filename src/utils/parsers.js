@@ -1,5 +1,5 @@
 /**
-   * Turns date milliseconds format to YYYY-MM-DD UTC time
+   * Turns date milliseconds/string format to YYYY-MM-DD UTC time
    * @param {number} dateMS
    * @returns {string} YYYY-MM-DD format
    */
@@ -12,6 +12,7 @@ export const parseToDate = (dateMS) => {
   if( d < 10) d = `0${d}`
   return `${y}-${m}-${d}`
 }
+
 /**
    * Turns volume number clean non-float number if needed with dots
    * between 10^3.
