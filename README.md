@@ -15,6 +15,6 @@ Backend being built next for this project at KoskinenTimo/Crypto-Analyzer-For-Sc
 
 Next TODO:
 
-- Finish favorites and fill text fields
 - refactor whole css style sheet to use BEM and Sass
+- refactor components, remove repeating code
 - Build tests for both client and api using jest, cypress etc

@@ -34,7 +34,6 @@ const NoteAddEditInput = ({ data, setEditNote }) => {
           dispatch(createErrorNotification(err.message))
         }
       })
-
   }
 
   return (
