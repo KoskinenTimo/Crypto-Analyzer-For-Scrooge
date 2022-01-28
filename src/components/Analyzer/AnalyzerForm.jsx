@@ -1,22 +1,24 @@
 import React, { useRef, useState } from 'react'
 import { createErrorNotification } from '../../reducers/notificationReducer'
 import { createSearch, resetSearch } from '../../reducers/analyzerReducer'
+import useAutoInput from '../../hooks/useAutoInput'
+import { useDispatch } from 'react-redux'
+import './AnalyzerForm.scss'
 
 // Utils
 import { coins, currencies } from '../../utils/constants'
+import { parseToTimestamp } from '../../utils/parsers'
+import { isValidDate, isValidDateString } from '../../utils/validators'
 
 // Components
 import DateInput from '../Inputs/DateInput'
-import SubmitResetButtons from '../SubmitResetButtons'
 import DropDownMenu from '../Inputs/DropDownMenu'
-
-// Hooks
-import useAutoInput from '../../hooks/useAutoInput'
-import { useDispatch } from 'react-redux'
-
+import SubmitButton from '../Buttons/SubmitButton'
+import ResetButton from '../Buttons/ResetButton'
 
 /**
- * Form for inputting dates to make a fetch to API
+ * Form takes 4 values, fromDate, toDate, coin and currency. On submit the
+ * data is moved to store for DataView component to use
  */
 const AnalyzerForm = () => {
   const dispatch = useDispatch()
@@ -25,10 +27,9 @@ const AnalyzerForm = () => {
   const [ coin, setCoin ] = useState('')
   const [ currency, setCurrency ] = useState('')
 
-  // Add / characters as the user gives date
+  // Add '/' characters as the user gives date
   useAutoInput(fromDateInputValue,setFromDateInputValue,'/',[2,5])
   useAutoInput(toDateInputValue,setToDateInputValue,'/',[2,5])
-  // Refs to input fields to conrol them
   const fromDateRef = useRef()
   const toDateRef = useRef()
 
@@ -61,83 +62,14 @@ const AnalyzerForm = () => {
     dispatch(createErrorNotification('\'From Date\' and \'To Date\' cannot be the same'))
   }
 
-  /**
-   * Coverts a date string to UNIX timestamp
-   * Builds first UTC time format and then converts
-   * it to Unix timestamp
-   * Works with string format "DD/MM/YEAR"
-   * @param {string} dateString
-   * @returns {number} Unix timestamp
-   */
-  const parseToTimestamp = (dateString,hour=0) => {
-    const dateParts = dateString.split('/')
-    const [day,month,year] = [...dateParts]
-    const dateUTC = `${year}-${month}-${day}T0${hour}:00:00.000Z`
-    const dateMilliseconds = Date.parse(dateUTC)
-    return dateMilliseconds/1000
-  }
 
-  /**
-   * Checks if the input date value is in correct form
-   * @param {string} value
-   * @returns {boolean}
-   */
-  const isValidString = (value) => {
-    const regex = /^\d{2}[/]\d{2}[/]\d{4}$/g
-    return regex.test(value)
-  }
-
-  /**
-   * Checks if the input date is a real date
-   * @param {string} value
-   * @returns {boolean}
-   */
-  const isValidDate = (value) => {
-    if (value.length === 10) {
-      const dateParts = value.split('/')
-      const day = parseInt(dateParts[0],10)
-      const month = parseInt(dateParts[1],10)
-      const year = parseInt(dateParts[2],10)
-      if (
-        year < 1970 ||
-        year > new Date().getFullYear() ||
-        month === 0 ||
-        month > 12
-      ) {
-        return false
-      }
-      if (
-        year === new Date().getFullYear() &&
-        month > new Date().getMonth()+1
-      ) {
-        return false
-      }
-      if (
-        year === new Date().getFullYear() &&
-        month === new Date().getMonth()+1 &&
-        day > new Date().getDate()
-      ) {
-        return false
-      }
-
-      const daysInEachMonth = [ 31,28,31,30,31,30,31,31,30,31,30,31 ]
-
-      if (year % 4) {
-        daysInEachMonth[1] = 29
-      }
-      if (day > 0 && day > daysInEachMonth[month - 1]) {
-        return false
-      }
-    }
-    return true
-  }
 
   /**
    * Controls date inputs storing and validations in real time
    * @param {DOM object} inputElement
    */
   const handleDateInput = (inputElement) => {
-    const validString = isValidString(inputElement.value)
+    const validString = isValidDateString(inputElement.value)
     const validDate = isValidDate(inputElement.value)
     if (inputElement.name === 'fromDate') {
       setFromDateInputValue(inputElement.value)
@@ -185,16 +117,18 @@ const AnalyzerForm = () => {
     setFromDateInputValue('')
     setToDateInputValue('')
     dispatch(resetSearch())
-
     // remove all error messages visible in the form
-    const validElements = document.getElementById('analyzer-form').getElementsByClassName('form-input-valid')
-    const errorElements = document.getElementById('analyzer-form').getElementsByClassName('form-input-error')
+    const validElements = document.getElementById('analyzer-cntr__form-id').getElementsByClassName('form-input-valid')
+    const errorElements = document.getElementById('analyzer-cntr__form-id').getElementsByClassName('form-input-error')
     const elements = [...validElements, ...errorElements]
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.display = 'none'
     }
   }
 
+  /**
+   * Keeps crypto coin image updated next to title
+   */
   const getImageLink = () =>  {
     const foundCoin = coins.find(part => part.id === coin)
     if (foundCoin) {
@@ -203,11 +137,16 @@ const AnalyzerForm = () => {
   }
 
   return(
-    <form className="form" id="analyzer-form" onSubmit={handleSubmit}>
-      <h3 className='form-title flex-row'>
-        <div>Analyzer</div>
+    <form
+      className="form analyzer-form"
+      id="analyzer-cntr__form-id"
+      onSubmit={handleSubmit}
+    >
+
+      <div className='analyzer-form__title'>
+        <h3>Analyzer</h3>
         <img src={getImageLink()}/>
-      </h3>
+      </div>
       <DateInput
         dateInputValue={fromDateInputValue}
         handleDateInput={handleDateInput}
@@ -222,7 +161,7 @@ const AnalyzerForm = () => {
         title="To Date"
         elementRef={toDateRef}
       />
-      <div className='flex-row'>
+      <div className='analyzer-form__dropdowns'>
         <DropDownMenu
           setter={setCoin}
           title={'Coin'}
@@ -234,11 +173,10 @@ const AnalyzerForm = () => {
           array={currencies}
         />
       </div>
-      <SubmitResetButtons
-        submit='Search'
-        cancel='Reset'
-        handleReset={handleResetButton}
-      />
+      <div>
+        <SubmitButton submit='Search' />
+        <ResetButton cancel='Reset' handleReset={handleResetButton} />
+      </div>
     </form>
   )
 }

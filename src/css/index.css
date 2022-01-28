@@ -153,15 +153,14 @@ header button:active {
   margin-right: .5em;
 }
 
-.data-card-table {
+.default-cntr {
   display: flex;
   justify-content: space-around;
-  flex-flow: row wrap;
   width: 60%;
-  margin: 2% auto;
+  margin: 2em auto;
 }
 
-.data-card-table-list {
+.default-cntr-list {
   display: flex;
   flex-direction: row;
   flex-basis: inherit;
@@ -259,11 +258,6 @@ header button:active {
   margin-bottom: 10px;
 }
 
-.form-title img {
-  margin: 0 0 0 10px;
-  padding: 0;
-  height: 1.2em;
-}
 
 .form-button:hover,
 .header-navbar-button:hover {

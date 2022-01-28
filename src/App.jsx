@@ -11,16 +11,16 @@ import Header from './components/Header'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
 import NavBar from './components/NavBar'
-import AnalyzerContainer from './components/Analyzer/AnalyzerContainer'
-import LoginForm from './components/LoginForm'
+import AnalyzerCntr from './components/Analyzer/AnalyzerCntr'
+import LoginFormCntr from './components/Login/LoginFormCntr'
 import Logout from './components/Logout'
-import SignUpForm from './components/SignUpForm'
+import SignUpFormCntr from './components/SignUp/SignUpFormCntr'
 import Home from './components/Home'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import MarketContainer from './components/Market/MarketContainer'
 import Forbidden from './components/Forbidden'
 import Authenticate from './components/Authenticate'
-import PR from './components/PrivateRoute' // Private Route wrapper
+import PR from './components/PrivateRoute' // Private Route Wrapper
 
 function App() {
   const navigate = useNavigate()
@@ -40,9 +40,9 @@ function App() {
         <Route exact path='/' element={<Home />}/>
         <Route path='/authenticate' element={<Authenticate />}/>
         <Route path='/home' element={<Home />}/>
-        <Route path='/signup' element={<SignUpForm />}/>
-        <Route path='/analyzer' element={<AnalyzerContainer />}/>
-        <Route path='/login' element={<LoginForm />} />
+        <Route path='/signup' element={<SignUpFormCntr />}/>
+        <Route path='/analyzer' element={<AnalyzerCntr />}/>
+        <Route path='/login' element={<LoginFormCntr />} />
         <Route path='/logout' element={<Logout />}/>
         <Route path='/profile' element={<PR><ProfileContainer /></PR>}/>
         <Route path='/market' element={<MarketContainer />}/>

@@ -1,13 +1,13 @@
 import React from 'react'
-
+import './AnalyzerInfo.scss'
 
 /**
  * Analyzer form info
  */
 const AnalyzerInfo = () => {
   return (
-    <div className='dataview-container'>
-      <div className="data-card">
+    <div className='analyzer-info'>
+      <div className="analyzer-info__card">
         <p>
           Choose dates, coin and currency to see how the coin has performed between those dates.
           <br /><br />

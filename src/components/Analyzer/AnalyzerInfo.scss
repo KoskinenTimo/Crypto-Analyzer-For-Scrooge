@@ -1,0 +1,14 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.analyzer-info {
+  @extend %card-cntr;
+  &__card {
+    background-color: $primary-clr;
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-bottom: 15px; 
+    width: 100%;
+    @extend %card-text
+  }
+}

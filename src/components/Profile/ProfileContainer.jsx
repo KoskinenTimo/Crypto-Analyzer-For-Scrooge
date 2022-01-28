@@ -43,7 +43,7 @@ const ProfileContainer = () => {
     return(<Loading />)
   }
   return (
-    <div className='data-card-table-list'>
+    <div className='default-cntr-list'>
       <DetailsCard />
       <FavoritesList />
     </div>

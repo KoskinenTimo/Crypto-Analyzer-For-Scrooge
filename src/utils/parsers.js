@@ -26,3 +26,19 @@ export const parseNumber = (number,float=false) => {
   }
   return new Intl.NumberFormat('de-DE').format(number)
 }
+
+/**
+   * Coverts a date string to UNIX timestamp
+   * Builds first UTC time format and then converts
+   * it to Unix timestamp
+   * Works with string format "DD/MM/YEAR"
+   * @param {string} dateString
+   * @returns {number} Unix timestamp
+   */
+export const parseToTimestamp = (dateString,hour=0) => {
+  const dateParts = dateString.split('/')
+  const [day,month,year] = [...dateParts]
+  const dateUTC = `${year}-${month}-${day}T0${hour}:00:00.000Z`
+  const dateMilliseconds = Date.parse(dateUTC)
+  return dateMilliseconds/1000
+}

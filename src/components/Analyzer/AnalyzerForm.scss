@@ -1,0 +1,17 @@
+@import '../../scss/Constants.scss';
+@import '../../scss/Extends.scss';
+
+.analyzer-form {
+  &__title {
+    @extend %primary-title;
+    @extend %flex-row;
+    img {
+      margin: 0 0 0 .5em;
+      padding: 0;
+      height: 1.2em;
+    }
+  }
+  &__dropdowns {
+    @extend %flex-row;
+  }
+}

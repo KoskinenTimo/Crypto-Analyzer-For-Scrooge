@@ -28,6 +28,17 @@ export const createErrorNotification = (content) => {
   }
 }
 
+export const extractErrorMsg = (err) => {
+  if (
+    err.response &&
+    err.response.data &&
+    err.response.data.error
+  ) {
+    return err.response.data.error
+  }
+  return err.message
+}
+
 export const createSuccessNotification = (content) => {
   return {
     type: 'CREATE_SUCCESS_NOTIFICATION',

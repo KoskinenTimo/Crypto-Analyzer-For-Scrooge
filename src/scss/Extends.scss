@@ -1,0 +1,83 @@
+@import './Constants.scss';
+
+//
+// BUTTONS
+//
+
+%form-button {
+  display: inline-block;
+  font-size: $heading--sm;
+  border: none;
+  border-radius: 4px;
+  color: $txt-white;
+  width: 90px;
+  padding: 0.7em;
+  margin-right: 0.2em;
+  &:hover {
+    background-color: $primary-clr-light;
+  }
+  &:active {
+    background-color: $primary-clr-darker;
+  }
+}
+
+//
+// HEADINGS AND TEXT
+//
+
+%primary-title {
+  color: $primary-clr;
+  font-size: $heading--md;
+  font-weight: bold;
+  padding: 5px 5px 5px 0;
+  border-bottom: $brdr--primary;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+%card-title {
+  display: inline-block;  
+  color: $txt-white ;
+  border: 1px solid $txt-white;
+  border-radius: 5px;
+  padding: 6px;
+  margin-bottom: 8px;
+  margin-top: 5px;
+}
+
+%card-text {
+  margin-bottom: 5px;
+  color: $txt-white;
+  font-size: 1.1em;
+  line-height: 1.25em;
+}
+
+//
+// BLOCKS
+//
+
+%basic-form {
+  display: flex;
+  flex-direction: column;  
+  text-align: left;
+  width: 45%;
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+}
+
+%card-cntr {
+  width: 45%;
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+  text-align: left;
+  margin-top: 10px;  
+}
+
+//
+// FLEXS
+//
+
+%flex-row {
+  display: flex;
+  flex-direction: row;
+}

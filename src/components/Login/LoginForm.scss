@@ -1,0 +1,9 @@
+@import '../../scss/Constants.scss';
+@import '../../scss/Extends.scss';
+
+.login-form {
+  @extend %basic-form;
+  &__title {
+    @extend %primary-title;
+  }
+}

@@ -8,7 +8,7 @@ import CoinCard from './CoinCard'
 const CoinCardList = ({ data }) => {
   if (data && data.length) {
     return(
-      <div className='data-card-table'>
+      <div className='default-cntr'>
         {data.map((coinData, index) => <CoinCard data={coinData} key={coinData.id} index={index}/>)}
       </div>
     )

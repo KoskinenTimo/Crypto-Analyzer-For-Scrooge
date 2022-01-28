@@ -1,24 +1,20 @@
-import Cookies from 'js-cookie'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { createErrorNotification, createProcessNotification, createSuccessNotification, resetNotification } from '../reducers/notificationReducer'
-import { loginUser } from '../reducers/userReducer'
-import { login } from '../services/loginService'
-import { signup } from '../services/userService'
+import { Navigate } from 'react-router-dom'
+import { createErrorNotification, createProcessNotification } from '../../reducers/notificationReducer'
+import './SignUpForm.scss'
 
 // Components
-import TextInput from './Inputs/TextInput'
-import SubmitResetButtons from './SubmitResetButtons'
-
+import TextInput from '../Inputs/TextInput'
+import ResetButton from '../Buttons/ResetButton'
+import SubmitButton from '../Buttons/SubmitButton'
 
 /**
  * This component hold the logic for sign up, new user will be also logged in
  * after a succesfull sign up
  */
-const SignUpForm = () => {
+const SignUpForm = ({ submitData }) => {
   const authUser = useSelector(state => state.authUser)
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const nameRef = useRef()
@@ -30,6 +26,12 @@ const SignUpForm = () => {
   const [ password, setPassword ] = useState('')
   const [ name, setName ] = useState('')
   const [ rePassword, setRePassword ] = useState('')
+
+  useEffect(() => {
+    return () => {
+      handleReset()
+    }
+  }, [])
 
   /**
    * Handles form submit. Uses input client-side validations before submitting
@@ -45,26 +47,8 @@ const SignUpForm = () => {
       validatePassword() &&
       validateRePassword()
     ) {
-      dispatch(resetNotification())
       dispatch(createProcessNotification('Signing up...'))
-      signup({ username, password, name })
-        .then(() => {
-          login({ username, password })
-            .then(res => {
-              onReset()
-              const authDetails = res.data
-              Cookies.set('authUser', JSON.stringify(authDetails),{ expires: 1 })
-              dispatch(loginUser(authDetails))
-              dispatch(createSuccessNotification('Sign Up succesful'))
-              navigate('/home')
-            })
-            .catch(err => {
-              dispatch(createErrorNotification(err.response.data.error))
-            })
-        })
-        .catch(err => {
-          dispatch(createErrorNotification(err.response.data.error))
-        })
+      submitData(username, password, name)
     } else {
       dispatch(createErrorNotification('Please check that the input is in correct form'))
     }
@@ -73,18 +57,18 @@ const SignUpForm = () => {
   /**
    * Resets all input tracking states and error/valid visuals on the form
    */
-  const onReset = () => {
+  const handleReset = () => {
     setUsername('')
     setPassword('')
     setName('')
     setRePassword('')
-
-    // remove all error messages visible in the form
-    const validElements = document.getElementById('signup-form').getElementsByClassName('form-input-valid')
-    const errorElements = document.getElementById('signup-form').getElementsByClassName('form-input-error')
-    const elements = [...validElements, ...errorElements]
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.display = 'none'
+    if (document.getElementById('signup-form-id')) {
+      const validElements = document.getElementById('signup-form-id').getElementsByClassName('form-input-valid')
+      const errorElements = document.getElementById('signup-form-id').getElementsByClassName('form-input-error')
+      const elements = [...validElements, ...errorElements]
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].style.display = 'none'
+      }
     }
   }
 
@@ -197,8 +181,8 @@ const SignUpForm = () => {
     )
   }
   return (
-    <form className='form' id='signup-form' onSubmit={onSubmit}>
-      <h3 className='form-title'>Sign Up</h3>
+    <form className='signup-form' id='signup-form-id' onSubmit={onSubmit}>
+      <h3 className='signup-form__title'>Sign Up</h3>
       <TextInput
         title='Name'
         name='name'
@@ -234,11 +218,10 @@ const SignUpForm = () => {
         inputRef={rePasswordRef}
         error='Must match the password'
       />
-      <SubmitResetButtons
-        submit='Sign Up'
-        cancel='Reset'
-        handleReset={onReset}
-      />
+      <div>
+        <SubmitButton submit='Sign Up' />
+        <ResetButton cancel='Reset' handleReset={handleReset} />
+      </div>
     </form>
   )
 }

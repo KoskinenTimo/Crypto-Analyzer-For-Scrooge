@@ -1,0 +1,7 @@
+@import '../../scss/Constants.scss';
+@import '../../scss/Extends.scss';
+
+.form__reset-button {
+  @extend %form-button;
+  background-color: $primary-clr-lighter;
+}
