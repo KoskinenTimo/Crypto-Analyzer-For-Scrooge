@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetNotification } from '../reducers/notificationReducer'
-
+import './Notification.scss'
 
 /**
  * Used as an error message display below header for any caught errors
@@ -51,18 +51,18 @@ const Notification = () => {
         dispatch(resetNotification())
         setNotificationMessage('')
       }
-    },4000)
+    },10000)
   }, [notification])
 
   return(
     <>
-      <div id="error-message-container" ref={errorRef}>
+      <div className='notification--error' ref={errorRef}>
         <h4>{notificationMessage}</h4>
       </div>
-      <div id="success-message-container" ref={successRef}>
+      <div className='notification--success' ref={successRef}>
         <h4>{notificationMessage}</h4>
       </div>
-      <div id="process-message-container" ref={processRef}>
+      <div className='notification--process' ref={processRef}>
         <h4>{notificationMessage}</h4>
       </div>
     </>

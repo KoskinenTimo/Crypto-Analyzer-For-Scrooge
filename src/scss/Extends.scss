@@ -77,7 +77,27 @@
 // FLEXS
 //
 
-%flex-row {
+@mixin flex-row {
   display: flex;
   flex-direction: row;
+}
+
+@mixin flex-row-spc-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@mixin flex-clmn {
+  display: flex;
+  flex-direction: column;
+}
+
+//
+// THEMES
+//
+
+@mixin background-font {
+  background-color: $primary-clr;
+  color: $txt-white;
 }

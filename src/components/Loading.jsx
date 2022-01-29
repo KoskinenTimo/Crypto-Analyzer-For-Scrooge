@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Loading.scss'
 
 /**
  * Loading component to display a loading message when app is getting/processing

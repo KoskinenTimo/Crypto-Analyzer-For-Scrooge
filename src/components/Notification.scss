@@ -1,0 +1,24 @@
+@import '../scss/Constants.scss';
+
+[class^="notification--"] {
+  font-size: $heading--md;
+  font-weight: bold;
+  text-align: center;
+  color: $txt-white;
+  padding: 1em;
+  width: 100%;
+  margin: 1em 0;
+  display: none;
+}
+
+.notification {
+  &--error {
+    background-color: $notification-error
+  }
+  &--process {
+    background-color: $primary-clr-light
+  }
+  &--success {
+    background-color: $notification-success
+  }
+}

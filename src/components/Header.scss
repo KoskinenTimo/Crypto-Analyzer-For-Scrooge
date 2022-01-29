@@ -1,0 +1,15 @@
+@import '../scss/Constants.scss';
+@import '../scss/Extends.scss';
+
+.header {
+  @include flex-row-spc-between;
+  background-color: $primary-clr;
+  width: 100%;
+  margin: 0;
+  &__title {
+    color: $txt-white;
+    font-size: $heading--lg;
+    padding: 30px 30px 30px 6px;
+    margin-left: 15%
+  }
+}

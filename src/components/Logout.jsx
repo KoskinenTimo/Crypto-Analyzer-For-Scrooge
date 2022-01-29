@@ -5,7 +5,6 @@ import { Navigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { createSuccessNotification } from '../reducers/notificationReducer'
 
-
 /**
  * This component holds the logic for logging out
  */

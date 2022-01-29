@@ -5,7 +5,8 @@ If you want to run without build version
 <br>npm install
 <br>npm start
 
-You can ask for a link to live version if needed.
+Live link:
+https://koskinentht-crypto-analyzer.herokuapp.com/
 
 --------------------------------------------------------------
 

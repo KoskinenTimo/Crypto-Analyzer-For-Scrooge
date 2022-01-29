@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {
   createErrorNotification,
@@ -17,6 +17,7 @@ import LoginForm from './LoginForm'
 const LoginFormCntr = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector(s => s.authUser)
 
   const submitData = (username, password) => {
     login({ username, password })
@@ -25,14 +26,15 @@ const LoginFormCntr = () => {
         Cookies.set('authUser', JSON.stringify(authDetails),{ expires: 1 })
         dispatch(loginUser(authDetails))
         dispatch(createSuccessNotification('Logged in'))
-        navigate(-1)
       })
       .catch(err => {
         dispatch(createErrorNotification(extractErrorMsg(err)))
       })
   }
 
-
+  if (user) {
+    return <>{navigate(-1)}</>
+  }
   return (
     <>
       <LoginForm submitData={submitData}/>

@@ -18,7 +18,6 @@ import SignUpFormCntr from './components/SignUp/SignUpFormCntr'
 import Home from './components/Home'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import MarketContainer from './components/Market/MarketContainer'
-import Forbidden from './components/Forbidden'
 import Authenticate from './components/Authenticate'
 import PR from './components/PrivateRoute' // Private Route Wrapper
 
@@ -46,7 +45,6 @@ function App() {
         <Route path='/logout' element={<Logout />}/>
         <Route path='/profile' element={<PR><ProfileContainer /></PR>}/>
         <Route path='/market' element={<MarketContainer />}/>
-        <Route path='/forbidden' element={<Forbidden />}/>
       </Routes>
 
       <Footer />

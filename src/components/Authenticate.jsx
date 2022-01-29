@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { createErrorNotification } from '../reducers/notificationReducer'
 import { loginUser } from '../reducers/userReducer'
 import { checkToken } from '../services/loginService'
-
+import './Authenticate.scss'
 
 const Authenticate = () => {
   const dispatch = useDispatch()
@@ -48,7 +48,7 @@ const Authenticate = () => {
     return <>{navigate(-1)}</>
   }
   return (
-    <h1 className="loading">
+    <h1 className="authenticate-loading">
       AUTHENTICATING...
     </h1>
   )

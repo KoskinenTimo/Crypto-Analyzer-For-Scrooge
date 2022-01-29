@@ -1,0 +1,31 @@
+@import '../scss/Constants.scss';
+@import '../scss/Extends.scss';
+
+.login-bar {
+  @include flex-row;
+  color: $txt-white;
+  font-size: $heading--sm;
+  font-weight: bold;
+  overflow-y: hidden;
+  margin: auto 10% 0 0;
+  &__title {
+    font-size: $heading--sm;
+    font-weight: bold;
+    padding: .5em;
+  }
+  &__button {
+    font-size: $heading--sm;
+    font-weight: bold;
+    padding: .5em;
+    color: $primary-clr;
+    background-color: white;
+    &:hover {
+      background-color: $primary-clr-lighter;
+      color: $txt-white;
+    }
+    &:active {
+      background-color: $primary-clr-light;
+      color: $txt-white;
+    }
+  }
+}

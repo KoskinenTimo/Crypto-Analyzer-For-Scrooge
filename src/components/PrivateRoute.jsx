@@ -3,7 +3,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-
 /**
  * Is used to wrap routes that require login/auth user
  */

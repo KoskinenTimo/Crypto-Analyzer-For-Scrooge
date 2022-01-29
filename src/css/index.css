@@ -1,83 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  text-align: center;
-}
-
-button {
-  border: none;
-}
-
-footer {
-  background-color: #01a1af;
-  width: 100%;
-  padding: 7px;
-  margin-top: auto;
-  border-top: 10px solid white;
-}
-
-h1 {
-  font-size: 1.7em;
-}
-
-h4 {
-  font-size: 1.4em;
-}
-
-header {  
-  background-color: #01a1af;
-  width: 100%;
-  margin: 0;
-}
-
-footer p {
-  margin: 0;
-  color: aliceblue;
-}
-
-header h1 {
-  color: aliceblue;
-  padding: 30px 30px 30px 6px;
-  margin-left: 15%
-}
-
-header h3 {
-  color: white;
-}
-
-header button, 
-header h3 {
-  font-size: 1.1em;
-  font-weight: bold;
-  padding: 7px;
-  margin-right: 15px;
-} 
-
-header .login-bar {
-  overflow-y: hidden;
-  margin: auto 10% 0 0
-}
-
-header button {
-  border: none;
-  color: #01a1af;
-  background-color: white;
-}
-
-header button:hover {
-  color:aliceblue;
-  background-color: #01c9db;
-}
-
-header button:active {
-  background-color: rgba(1, 201, 219, 0.4);
-}
-
 .data-card {
   background-color: #01a1af;
   border-radius: 10px;
@@ -269,14 +189,6 @@ header button:active {
   background-color: rgba(1, 201, 219, 0.4);  
 }
 
-#error-message-container,
-#success-message-container,
-#process-message-container {
-  width: 45%;
-  min-width: 250px;
-  margin: 0 auto 10px auto;
-  max-width: 600px;
-}
 
 .form,
 .dataview-container {
@@ -296,22 +208,6 @@ header button:active {
   overflow-y: scroll;
 }
 
-.flex-row-space-btw {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
 .header-navbar {
   margin: 0 0 2% 15%;
   justify-content: start;
@@ -327,10 +223,6 @@ header button:active {
   width: 120px;
 }
 
-.loading {
-  margin: 20px 0;
-  color: #01a1af;
-}
 
 .market-data-card {
   background-color: #01a1af;
@@ -379,30 +271,6 @@ header button:active {
   flex-direction: column;
 }
 
-#error-message-container,
-#success-message-container,
-#process-message-container {
-  text-align: left;
-  display: none
-}
-
-#error-message-container h4,
-#success-message-container h4,
-#process-message-container h4 {
-  margin: 0 0 5px 0;
-  color: aliceblue;
-  padding: 8px;
-}
-
-#error-message-container h4 {
-  background-color: #fe5e50;
-}
-#success-message-container h4 {
-  background-color: #00b10f;
-}
-#process-message-container h4 {
-  background-color: #01c9db;
-}
 
 #profile-details {
   height: 210px;

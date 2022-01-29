@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
+import './LoginBar.scss'
 
 /**
  * Header login bar to display log in and signup options if the user is not already logged
@@ -42,18 +42,18 @@ const LoginBar = () => {
   }
 
   return (
-    <div className="login-bar flex-row">
+    <div className="login-bar">
       {
         login
           ?
           <>
-            <h3>Welcome {authUser.username}!</h3>
-            <button onClick={() => handleLogout()}>Logout</button>
+            <h3 className='login-bar__title'>Welcome {authUser.username}!</h3>
+            <button className='login-bar__button' onClick={() => handleLogout()}>Logout</button>
           </>
           :
           <>
-            <button onClick={() => handleLogin()}>Login</button>
-            <button onClick={() => handleSignUp()}>Sign up</button>
+            <button className='login-bar__button' onClick={() => handleLogin()}>Login</button>
+            <button className='login-bar__button' onClick={() => handleSignUp()}>Sign up</button>
           </>
       }
     </div>

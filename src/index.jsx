@@ -7,8 +7,9 @@ import { Provider } from 'react-redux'
 import store from './reducers/store'
 
 // CSS styles
-import './css/reset.css'
 import './css/index.css'
+import './scss/Reset.scss'
+import './scss/Base.scss'
 
 
 ReactDOM.render(

@@ -4,7 +4,7 @@
 .analyzer-form {
   &__title {
     @extend %primary-title;
-    @extend %flex-row;
+    @include flex-row;
     img {
       margin: 0 0 0 .5em;
       padding: 0;
@@ -12,6 +12,6 @@
     }
   }
   &__dropdowns {
-    @extend %flex-row;
+    @include flex-row;
   }
 }

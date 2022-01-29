@@ -1,0 +1,13 @@
+@import '../scss/Constants.scss';
+@import '../scss/Extends.scss';
+
+.footer {
+  @include background-font;
+  width: 100%;
+  padding: 7px;
+  margin-top: auto;
+  border-top: 10px solid white;
+  &__text {
+    margin: 0;
+  }
+}
