@@ -11,16 +11,18 @@ $notification-error   : #fe5e50;
 $notification-success : #00b10f;
 
 //
-// HEADINGS
+// HEADINGS AND TEXT SIZE
 //
 
 $heading--xlg         : 2.5em;
 $heading--lg          : 2em;
 $heading--md          : 1.5em;
 $heading--sm          : 1.1em;
+$notification-sm      : 0.9em;
 
 //
 // BORDERS
 //
 
 $brdr--primary        : 1px solid $primary-clr;
+$brdr--primary-bold   : 2px solid $primary-clr;

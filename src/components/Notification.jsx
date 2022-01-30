@@ -51,7 +51,7 @@ const Notification = () => {
         dispatch(resetNotification())
         setNotificationMessage('')
       }
-    },10000)
+    },5000)
   }, [notification])
 
   return(

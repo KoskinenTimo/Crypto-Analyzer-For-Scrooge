@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetHighestVolume } from '../../reducers/highestVolumeReducer'
-
-// Utils
 import { parseToDate, parseNumber } from '../../utils/parsers'
-
+import './DataViewHighestVolume.scss'
 
 /**
  * Used to render highest volume date data
@@ -22,19 +20,21 @@ const DataViewHighestVolume = () => {
       const parsedVolume = parseNumber(highestVolumeAndDate[1])
       setHighestTradingVolumeDate([ parsedDate,parsedVolume ])
     }
-    // Reset on unmount
+  },[highestVolumeAndDate])
+
+  useEffect(() => {
     return () => {
       const reset = []
       setHighestTradingVolumeDate(reset)
       dispatch(resetHighestVolume())
     }
-  },[highestVolumeAndDate])
+  }, [])
 
   if (highestTradingVolumeDate.length) {
     return (
-      <div className="data-card">
-        <h4>Highest volume date</h4>
-        <p>
+      <div className="dv-volume-card">
+        <h4 className='dv-volume-card__title'>Highest volume date</h4>
+        <p className='dv-volume-card__txt'>
           The highest trading day by volume was {highestTradingVolumeDate[0]} and
           the volume was {highestTradingVolumeDate[1]}{s}.
         </p>

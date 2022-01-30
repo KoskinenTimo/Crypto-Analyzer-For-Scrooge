@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createErrorNotification, createProcessNotification, createSuccessNotification } from '../../reducers/notificationReducer'
+import { createErrorNotification, createProcessNotification, createSuccessNotification, extractErrorMsg } from '../../reducers/notificationReducer'
 import { createFavorite } from '../../services/favoritesService'
+import './DataViewSaveBar.scss'
 
-
-const SaveBar = () => {
+/**
+ * SaveBar for storing favorite dates in user 'profile'
+ */
+const DataViewSaveBar = () => {
   const dispatch = useDispatch()
   const { fromDate, toDate, coin, currency } = useSelector(s => s.analyzer)
   const profit = useSelector(s => s.bestBuySell)[2]
@@ -31,31 +34,23 @@ const SaveBar = () => {
         }, 1000)
       })
       .catch(err => {
-        if (
-          err.response &&
-          err.response.data &&
-          err.response.data.error
-        ) {
-          dispatch(createErrorNotification(err.response.data.error))
-        } else {
-          dispatch(createErrorNotification(err.message))
-        }
+        dispatch(createErrorNotification(extractErrorMsg(err)))
         setSaved(false)
       })
 
   }
   if (saved) {
     return (
-      <button className='data-save-bar'>
-        <h4>SAVED!</h4>
+      <button className='save-bar'>
+        <h4 className='save-bar__title'>SAVED!</h4>
       </button>
     )
   }
   return (
-    <button className='data-save-bar' onClick={() => handleClick()}>
-      <h4>SAVE TO PROFILE</h4>
+    <button className='save-bar' onClick={() => handleClick()}>
+      <h4 className='save-bar__title'>SAVE TO PROFILE</h4>
     </button>
   )
 }
 
-export default SaveBar
+export default DataViewSaveBar

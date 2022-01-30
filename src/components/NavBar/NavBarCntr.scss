@@ -1,0 +1,9 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.header-nav {
+  @include flex-row;
+  margin: 0 0 2% 15%;
+  justify-content: flex-start;
+  border-top: 4px solid white;
+}

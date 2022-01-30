@@ -1,0 +1,18 @@
+@import '../../scss/Constants.scss';
+@import '../../scss/Extends.scss';
+
+.txt-input-cntr {
+  @extend %input-cntr;
+  &__input {
+    @extend %primary-input;
+  }
+  &__notification {
+    &--valid {
+      display: none;
+    }
+    &--error {
+      display: none;
+      @extend %error-label;
+    }
+  }
+}

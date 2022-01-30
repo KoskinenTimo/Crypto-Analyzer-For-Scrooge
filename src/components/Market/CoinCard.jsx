@@ -6,6 +6,7 @@ import {
   faArrowAltCircleUp,
   faArrowAltCircleRight
 } from '@fortawesome/free-solid-svg-icons'
+import './CoinCard.scss'
 
 const CoinCard = ({
   data,
@@ -27,15 +28,14 @@ const CoinCard = ({
   }
 
   return(
-    <div className="market-data-card">
-      <h4>{index + 1}. {data.name}</h4>
-      <p></p>
-      <p>Market Cap: {parseNumber(data.market_cap)}€</p>
-      <p>Price Per Coin: {parseNumber(data.current_price)}€</p>
-      <p>Price Change 24h: {parseNumber(data.price_change_24h)}€ {renderArrow(data.price_change_24h)}</p>
-      <p>Total Volume: {parseNumber(data.total_volume)}€</p>
-      <p>Total Supply: {data.total_supply}</p>
-      <p>Last Updated: {new Date(data.last_updated).toUTCString()}</p>
+    <div className="market-card">
+      <h4 className='market-card__title'>{index + 1}. {data.name}</h4>
+      <p className='market-card__txt'>Market Cap: {parseNumber(data.market_cap)}€</p>
+      <p className='market-card__txt'>Price Per Coin: {parseNumber(data.current_price)}€</p>
+      <p className='market-card__txt'>Price Change 24h: {parseNumber(data.price_change_24h)}€ {renderArrow(data.price_change_24h)}</p>
+      <p className='market-card__txt'>Total Volume: {parseNumber(data.total_volume)}€</p>
+      <p className='market-card__txt'>Total Supply: {data.total_supply}</p>
+      <p className='market-card__txt'>Last Updated: {new Date(data.last_updated).toUTCString()}</p>
     </div>
 
   )

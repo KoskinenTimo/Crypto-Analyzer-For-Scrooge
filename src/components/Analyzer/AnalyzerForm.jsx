@@ -91,9 +91,9 @@ const AnalyzerForm = () => {
    * @param {boolean} validString
    */
   const toggleStringValidation = (inputElement,validString,validDate) => {
-    const stringErrorNode = inputElement.parentNode.getElementsByClassName('form-input-error')[0]
-    const dateErrorNode = inputElement.parentNode.getElementsByClassName('form-input-error')[1]
-    const inputValidNode = inputElement.parentNode.getElementsByClassName('form-input-valid')[0]
+    const stringErrorNode = inputElement.parentNode.getElementsByClassName('date-input-cntr__notification--error')[0]
+    const dateErrorNode = inputElement.parentNode.getElementsByClassName('date-input-cntr__notification--error')[1]
+    const inputValidNode = inputElement.parentNode.getElementsByClassName('date-input-cntr__notification--valid')[0]
     if (!validString || !validDate) {
       inputValidNode.style.display = 'none'
       if (!validString) {
@@ -118,8 +118,8 @@ const AnalyzerForm = () => {
     setToDateInputValue('')
     dispatch(resetSearch())
     // remove all error messages visible in the form
-    const validElements = document.getElementById('analyzer-cntr__form-id').getElementsByClassName('form-input-valid')
-    const errorElements = document.getElementById('analyzer-cntr__form-id').getElementsByClassName('form-input-error')
+    const validElements = document.getElementById('analyzer-cntr__form-id').getElementsByClassName('date-input-cntr__notification--valid')
+    const errorElements = document.getElementById('analyzer-cntr__form-id').getElementsByClassName('date-input-cntr__notification--error')
     const elements = [...validElements, ...errorElements]
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.display = 'none'

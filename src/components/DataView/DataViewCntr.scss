@@ -1,0 +1,5 @@
+@import '../../scss/Extends.scss';
+
+.dataview-cntr {
+  @extend %clmn-cntr;
+}

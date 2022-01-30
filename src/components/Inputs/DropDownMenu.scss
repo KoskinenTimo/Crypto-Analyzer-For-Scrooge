@@ -1,0 +1,30 @@
+@import '../../scss/Constants.scss';
+@import '../../scss/Extends.scss';
+
+.dropdown-menu-cntr {
+  @include flex-row;
+  justify-content: flex-start;
+  color: $primary-clr;
+  font-size: $heading--sm ;  
+  border: $brdr--primary;
+  border-radius: 3px;
+  margin: .8em .8em 1.2em 0;
+  &__title {
+    padding: .7em;
+  }
+  &__options {
+    @include background-font;
+    padding: .7em;
+    font-size: $notification-sm;
+    width: 120px;
+    text-align: center;
+    border: none;
+    margin-left: .4em;
+    &:hover {
+      background-color: #01c9db;
+    }
+    &:focus {
+      background-color: #01c9db;
+    }
+  }
+}

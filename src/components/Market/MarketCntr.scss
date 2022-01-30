@@ -1,0 +1,13 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.market-cntr {
+  @extend %clmn-cntr;
+  &__title {
+    @extend %primary-title;
+    &--centered {
+      @extend %primary-title;
+      margin: 0 auto
+    }
+  }
+}

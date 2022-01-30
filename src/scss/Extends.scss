@@ -21,6 +21,28 @@
   }
 }
 
+@mixin nav-button {
+  text-decoration: none;
+  @include background-font;
+  font-size: $heading--sm;
+  font-weight: bold;
+  padding: .7em;
+  margin: 0 1em 0 0;
+  width: 120px;
+}
+
+@mixin card-button {
+  color: $primary-clr ;
+  font-size: 1.1em;
+  background-color: white;
+  padding: .5em;
+  width: 120px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: .5em;
+}
+
 //
 // HEADINGS AND TEXT
 //
@@ -53,27 +75,6 @@
 }
 
 //
-// BLOCKS
-//
-
-%basic-form {
-  display: flex;
-  flex-direction: column;  
-  text-align: left;
-  width: 45%;
-  max-width: 600px;
-  margin: 0 auto 10px auto;
-}
-
-%card-cntr {
-  width: 45%;
-  max-width: 600px;
-  margin: 0 auto 10px auto;
-  text-align: left;
-  margin-top: 10px;  
-}
-
-//
 // FLEXS
 //
 
@@ -92,6 +93,90 @@
   display: flex;
   flex-direction: column;
 }
+
+//
+// BLOCKS
+//
+
+%basic-form {
+  display: flex;
+  flex-direction: column;  
+  text-align: left;
+  width: 45%;
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+}
+
+%card-cntr {
+  width: 45%;
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+  text-align: left;
+}
+
+%clmn-cntr {
+  width: 45%;
+  min-width: 250px;
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+  text-align: left;
+}
+
+%input-cntr {
+  @include flex-clmn;
+  color: $primary-clr;
+  font-size: $heading--sm;
+  margin: 10px 0;
+}
+
+@mixin card {
+  background-color: $primary-clr;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 1em; 
+  width: 100%;
+}
+
+//
+// ELEMENTS
+//
+
+%primary-input {
+  padding: .8em;
+  border: $brdr--primary ;
+  border-radius: 3px;  
+  margin-top: .4em;
+  &:focus {
+    outline: 2px solid #01a1af
+  }
+}
+
+%error-label {
+  font-size: $notification-sm;
+  color: $notification-error;  
+  border-bottom: 1px solid $notification-error;
+  margin-top: .4em;
+}
+
+@mixin card-title {
+  display: inline-block;  
+  color: $txt-white;
+  font-size: $heading--sm;
+  border: 1px solid $txt-white;
+  border-radius: 5px;
+  padding: .5em;
+  margin-bottom: .5em;
+  margin-top: .5em;
+}
+
+@mixin card-txt {
+  margin-bottom: .5em;
+  color: $txt-white;
+  font-size: $heading--sm;
+  line-height: 1.25em;
+}
+
+
 
 //
 // THEMES

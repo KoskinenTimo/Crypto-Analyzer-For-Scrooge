@@ -10,14 +10,14 @@ import Cookies from 'js-cookie'
 import Header from './components/Header'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
-import NavBar from './components/NavBar'
+import NavBarCntr from './components/NavBar/NavBarCntr'
 import AnalyzerCntr from './components/Analyzer/AnalyzerCntr'
 import LoginFormCntr from './components/Login/LoginFormCntr'
 import Logout from './components/Logout'
 import SignUpFormCntr from './components/SignUp/SignUpFormCntr'
-import Home from './components/Home'
+import HomeCntr from './components/Home/HomeCntr'
 import ProfileContainer from './components/Profile/ProfileContainer'
-import MarketContainer from './components/Market/MarketContainer'
+import MarketCntr from './components/Market/MarketCntr'
 import Authenticate from './components/Authenticate'
 import PR from './components/PrivateRoute' // Private Route Wrapper
 
@@ -33,18 +33,18 @@ function App() {
   return (
     <div className="wrapper">
       <Header />
-      <NavBar />
+      <NavBarCntr />
       <Notification />
       <Routes>
-        <Route exact path='/' element={<Home />}/>
+        <Route exact path='/' element={<HomeCntr />}/>
         <Route path='/authenticate' element={<Authenticate />}/>
-        <Route path='/home' element={<Home />}/>
+        <Route path='/home' element={<HomeCntr />}/>
         <Route path='/signup' element={<SignUpFormCntr />}/>
         <Route path='/analyzer' element={<AnalyzerCntr />}/>
         <Route path='/login' element={<LoginFormCntr />} />
         <Route path='/logout' element={<Logout />}/>
         <Route path='/profile' element={<PR><ProfileContainer /></PR>}/>
-        <Route path='/market' element={<MarketContainer />}/>
+        <Route path='/market' element={<MarketCntr />}/>
       </Routes>
 
       <Footer />

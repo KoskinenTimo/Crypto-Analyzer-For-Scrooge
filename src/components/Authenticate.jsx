@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createErrorNotification } from '../reducers/notificationReducer'
+import { createErrorNotification, extractErrorMsg } from '../reducers/notificationReducer'
 import { loginUser } from '../reducers/userReducer'
 import { checkToken } from '../services/loginService'
 import './Authenticate.scss'
@@ -20,23 +20,8 @@ const Authenticate = () => {
           dispatch(loginUser(authUser))
         })
         .catch(err => {
-          if (
-            err.response &&
-            err.response.status &&
-            err.response.status === 401
-          ) {
-            Cookies.remove('authUser')
-            dispatch(createErrorNotification('Login token expired or invalid'))
-          }
-          if (
-            err.response &&
-            err.response.data &&
-            err.response.message
-          ) {
-            dispatch(createErrorNotification(err.response.message))
-          } else {
-            dispatch(createErrorNotification(err.message))
-          }
+          dispatch(createErrorNotification(extractErrorMsg(err)))
+          Cookies.remove('authUser')
           navigate('/')
         })
     } else {

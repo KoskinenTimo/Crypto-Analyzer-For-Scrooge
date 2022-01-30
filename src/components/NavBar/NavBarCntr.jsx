@@ -1,16 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import NavButton from './NavButton'
-
+import './NavBarCntr.scss'
 
 /**
  * Header navigation bar for main site navigation
  */
-const NavBar = () => {
+const NavBarCntr = () => {
   const user = useSelector(store => store.authUser)
 
   return (
-    <div className="header-navbar flex-row">
+    <nav className='header-nav'>
       <NavButton text={'Home'}/>
       <NavButton text={'Market'}/>
       <NavButton text={'Analyzer'}/>
@@ -19,8 +19,8 @@ const NavBar = () => {
           <NavButton text={'Profile'}/> :
           ''
       }
-    </div>
+    </nav>
   )
 }
 
-export default NavBar
+export default NavBarCntr

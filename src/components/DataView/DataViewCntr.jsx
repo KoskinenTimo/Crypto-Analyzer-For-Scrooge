@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getCoinChartRange } from '../../services/geckoApiService'
+import { createErrorNotification, extractErrorMsg } from '../../reducers/notificationReducer'
+import { resetSearch } from '../../reducers/analyzerReducer'
+import { createBearishTrend } from '../../reducers/bearishTrendReducer'
+import { createBestBuySell } from '../../reducers/bestBuySellReducer'
+import { createHighestVolume } from '../../reducers/highestVolumeReducer'
+import './DataViewCntr.scss'
 
 // Components
 import DataViewBearishTrend from './DataViewBearishTrend'
@@ -7,22 +14,13 @@ import DataViewBestBuySell from './DataViewBestBuySell'
 import DataViewHighestVolume from './DataViewHighestVolume'
 import DataViewNoData from './DataViewNoData'
 import Loading from '../Loading'
-
-// Services
-import { getCoinChartRange } from '../../services/geckoApiService'
-import { createErrorNotification } from '../../reducers/notificationReducer'
-import { resetSearch } from '../../reducers/analyzerReducer'
-import { createBearishTrend } from '../../reducers/bearishTrendReducer'
-import { createBestBuySell } from '../../reducers/bestBuySellReducer'
-import SaveBar from './SaveBar'
-import { createHighestVolume } from '../../reducers/highestVolumeReducer'
-
+import DataViewSaveBar from './DataViewSaveBar'
 
 /**
  * Main container component for all data display, formats dates data to be
  * used by children, like list of days and days with data points
  */
-const DataView = () => {
+const DataViewCntr = () => {
   const dispatch = useDispatch()
   const analyzer = useSelector(s => s.analyzer)
   const authUser = useSelector(s => s.authUser)
@@ -33,7 +31,6 @@ const DataView = () => {
   useEffect(() => {
     if (loading) return
     setLoading(true)
-    // Get data from API
     getCoinChartRange(
       analyzer.fromDate,
       analyzer.toDate,
@@ -48,7 +45,7 @@ const DataView = () => {
           prices.length &&
           total_volumes.length
         ) {
-          const newArrayOfDates = createDateArray(analyzer.fromDate,analyzer.toDate)
+          const newArrayOfDates = createDatesArray(analyzer.fromDate,analyzer.toDate)
           const newarrayDatesPrices = getOneDataPointPerDate(newArrayOfDates,prices)
           const newarrayDatesVolumes = getOneDataPointPerDate(newArrayOfDates,total_volumes)
           setArrayDatesPrices(newarrayDatesPrices)
@@ -60,15 +57,7 @@ const DataView = () => {
         setLoading(false)
       })
       .catch(err => {
-        if (
-          err.response &&
-            err.response.data &&
-            err.response.data.error
-        ) {
-          dispatch(createErrorNotification(err.response.data.error))
-        } else {
-          dispatch(createErrorNotification(err.message))
-        }
+        dispatch(createErrorNotification(extractErrorMsg(err)))
         setLoading(false)
       })
   },[analyzer])
@@ -107,7 +96,7 @@ const DataView = () => {
    * @param {number} toDate Unix timestamp ms
    * @returns {number[]} dateArray
    */
-  const createDateArray = (fromDate,toDate) => {
+  const createDatesArray = (fromDate,toDate) => {
     const firstDay = fromDate*1000
     const lastDay = toDate*1000
     let currentDay = firstDay
@@ -160,7 +149,7 @@ const DataView = () => {
 
   if (loading) {
     return (
-      <div className="dataview-container">
+      <div className="dataview-cntr">
         <Loading />
       </div>
     )
@@ -171,18 +160,19 @@ const DataView = () => {
     !arrayDatesVolumes.length
   ) {
     return (
-      <div className="dataview-container">
+      <div className="dataview-cntr">
         <DataViewNoData />
       </div>
     )
   }
   return (
-    <div className="dataview-container">
-      {authUser && <SaveBar />}
+    <div className="dataview-cntr">
+      {authUser && <DataViewSaveBar />}
       <DataViewBearishTrend />
       <DataViewHighestVolume />
       <DataViewBestBuySell />
-    </div>)
+    </div>
+  )
 }
 
-export default DataView
+export default DataViewCntr

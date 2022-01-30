@@ -1,0 +1,11 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.header-nav__button {
+  @include nav-button;
+  &--active {
+    @include nav-button;
+    background-color: $primary-clr-light;
+    border: $brdr--primary-bold;
+  }
+}

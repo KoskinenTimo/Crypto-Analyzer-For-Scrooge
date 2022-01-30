@@ -1,0 +1,14 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.market-card {
+  @include card;
+  flex-basis: 30%;
+  margin: 1em;
+  &__title {
+    @include card-title;
+  }
+  &__txt {
+    @include card-txt;
+  }
+}

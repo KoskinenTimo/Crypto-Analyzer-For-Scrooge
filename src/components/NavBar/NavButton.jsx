@@ -1,16 +1,18 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-
+import { NavLink } from 'react-router-dom'
+import './NavButton.scss'
 
 /**
  * Header navigation bar button
  */
 const NavButton = ({ text }) => {
-  const navigate = useNavigate()
   return (
-    <button className="header-navbar-button" onClick={() => navigate(text.toLowerCase())}>
+    <NavLink
+      to={`${text.toLowerCase()}`}
+      className={({ isActive }) => (isActive ? 'header-nav__button--active' : 'header-nav__button')}
+    >
       {text}
-    </button>
+    </NavLink>
   )
 }
 

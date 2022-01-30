@@ -1,0 +1,12 @@
+@import '../../scss/Constants.scss';
+@import '../../scss/Extends.scss';
+
+.dv-volume-card {
+  @include card;
+  &__title {
+  @include card-title;
+  }
+  &__txt {
+  @include card-txt;
+  }
+}

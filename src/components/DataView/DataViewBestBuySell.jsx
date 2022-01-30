@@ -1,9 +1,8 @@
 import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetBestBuySell } from '../../reducers/bestBuySellReducer'
-
-// Utils
 import { parseNumber, parseToDate } from '../../utils/parsers'
+import './DataViewBestBuySell.scss'
 
 /**
  * Used to render the best day to buy and to sell in data
@@ -23,28 +22,30 @@ const DataViewBestBuySell = () => {
       const parsedArray = [ parsedBuyDate, parsedSellDate, parsedProfit ]
       setProfitData(parsedArray)
     }
-    // Reset on unmount
+  },[datesAndProfit])
+
+  useEffect(() => {
     return () => {
       const reset = []
       setProfitData(reset)
       dispatch(resetBestBuySell())
     }
-  },[datesAndProfit])
+  }, [])
 
   if (profitData.length) {
     return (
-      <div className="data-card">
-        <h4>Best day to buy and sell</h4>
+      <div className="dv-buysell-card">
+        <h4 className='dv-buysell-card__title'>Best day to buy and sell</h4>
         {
           // if profit
           parseFloat(profitData[2]) > 0
             ?
-            <p>
+            <p className='dv-buysell-card__txt'>
           Best day to buy {profitData[0]} and best to sell {profitData[1]},
           profit {profitData[2]}{c} per coin.
             </p>
             :
-            <p>
+            <p className='dv-buysell-card__txt'>
           Between {profitData[0]} and {profitData[1]}, there are no dates
           to make profit.
             </p>
@@ -53,7 +54,6 @@ const DataViewBestBuySell = () => {
     )
   }
   return(<div></div>)
-
 }
 
 export default DataViewBestBuySell

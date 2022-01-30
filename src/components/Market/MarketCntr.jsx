@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createErrorNotification } from '../../reducers/notificationReducer'
 import { getTopMarketData } from '../../services/geckoApiService'
+import './MarketCntr.scss'
 
 // Components
 import Loading from '../Loading'
 import CoinCardList from './CoinCardList'
 import NoData from './NoData'
 
-
 /**
  * Market data page for top 6 coins by market cap
  */
-const MarketContainer = () => {
+const MarketCntr = () => {
   const dispatch = useDispatch()
   const [ marketData, setMarketData ] = useState('')
   const [ loading, setLoading ] = useState(true)
@@ -43,8 +43,8 @@ const MarketContainer = () => {
 
   if(loading) {
     return (
-      <div className="dataview-container">
-        <h1 className='form-title'>Market</h1>
+      <div className="market-cntr">
+        <h1 className='market-cntr__title form-title'>Market</h1>
         <Loading />
       </div>
     )
@@ -52,19 +52,19 @@ const MarketContainer = () => {
   if (marketData && !loading) {
     return (
       <div>
-        <h1 className='market-title'>Market</h1>
+        <h1 className='market-cntr__title--centered'>Market</h1>
         <CoinCardList data={marketData} />
       </div>
     )
   }
   if (!marketData && !loading) {
     return (
-      <div className="dataview-container">
-        <h1 className='form-title'>Market</h1>
+      <div className="market-cntr">
+        <h1 className='market-cntr__title form-title'>Market</h1>
         <NoData />
       </div>
     )
   }
 }
 
-export default MarketContainer
+export default MarketCntr

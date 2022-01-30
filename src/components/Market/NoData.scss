@@ -1,0 +1,12 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.market-card {
+  @include card;
+  &__title {
+    @extend %card-title;
+  }
+  &__txt {
+    @extend %card-text;
+  }
+}

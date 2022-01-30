@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './TextInput.scss'
 
 /**
  * Re-usable input field for text
@@ -17,10 +17,10 @@ const TextInput = ({
 }) => {
 
   return (
-    <label className="form-input-label">
-      <label>{title}<span className="form-input-valid">&#10004;&#65039;</span></label>
+    <div className="txt-input-cntr form-input-label">
+      <label className='txt-input-cntr__title'>{title}<span className="txt-input-cntr__notification--valid form-input-valid">&#10004;&#65039;</span></label>
       <input
-        className='form-input'
+        className='txt-input-cntr__input form-input'
         name={name}
         type={type}
         maxLength={maxLength}
@@ -29,8 +29,8 @@ const TextInput = ({
         placeholder={placeholder}
         ref={inputRef}
       />
-      <span className="form-input-error">{error}</span>
-    </label>
+      <span className="txt-input-cntr__notification--error form-input-error">{error}</span>
+    </div>
   )
 }
 

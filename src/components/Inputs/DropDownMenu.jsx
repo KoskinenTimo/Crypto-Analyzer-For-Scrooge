@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import './DropDownMenu.scss'
 
 /**
  * Coin list drop down menu
@@ -28,12 +28,12 @@ const DropDownMenu = ({
   }
 
   return (
-    <label className="form-menu-label">
-      <label>{title}</label>
-      <select onChange={(e) => handleChange(e)} value={optionName}>
+    <div className="dropdown-menu-cntr">
+      <label className='dropdown-menu-cntr__title'>{title}</label>
+      <select className='dropdown-menu-cntr__options' onChange={(e) => handleChange(e)} value={optionName}>
         {array.map(part => <option key={part.id}>{part.name}</option>)}
       </select>
-    </label>
+    </div>
   )
 }
 

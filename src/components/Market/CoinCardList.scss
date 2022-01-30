@@ -1,0 +1,9 @@
+@import '../../scss/Extends.scss';
+@import '../../scss/Constants.scss';
+
+.market-coin-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  margin: 2em auto;
+}

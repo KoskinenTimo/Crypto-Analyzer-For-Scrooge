@@ -1,19 +1,19 @@
 import React from 'react'
 import Info from './Info'
 import Project from './Project'
-
+import './HomeCntr.scss'
 
 /**
  * Homepage to show some default data fetched from Gecko API
  */
-const Home = () => {
+const HomeCntr = () => {
   return (
-    <div className="dataview-container">
-      <h1 className='form-title'>Home</h1>
+    <div className="home">
+      <h1 className='home__title'>Home</h1>
       <Info />
       <Project />
     </div>
   )
 }
 
-export default Home
+export default HomeCntr

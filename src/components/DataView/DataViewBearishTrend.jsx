@@ -1,12 +1,9 @@
 import React,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetBearishTrend } from '../../reducers/bearishTrendReducer'
-
-// Utils
 import { parseToDate } from '../../utils/parsers'
 import { coins } from '../../utils/constants'
-
-
+import './DataViewBearishTrend.scss'
 
 /**
  * Used to render bearish trend data
@@ -23,15 +20,16 @@ const DataViewBearishTrend = () => {
     const parsedFromDate = parseToDate(analyzer.fromDate*1000)
     const parsedToDate = parseToDate(analyzer.toDate*1000)
     setDates([ parsedFromDate,parsedToDate ])
+  }, [analyzer])
 
-    // Reset when unmount
+  useEffect(() => {
     return () => {
       const reset = []
       dispatch(resetBearishTrend())
       setDates(reset)
       setCoinName('')
     }
-  }, [analyzer])
+  }, [])
 
   // Handles setting correct coin name
   useEffect(() => {
@@ -43,9 +41,9 @@ const DataViewBearishTrend = () => {
 
   if (bearishTrend) {
     return (
-      <div className="data-card">
-        <h4>Longest bearish trend</h4>
-        <p>
+      <div className="dv-bearish-card">
+        <h4 className='dv-bearish-card__title'>Longest bearish trend</h4>
+        <p className='dv-bearish-card__txt'>
           In {coinName}’s historical data from CoinGecko, the price decreased {bearishTrend} days in a row for the
           inputs from {dates[0]} and {dates[1]}.
         </p>
