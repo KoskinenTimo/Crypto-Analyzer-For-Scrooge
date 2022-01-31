@@ -1,11 +1,17 @@
 @import '../../styles/Extends.scss';
 @import '../../styles/Constants.scss';
 
-.market-card {
+.profile-details-cntr {
+  @extend %clmn-cntr;
+}
+
+.profile-details-card {
+  @include flex-row;
   @include card;
-  flex-basis: 30%;
-  margin: 1em;
-  text-align: left;
+  &__img {
+    width: 40%;
+    margin-right: 5%;
+  }
   &__title {
     @include card-title;
   }

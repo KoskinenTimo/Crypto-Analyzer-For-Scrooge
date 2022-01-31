@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {  } from 'react-router-dom'
-import { createErrorNotification } from '../../reducers/notificationReducer'
+import { createErrorNotification, extractErrorMsg } from '../../reducers/notificationReducer'
 import { updateUser } from '../../reducers/userReducer'
 import { getOneUser } from '../../services/userService'
+import './ProfileCntr.scss'
+
+// Components
 import Loading from '../Loading'
 import DetailsCard from './DetailsCard'
 import FavoritesList from './FavoritesList'
 
-
-const ProfileContainer = () => {
+const ProfileCntr = () => {
   const user = useSelector(s => s.authUser)
   const dispatch = useDispatch()
   const [ loading, setLoading ] = useState(false)
@@ -23,15 +25,7 @@ const ProfileContainer = () => {
           setLoading(false)
         })
         .catch(err => {
-          if (
-            err.response &&
-            err.response.data &&
-            err.response.data.error
-          ) {
-            dispatch(createErrorNotification(err.response.data.error))
-          } else {
-            dispatch(createErrorNotification(err.message))
-          }
+          dispatch(createErrorNotification(extractErrorMsg(err)))
           setLoading(false)
         })
     } else {
@@ -43,11 +37,11 @@ const ProfileContainer = () => {
     return(<Loading />)
   }
   return (
-    <div className='default-cntr-list'>
+    <div className='profile-cntr'>
       <DetailsCard />
       <FavoritesList />
     </div>
   )
 }
 
-export default ProfileContainer
+export default ProfileCntr

@@ -3,7 +3,7 @@ import { coins, currencies } from '../../utils/constants'
 import { parseNumber, parseToDate } from '../../utils/parsers'
 import DeleteFavoriteButton from './DeleteFavoriteButton'
 import NoteAddEditInput from './NoteAddEditInput'
-
+import './FavoriteListItem.scss'
 
 const FavoriteListItem = ({ data }) => {
   const [ parsedData, setParsedData ] = useState({})
@@ -48,33 +48,53 @@ const FavoriteListItem = ({ data }) => {
 
   if (parsed) {
     return (
-      <div className='data-card'>
-        <div className='flex-row-space-btw'>
+      <div className='profile-favlist-item'>
+        <div className='profile-favlist-item__flexbox'>
           <div>
-            <p>From Date: {parseToDate(parsedData.fromDate)}</p>
-            <p>To Date: {parseToDate(parsedData.toDate)}</p>
-            <p>Coin: {parsedData.coin}</p>
-            <p>Profit per Coin: {parsedData.profit} {parsedData.currency}</p>
-            <p>Highest Volume: {parsedData.volume} {parsedData.currency}</p>
-            <p>{parsedData.note && `Note: ${parsedData.note}`}</p>
+            <p className='profile-favlist-item__txt'>From Date: {parseToDate(parsedData.fromDate)}</p>
+            <p className='profile-favlist-item__txt'>To Date: {parseToDate(parsedData.toDate)}</p>
+            <p className='profile-favlist-item__txt'>Coin: {parsedData.coin}</p>
+            <p className='profile-favlist-item__txt'>Profit per Coin: {parsedData.profit} {parsedData.currency}</p>
+            <p className='profile-favlist-item__txt'>Highest Volume: {parsedData.volume} {parsedData.currency}</p>
+            <p className='profile-favlist-item__txt'>{parsedData.note && `Note: ${parsedData.note}`}</p>
           </div>
-          <div className='flex-column'>
+          <div className='profile-favlist-item-buttons-flexbox'>
             {
               editNote
                 ?
-                <button onClick={() => setEditNote(false)}>Cancel Edit</button>
+                <button
+                  className='profile-favlist-item__button'
+                  onClick={() => setEditNote(false)}
+                >
+                Cancel Edit
+                </button>
                 :
-                <button onClick={() => setEditNote(true)}>Add/Edit Note</button>
+                <button
+                  className='profile-favlist-item__button'
+                  onClick={() => setEditNote(true)}
+                >
+                  Add/Edit Note
+                </button>
             }
             {
               deleteFav
                 ?
                 <>
-                  <button onClick={() => setDeleteFav(false)}>Cancel</button>
-                  <DeleteFavoriteButton id={data.id}/>
+                  <button
+                    className='profile-favlist-item__button'
+                    onClick={() => setDeleteFav(false)}
+                  >
+                    Cancel
+                  </button>
+                  <DeleteFavoriteButton id={data.id} />
                 </>
                 :
-                <button onClick={() => setDeleteFav(true)}>Delete</button>
+                <button
+                  className='profile-favlist-item__button'
+                  onClick={() => setDeleteFav(true)}
+                >
+                  Delete
+                </button>
             }
           </div>
         </div>
@@ -83,8 +103,8 @@ const FavoriteListItem = ({ data }) => {
     )
   }
   return (
-    <div className='data-card'>
-      <p>Loading...</p>
+    <div className='profile-favlist-item'>
+      <p className='profile-favlist-item__txt'>Loading...</p>
     </div>
   )
 }

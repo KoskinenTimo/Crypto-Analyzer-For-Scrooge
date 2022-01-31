@@ -1,0 +1,23 @@
+@import '../../styles/Extends.scss';
+@import '../../styles/Constants.scss';
+
+.profile-favlist-item {
+  &__button--submit {
+    @include favlist-button;
+    padding: 0;
+    height: 2.3em;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  &__textarea {
+    font-size: $heading--sm;
+    width: 60%;
+    height: 4em;
+    padding: .5em;
+    margin-right: .5em;
+  }
+}
+
+.profile-favlist-note-edit-flexbox {
+  @include flex-row;
+}

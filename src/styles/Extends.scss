@@ -43,6 +43,25 @@
   margin-bottom: .5em;
 }
 
+@mixin favlist-button {
+  color: $primary-clr;
+  font-size: $heading--sm;
+  background-color: white;
+  padding: .6em;
+  width: 130px;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 4px;
+  &:hover {
+    background-color: $primary-clr-lighter;
+    color: $txt-white;
+  }
+  &:active {
+    background-color: $primary-clr-light;
+    color: $txt-white;
+  }
+}
+
 //
 // HEADINGS AND TEXT
 //
@@ -94,6 +113,11 @@
   flex-direction: column;
 }
 
+@mixin flex-row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 //
 // BLOCKS
 //
@@ -127,6 +151,12 @@
   color: $primary-clr;
   font-size: $heading--sm;
   margin: 10px 0;
+}
+
+%row-wrap-cntr {
+  @include flex-row-wrap;
+  width: 60%;
+  margin: 1% auto;
 }
 
 @mixin card {

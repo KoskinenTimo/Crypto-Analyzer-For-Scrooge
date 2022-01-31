@@ -138,11 +138,10 @@ const AnalyzerForm = () => {
 
   return(
     <form
-      className="form analyzer-form"
+      className="analyzer-form"
       id="analyzer-cntr__form-id"
       onSubmit={handleSubmit}
     >
-
       <div className='analyzer-form__title'>
         <h3>Analyzer</h3>
         <img src={getImageLink()}/>

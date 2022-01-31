@@ -1,0 +1,18 @@
+@import '../../styles/Extends.scss';
+@import '../../styles/Constants.scss';
+
+.profile-favlist-cntr {
+  @extend %clmn-cntr;
+  height:70vh;
+  overflow-y: scroll;
+}
+
+.profile-favlist-card {
+  @include card;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  &__title {
+    @include card-title;
+    font-size: $heading--md;
+  }
+}

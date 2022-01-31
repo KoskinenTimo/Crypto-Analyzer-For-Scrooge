@@ -1,0 +1,22 @@
+@import '../../styles/Extends.scss';
+@import '../../styles/Constants.scss';
+
+.profile-favlist-item {
+  @include card;
+  &__flexbox {
+    @include flex-row-spc-between;
+  }
+  &__title {
+    @include card-title;
+  }
+  &__txt {
+    @include card-txt;
+  }
+  &__button {
+    @include favlist-button;
+  }
+}
+
+.profile-favlist-item-buttons-flexbox {
+  @include flex-clmn;
+}

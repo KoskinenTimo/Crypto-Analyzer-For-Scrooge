@@ -1,10 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createErrorNotification, createProcessNotification, createSuccessNotification } from '../../reducers/notificationReducer'
+import { createErrorNotification, createProcessNotification, createSuccessNotification, extractErrorMsg } from '../../reducers/notificationReducer'
 import { deleteUserFavorite } from '../../reducers/userReducer'
 import { deleteFavorite } from '../../services/favoritesService'
+import './DeleteFavoriteButton.scss'
 
-
+/**
+ * Delete button for profile favorites list item cards
+ */
 const DeleteFavoriteButton = ({ id }) => {
   const dispatch = useDispatch()
   const user = useSelector(s => s.authUser)
@@ -17,21 +20,13 @@ const DeleteFavoriteButton = ({ id }) => {
         dispatch(createSuccessNotification('Favorite deleted succesfully!'))
       })
       .catch(err => {
-        if (
-          err.response &&
-          err.response.data &&
-          err.response.error
-        ) {
-          dispatch(createErrorNotification(err.response.data.error))
-        } else {
-          dispatch(createErrorNotification(err.message))
-        }
+        dispatch(createErrorNotification(extractErrorMsg(err)))
       })
   }
 
   return (
     <>
-      <button onClick={() => handleDelete()}>Confirm</button>
+      <button className='profile-favlist-item__button--delete' onClick={() => handleDelete()}>Confirm</button>
     </>
   )
 }

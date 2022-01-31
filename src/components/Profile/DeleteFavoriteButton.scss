@@ -1,6 +1,6 @@
 @import '../../styles/Extends.scss';
 @import '../../styles/Constants.scss';
 
-.market-coin-list {
-  @extend %row-wrap-cntr;
+.profile-favlist-item__button--delete {
+  @include favlist-button;
 }

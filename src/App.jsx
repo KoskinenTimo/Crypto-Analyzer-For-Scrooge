@@ -16,7 +16,7 @@ import LoginFormCntr from './components/Login/LoginFormCntr'
 import Logout from './components/Logout'
 import SignUpFormCntr from './components/SignUp/SignUpFormCntr'
 import HomeCntr from './components/Home/HomeCntr'
-import ProfileContainer from './components/Profile/ProfileContainer'
+import ProfileCntr from './components/Profile/ProfileCntr'
 import MarketCntr from './components/Market/MarketCntr'
 import Authenticate from './components/Authenticate'
 import PR from './components/PrivateRoute' // Private Route Wrapper
@@ -43,7 +43,7 @@ function App() {
         <Route path='/analyzer' element={<AnalyzerCntr />}/>
         <Route path='/login' element={<LoginFormCntr />} />
         <Route path='/logout' element={<Logout />}/>
-        <Route path='/profile' element={<PR><ProfileContainer /></PR>}/>
+        <Route path='/profile' element={<PR><ProfileCntr /></PR>}/>
         <Route path='/market' element={<MarketCntr />}/>
       </Routes>
 

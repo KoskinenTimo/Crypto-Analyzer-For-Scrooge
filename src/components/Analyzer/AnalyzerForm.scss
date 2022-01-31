@@ -1,7 +1,8 @@
-@import '../../scss/Constants.scss';
-@import '../../scss/Extends.scss';
+@import '../../styles/Constants.scss';
+@import '../../styles/Extends.scss';
 
 .analyzer-form {
+  @extend %basic-form;
   &__title {
     @extend %primary-title;
     @include flex-row;
