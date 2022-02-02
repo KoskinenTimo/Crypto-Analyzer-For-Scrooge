@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { selectUser } from '../reducers/store'
 import './LoginBar.scss'
 
 /**
@@ -8,10 +9,8 @@ import './LoginBar.scss'
  * in and log out if the user is logged in.
  */
 const LoginBar = () => {
-  const authUser = useSelector(state => state.authUser)
+  const authUser = useSelector(selectUser)
   const [ login, setLogin ] = useState(false)
-  const navigate = useNavigate()
-
   useEffect(() => {
     if (authUser) {
       setLogin(true)
@@ -20,27 +19,6 @@ const LoginBar = () => {
     }
   }, [authUser])
 
-  /**
-   * Click moves to log in form page
-   */
-  const handleLogin = () => {
-    navigate('/login')
-  }
-
-  /**
-   * Click moves to log out logic page
-   */
-  const handleLogout = () => {
-    navigate('/logout')
-  }
-
-  /**
-   * Click moves to sign up form page
-   */
-  const handleSignUp = () => {
-    navigate('/signup')
-  }
-
   return (
     <div className="login-bar">
       {
@@ -48,12 +26,27 @@ const LoginBar = () => {
           ?
           <>
             <h3 className='login-bar__title'>Welcome {authUser.username}!</h3>
-            <button className='login-bar__button' onClick={() => handleLogout()}>Logout</button>
+            <NavLink
+              className={({ isActive }) => (isActive ? 'login-bar__button--active' : 'login-bar__button')}
+              to={'logout'}
+            >
+              Log Out
+            </NavLink>
           </>
           :
           <>
-            <button className='login-bar__button' onClick={() => handleLogin()}>Login</button>
-            <button className='login-bar__button' onClick={() => handleSignUp()}>Sign up</button>
+            <NavLink
+              className={({ isActive }) => (isActive ? 'login-bar__button--active' : 'login-bar__button')}
+              to={'login'}
+            >
+              Log In
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? 'login-bar__button--active' : 'login-bar__button')}
+              to={'signup'}
+            >
+              Sign Up
+            </NavLink>
           </>
       }
     </div>

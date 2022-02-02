@@ -2,5 +2,5 @@
 @import '../../styles/Constants.scss';
 
 .profile-favlist-item__button--delete {
-  @include favlist-button;
+  @include favlist-btn;
 }

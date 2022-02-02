@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createErrorNotification, extractErrorMsg } from '../reducers/notificationReducer'
+import { selectUser } from '../reducers/store'
 import { loginUser } from '../reducers/userReducer'
 import { checkToken } from '../services/loginService'
 import './Authenticate.scss'
@@ -10,7 +11,7 @@ import './Authenticate.scss'
 const Authenticate = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     if (Cookies.get('authUser')) {

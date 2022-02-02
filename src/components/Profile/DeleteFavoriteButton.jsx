@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createErrorNotification, createProcessNotification, createSuccessNotification, extractErrorMsg } from '../../reducers/notificationReducer'
+import { selectUser } from '../../reducers/store'
 import { deleteUserFavorite } from '../../reducers/userReducer'
 import { deleteFavorite } from '../../services/favoritesService'
 import './DeleteFavoriteButton.scss'
@@ -10,7 +11,7 @@ import './DeleteFavoriteButton.scss'
  */
 const DeleteFavoriteButton = ({ id }) => {
   const dispatch = useDispatch()
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
 
   const handleDelete = () => {
     dispatch(createProcessNotification('Deleting favorite...'))
@@ -26,7 +27,7 @@ const DeleteFavoriteButton = ({ id }) => {
 
   return (
     <>
-      <button className='profile-favlist-item__button--delete' onClick={() => handleDelete()}>Confirm</button>
+      <button className='profile-favlist-item__btn--delete' onClick={() => handleDelete()}>Confirm</button>
     </>
   )
 }

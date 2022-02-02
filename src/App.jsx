@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import {
   Route,
   Routes,
-  useNavigate
+  useNavigate,
+  Navigate
 } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
@@ -36,7 +37,7 @@ function App() {
       <NavBarCntr />
       <Notification />
       <Routes>
-        <Route exact path='/' element={<HomeCntr />}/>
+        <Route exact path='/' element={<Navigate to={'home'} />}/>
         <Route path='/authenticate' element={<Authenticate />}/>
         <Route path='/home' element={<HomeCntr />}/>
         <Route path='/signup' element={<SignUpFormCntr />}/>

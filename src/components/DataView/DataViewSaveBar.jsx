@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createErrorNotification, createProcessNotification, createSuccessNotification, extractErrorMsg } from '../../reducers/notificationReducer'
+import { selectUser } from '../../reducers/store'
 import { createFavorite } from '../../services/favoritesService'
 import './DataViewSaveBar.scss'
 
@@ -12,7 +13,7 @@ const DataViewSaveBar = () => {
   const { fromDate, toDate, coin, currency } = useSelector(s => s.analyzer)
   const profit = useSelector(s => s.bestBuySell)[2]
   const volume = useSelector(s => s.highestVolume)[1]
-  const token = useSelector(s => s.authUser.token)
+  const token = useSelector(selectUser).token
   const [ saved, setSaved ] = useState(false)
 
 

@@ -8,13 +8,14 @@ import './SignUpForm.scss'
 import TextInput from '../Inputs/TextInput'
 import ResetButton from '../Buttons/ResetButton'
 import SubmitButton from '../Buttons/SubmitButton'
+import { selectUser } from '../../reducers/store'
 
 /**
  * This component hold the logic for sign up, new user will be also logged in
  * after a succesfull sign up
  */
 const SignUpForm = ({ submitData }) => {
-  const authUser = useSelector(state => state.authUser)
+  const authUser = useSelector(selectUser)
   const dispatch = useDispatch()
 
   const nameRef = useRef()

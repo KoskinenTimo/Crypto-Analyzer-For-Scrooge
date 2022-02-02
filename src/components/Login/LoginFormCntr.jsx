@@ -7,6 +7,7 @@ import {
   createSuccessNotification,
   extractErrorMsg
 } from '../../reducers/notificationReducer'
+import { selectUser } from '../../reducers/store'
 import { loginUser } from '../../reducers/userReducer'
 import { login } from '../../services/loginService'
 import LoginForm from './LoginForm'
@@ -17,7 +18,7 @@ import LoginForm from './LoginForm'
 const LoginFormCntr = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
 
   const submitData = (username, password) => {
     login({ username, password })

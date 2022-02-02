@@ -2,9 +2,9 @@
 @import '../../styles/Constants.scss';
 
 .header-nav__button {
-  @include nav-button;
+  @include nav-btn;
   &--active {
-    @include nav-button;
+    @include nav-btn;
     background-color: $primary-clr-light;
     border: $brdr--primary-bold;
   }

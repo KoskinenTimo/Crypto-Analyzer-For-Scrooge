@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createErrorNotification, createSuccessNotification, extractErrorMsg } from '../../reducers/notificationReducer'
+import { selectUser } from '../../reducers/store'
 import { updateUserFavorite } from '../../reducers/userReducer'
 import { updateFavorite } from '../../services/favoritesService'
 import './NoteAddEditInput.scss'
@@ -8,7 +9,7 @@ import './NoteAddEditInput.scss'
 const NoteAddEditInput = ({ data, setEditNote }) => {
   const [ note, setNote ] = useState('')
   const dispatch = useDispatch()
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     if (data.note) {

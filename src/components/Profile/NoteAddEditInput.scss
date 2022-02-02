@@ -3,7 +3,7 @@
 
 .profile-favlist-item {
   &__button--submit {
-    @include favlist-button;
+    @include favlist-btn;
     padding: 0;
     height: 2.3em;
     margin-top: auto;

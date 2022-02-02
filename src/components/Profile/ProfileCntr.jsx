@@ -10,9 +10,10 @@ import './ProfileCntr.scss'
 import Loading from '../Loading'
 import DetailsCard from './DetailsCard'
 import FavoritesList from './FavoritesList'
+import { selectUser } from '../../reducers/store'
 
 const ProfileCntr = () => {
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const [ loading, setLoading ] = useState(false)
 

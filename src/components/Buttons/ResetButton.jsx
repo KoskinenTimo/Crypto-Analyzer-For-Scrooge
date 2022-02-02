@@ -7,8 +7,8 @@ const ResetButton = ({
 }) => {
   return (
     <button
-      className="form__reset-button"
-      type="button"
+      className="form__reset-btn"
+      type="btn"
       onClick={() => handleReset()}
     >
       {cancel}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { selectUser } from '../../reducers/store'
 import FavoriteListItem from './FavoriteListItem'
 import './FavoritesList.scss'
 
@@ -7,7 +8,7 @@ import './FavoritesList.scss'
  * Container for favorites list in profile page
  */
 const FavoritesList = () => {
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
 
   if (user && user.favorites) {
     return (

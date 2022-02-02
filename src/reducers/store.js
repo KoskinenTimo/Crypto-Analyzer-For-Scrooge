@@ -16,6 +16,9 @@ const reducer = combineReducers({
   highestVolume: highestVolumeReducer
 })
 
+// Selectors
+export const selectUser = state => state.authUser
+
 const store = createStore(reducer)
 
 export default store

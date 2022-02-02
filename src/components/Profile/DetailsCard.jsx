@@ -1,12 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { selectUser } from '../../reducers/store'
 import './DetailsCard.scss'
 
 /**
  * Details card to show profile details and image
  */
 const DetailsCard = () => {
-  const user = useSelector(s => s.authUser)
+  const user = useSelector(selectUser)
+
   return (
     <div className='profile-details-cntr'>
       <div className='profile-details-card'>

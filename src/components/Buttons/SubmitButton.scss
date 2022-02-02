@@ -1,7 +1,7 @@
 @import '../../styles/Constants.scss';
 @import '../../styles/Extends.scss';
 
-.form__submit-button {
-  @extend %form-button;
+.form__submit-btn {
+  @extend %form-btn;
   background-color: $primary-clr;
 }

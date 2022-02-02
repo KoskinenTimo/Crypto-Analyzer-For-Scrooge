@@ -4,7 +4,7 @@
 // BUTTONS
 //
 
-%form-button {
+%form-btn {
   display: inline-block;
   font-size: $heading--sm;
   border: none;
@@ -21,7 +21,7 @@
   }
 }
 
-@mixin nav-button {
+@mixin nav-btn {
   text-decoration: none;
   @include background-font;
   font-size: $heading--sm;
@@ -31,7 +31,7 @@
   width: 120px;
 }
 
-@mixin card-button {
+@mixin card-btn {
   color: $primary-clr ;
   font-size: 1.1em;
   background-color: white;
@@ -43,7 +43,7 @@
   margin-bottom: .5em;
 }
 
-@mixin favlist-button {
+@mixin favlist-btn {
   color: $primary-clr;
   font-size: $heading--sm;
   background-color: white;

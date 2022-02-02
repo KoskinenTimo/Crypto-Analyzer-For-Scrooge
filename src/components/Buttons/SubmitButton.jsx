@@ -5,7 +5,7 @@ const SubmitButton = ({ submit='submit' }) => {
   return (
     <>
       <button
-        className="form__submit-button"
+        className="form__submit-btn"
         type="submit"
       >
         {submit}

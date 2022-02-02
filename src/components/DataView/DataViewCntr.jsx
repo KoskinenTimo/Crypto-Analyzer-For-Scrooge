@@ -15,6 +15,7 @@ import DataViewHighestVolume from './DataViewHighestVolume'
 import DataViewNoData from './DataViewNoData'
 import Loading from '../Loading'
 import DataViewSaveBar from './DataViewSaveBar'
+import { selectUser } from '../../reducers/store'
 
 /**
  * Main container component for all data display, formats dates data to be
@@ -23,7 +24,7 @@ import DataViewSaveBar from './DataViewSaveBar'
 const DataViewCntr = () => {
   const dispatch = useDispatch()
   const analyzer = useSelector(s => s.analyzer)
-  const authUser = useSelector(s => s.authUser)
+  const authUser = useSelector(selectUser)
   const [ loading, setLoading ] = useState(false)
   const [ arrayDatesPrices, setArrayDatesPrices ] = useState([])
   const [ arrayDatesVolumes, setArrayDatesVolumes ] = useState([])
