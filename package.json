@@ -1,9 +1,17 @@
 {
   "name": "client",
   "jest": {
-    "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"]
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "verbose": true
   },
-  "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"],
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-dom/extend-expect"
+  ],
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -57,6 +65,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.27.1",
-    "jest": "^26.6.0"
+    "jest": "^26.6.0",
+    "redux-testkit": "^1.0.6"
   }
 }

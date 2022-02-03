@@ -21,7 +21,7 @@ const TestComponent = () => {
   return (<div>I was rendered!</div>)
 }
 
-describe('Testing PrivateRoute', () => {
+describe('PrivateRoute', () => {
   test('No user, no cookie, redirect to /login page', () => {
     const mockAppState = {}
     useSelector.mockImplementation(cb => {

@@ -56,13 +56,13 @@ const Notification = () => {
 
   return(
     <>
-      <div className='notification--error' ref={errorRef}>
+      <div className='notification--error' ref={errorRef} data-testid='test-id-notification--error'>
         <h4>{notificationMessage}</h4>
       </div>
-      <div className='notification--success' ref={successRef}>
+      <div className='notification--success' ref={successRef} data-testid='test-id-notification--success'>
         <h4>{notificationMessage}</h4>
       </div>
-      <div className='notification--process' ref={processRef}>
+      <div className='notification--process' ref={processRef} data-testid='test-id-notification--process'>
         <h4>{notificationMessage}</h4>
       </div>
     </>
