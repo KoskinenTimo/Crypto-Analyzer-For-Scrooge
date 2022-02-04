@@ -4,17 +4,19 @@ If you have docker installed and want to run the app in a container at http://lo
 If you want to run without build version
 <br>npm install
 <br>npm start
+<br>Environment variable REACT_APP_BACKEND_URL can be used to changed backend address
 
 Live link:
 https://koskinentht-crypto-analyzer.herokuapp.com/
 
 --------------------------------------------------------------
 
-Backend being built next for this project at KoskinenTimo/Crypto-Analyzer-For-Scrooge-API
+Backend being built next for this project at 
+<br>https://github.com/KoskinenTimo/Crypto-Analyzer-For-Scrooge-API
 
 --------------------------------------------------------------
 
 Next TODO:
 
-- Build tests for both client and api using jest, cypress etc
+- building tests started for client side, no time left in MOOC Full Stack 2021 project time budget, will continue development on own spare time
 - Styling for different screen sizes

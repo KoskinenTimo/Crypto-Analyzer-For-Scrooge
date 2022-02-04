@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { coins, currencies } from '../../utils/constants'
 import { parseNumber, parseToDate } from '../../utils/parsers'
 import DeleteFavoriteButton from './DeleteFavoriteButton'
-import NoteAddEditInput from './NoteAddEditInput'
+import NoteAddEditInputCntr from './NoteAddEditInputCntr'
 import './FavoriteListItem.scss'
 
 const FavoriteListItem = ({ data }) => {
@@ -63,14 +63,14 @@ const FavoriteListItem = ({ data }) => {
               editNote
                 ?
                 <button
-                  className='profile-favlist-item__button'
+                  className='profile-favlist-item__button profile-favlist-item__button--cancel-edit'
                   onClick={() => setEditNote(false)}
                 >
                 Cancel Edit
                 </button>
                 :
                 <button
-                  className='profile-favlist-item__button'
+                  className='profile-favlist-item__button profile-favlist-item__button--add-edit'
                   onClick={() => setEditNote(true)}
                 >
                   Add/Edit Note
@@ -81,7 +81,7 @@ const FavoriteListItem = ({ data }) => {
                 ?
                 <>
                   <button
-                    className='profile-favlist-item__button'
+                    className='profile-favlist-item__button profile-favlist-item__button--cancel-delete'
                     onClick={() => setDeleteFav(false)}
                   >
                     Cancel
@@ -90,7 +90,7 @@ const FavoriteListItem = ({ data }) => {
                 </>
                 :
                 <button
-                  className='profile-favlist-item__button'
+                  className='profile-favlist-item__button profile-favlist-item__button--show-delete'
                   onClick={() => setDeleteFav(true)}
                 >
                   Delete
@@ -98,7 +98,7 @@ const FavoriteListItem = ({ data }) => {
             }
           </div>
         </div>
-        {editNote && <NoteAddEditInput data={data} setEditNote={setEditNote} />}
+        {editNote && <NoteAddEditInputCntr data={data} setEditNote={setEditNote} />}
       </div>
     )
   }

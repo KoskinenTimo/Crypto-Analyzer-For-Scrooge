@@ -1,36 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { createErrorNotification, createSuccessNotification, extractErrorMsg } from '../../reducers/notificationReducer'
-import { selectUser } from '../../reducers/store'
-import { updateUserFavorite } from '../../reducers/userReducer'
-import { updateFavorite } from '../../services/favoritesService'
 import './NoteAddEditInput.scss'
 
-const NoteAddEditInput = ({ data, setEditNote }) => {
+const NoteAddEditInput = ({ data, handleSubmit }) => {
   const [ note, setNote ] = useState('')
-  const dispatch = useDispatch()
-  const user = useSelector(selectUser)
-
   useEffect(() => {
     if (data.note) {
       setNote(data.note)
     }
   }, [])
 
-  const handleSubmit = () => {
-    updateFavorite(user.token, { note }, data.id)
-      .then(res => {
-        dispatch(updateUserFavorite(res.data))
-        dispatch(createSuccessNotification('Note updated/added!'))
-        setEditNote(false)
-      })
-      .catch(err => {
-        dispatch(createErrorNotification(extractErrorMsg(err)))
-      })
-  }
-
   return (
-    <div className="profile-favlist-note-edit-flexbox">
+    <form className="profile-favlist-note-edit-flexbox" onSubmit={e => handleSubmit(e,note)}>
       <textarea
         maxLength={200}
         value={note}
@@ -39,11 +19,11 @@ const NoteAddEditInput = ({ data, setEditNote }) => {
       />
       <button
         className='profile-favlist-item__button--submit'
-        onClick={() => handleSubmit()}
+        type='submit'
       >
         Submit
       </button>
-    </div>
+    </form>
   )
 }
 

@@ -12,6 +12,7 @@ import DetailsCard from './DetailsCard'
 import FavoritesList from './FavoritesList'
 import { selectUser } from '../../reducers/store'
 
+
 const ProfileCntr = () => {
   const user = useSelector(selectUser)
   const dispatch = useDispatch()

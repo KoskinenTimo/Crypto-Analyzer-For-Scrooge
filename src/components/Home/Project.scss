@@ -3,6 +3,8 @@
 
 .home-project {
   @include card;
+  height: 40vh;
+  overflow-y: scroll;
   &__title {
     @include card-title;
   }
