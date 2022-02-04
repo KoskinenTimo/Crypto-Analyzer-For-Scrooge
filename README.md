@@ -9,6 +9,9 @@ If you want to run without build version
 Live link:
 https://koskinentht-crypto-analyzer.herokuapp.com/
 
+Tests:
+<br>npm install
+<br>npm run test
 --------------------------------------------------------------
 
 Backend being built next for this project at 
