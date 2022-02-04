@@ -6,12 +6,17 @@ If you want to run without build version
 <br>npm start
 <br>Environment variable REACT_APP_BACKEND_URL can be used to changed backend address
 
+--------------------------------------------------------------
+
 Live link:
 https://koskinentht-crypto-analyzer.herokuapp.com/
+
+--------------------------------------------------------------
 
 Tests:
 <br>npm install
 <br>npm run test
+
 --------------------------------------------------------------
 
 Backend being built next for this project at 
