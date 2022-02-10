@@ -1,6 +1,6 @@
 @import '../../styles/Extends.scss';
 @import '../../styles/Constants.scss';
 
-.profile-favlist-item__button--delete {
+.profile-favlist-item__btn--delete {
   @include favlist-btn;
 }
